@@ -651,7 +651,7 @@ section ul li {
     }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1024px) and (max-width: 1200px) {
     .caja-elemental {
         min-width: 45%;
     }
