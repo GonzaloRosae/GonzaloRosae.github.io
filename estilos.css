@@ -24,6 +24,10 @@ body {
     line-height: 1.6;
 }
 
+strong {
+    font-weight: bold;
+}
+
 p {
     font-size: 18px;
 }
@@ -213,31 +217,45 @@ section ul li {
 }
 
 /* VIDEO */
-.video {
-    text-align: center;
-    padding: 4em 2em;
-}
-
-.video p {
-    font-size: 1.1em;
-    margin-bottom: 1.5em;
-    color: #444;
+.contenido-video-texto {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+    /* Para que sea responsivo */
 }
 
 .video-contenedor {
-    max-width: 90%;
-    margin: 0 auto;
-    border-radius: 12px;
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
 }
 
-.video-contenedor video {
+.video-contenedor iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    border-radius: 8px;
-    height: auto;
-    display: block;
+    height: 100%;
+    border: none;
 }
+
+.texto-video {
+    max-width: 400px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.texto-video p {
+    margin-bottom: 3.1rem;
+}
+
 
 /* SECCION PRUEBA */
 .seccion-prueba {
@@ -524,6 +542,14 @@ section ul li {
         max-width: 300px;
     }
 
+    .video-contenedor {
+        max-width: 100%;
+    }
+
+    .texto-video {
+        display: none;
+    }
+
     .caja-elemental.caja-3 {
         max-width: 100%;
     }
@@ -546,12 +572,6 @@ section ul li {
 
     .opinion-texto {
         font-size: 1.1rem;
-    }
-
-    iframe,
-    video {
-        width: 100% !important;
-        height: auto !important;
     }
 
     .seccion-prueba {
@@ -603,6 +623,15 @@ section ul li {
         width: auto;
         max-width: 100%;
     }
+
+    .video-contenedor {
+        max-width: 100%;
+    }
+
+    .texto-video {
+        display: none;
+    }
+
 
     .caja-elemental {
         min-width: 40%;
