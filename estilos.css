@@ -475,6 +475,11 @@ section ul li {
 /* MEDIA QUERIES */
 
 /* Móviles */
+@media (max-width: 340px) {
+    #direccion-correo {
+        font-size: 1rem;
+    }
+}
 
 @media (max-width: 768px) {
     body {
