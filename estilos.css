@@ -315,21 +315,6 @@ section ul li {
     transform: translateY(-5px);
 }
 
-.contacto .caja-elemental {
-    padding: 0;
-    position: relative;
-    overflow: hidden;
-    background-color: var(--fondoOscurito);
-}
-
-.contacto .caja-elemental:hover {
-    transform: none;
-}
-
-.contacto h3 {
-    color: var(--textoClaro) !important;
-}
-
 .enlace-caja {
     display: block;
     padding: 2rem !important;
@@ -470,6 +455,26 @@ section ul li {
 .faq-respuesta p {
     margin: 1rem 0;
     color: var(--textoOscuro);
+}
+
+/* CONTACTO */
+.contacto .caja-elemental {
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--fondoOscurito);
+}
+
+.contacto .caja-elemental:hover {
+    transform: none;
+}
+
+.contacto h3 {
+    color: var(--textoClaro) !important;
+}
+
+.contacto p {
+    font-size: 1.2rem;
 }
 
 /* MEDIA QUERIES */
