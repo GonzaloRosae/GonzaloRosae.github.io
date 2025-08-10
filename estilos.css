@@ -477,6 +477,53 @@ section ul li {
     font-size: 1.2rem;
 }
 
+.whatsapp-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25d366;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0 13px;
+    height: 60px;
+    width: 60px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: width 0.4s ease;
+    z-index: 1000;
+}
+
+.whatsapp-flotante:hover {
+    padding: 0 15px;
+    width: 170px;
+}
+
+.whatsapp-flotante img {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+}
+
+.whatsapp-texto {
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease 0.15s;
+    pointer-events: none;
+    user-select: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.whatsapp-flotante:hover .whatsapp-texto {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
 /* MEDIA QUERIES */
 
 /* Móviles */
