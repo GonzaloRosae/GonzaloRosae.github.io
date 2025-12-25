@@ -258,30 +258,30 @@ section ul li {
 
 
 /* SECCION PRUEBA */
-.seccion-prueba {
+.seccion-prueba, .seccion-regalo {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 2em;
 }
 
-.prueba-texto {
+.prueba-texto, .regalo-texto {
     flex: 1 1 300px;
     max-width: 600px;
 }
 
-#lista-primera-clase {
+.lista-pequeña {
     list-style-type: disc;
     margin-left: 3rem;
     font-size: 1rem;
 }
 
-.prueba-imagen {
+.prueba-imagen, .regalo-imagen {
     flex: 1 1 300px;
     max-width: 500px;
 }
 
-.prueba-imagen img {
+.prueba-imagen img, .regalo-imagen img {
     width: 100%;
     height: auto;
     border-radius: 12px;
@@ -642,8 +642,8 @@ section ul li {
         text-align: left;
     }
 
-    .prueba-texto,
-    .prueba-imagen {
+    .prueba-texto, .regalo-texto
+    .prueba-imagen, .regalo-imagen {
         max-width: 100%;
     }
 
@@ -729,7 +729,7 @@ section ul li {
         font-size: 1.1rem;
     }
 
-    #lista-primera-clase {
+    .lista-pequeña {
         font-size: 1.2rem;
     }
 
