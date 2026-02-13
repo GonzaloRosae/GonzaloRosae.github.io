@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gonzalo Rosae | Domina el Inglés</title>
+    <title>Gonzalo Rosae | Aprende inglés</title>
     <meta name="description" content="Aprende a hablar inglés con acento británico auténtico con Gonzalo Rosae. Clases personalizadas de pronunciación y gramática.">
     <link rel="shortcut icon" href="imagenes/rosae.png" type="image/x-icon">
     <style>
         /* =========================================
-           CONFIGURACIÓN GLOBAL ANTI-DESBORDE
+           CONFIGURACIÓN GLOBAL
            ========================================= */
         html, body {
             max-width: 100vw;       
-            overflow-x: hidden;     
+            overflow-x: hidden;
             margin: 0;
             padding: 0;
             width: 100%;
@@ -30,9 +30,7 @@
             --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
-        * {
-            box-sizing: border-box; 
-        }
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -47,24 +45,42 @@
            ESTILOS DE ESCRITORIO
            ========================================= */
         .hero {
-            padding-left: 120px !important; 
-            padding-bottom: 0 !important; /* Mantenemos esto en PC también */
-            min-height: 100vh;
+            padding-left: 10% !important; 
+            padding-right: 5% !important;
+            padding-bottom: 0 !important; 
+            
+            /* Esta es la referencia para la altura */
+            height: 100vh;
+            min-height: 600px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 4rem 2rem;
+            align-items: center; 
+            position: relative;  /* IMPORTANTE: La imagen buscará este límite */
+            overflow: hidden;    
+            
             background: radial-gradient(circle at top right, rgba(39, 134, 190, 0.1), transparent),
                         radial-gradient(circle at bottom left, rgba(221, 49, 79, 0.1), transparent);
         }
 
         .hero-container {
-            max-width: 1200px;
+            max-width: 1400px;
             width: 100%;
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
             align-items: center;
+            
+            /* --- CORRECCIÓN CLAVE --- */
+            /* Quitamos 'position: relative' de aquí. */
+            /* Esto permite que la imagen se "escape" de esta caja y busque el borde de la pantalla. */
+            position: static; 
+        }
+
+        .hero-text {
+            max-width: 650px;
+            /* --- CORRECCIÓN --- */
+            /* Ponemos el texto relativo y con z-index para que flote SOBRE la imagen si se cruzan */
+            position: relative;
+            z-index: 10; 
         }
 
         .hero-text h1 {
@@ -87,19 +103,48 @@
             font-size: 1.2rem;
             color: var(--text-dim);
             margin-bottom: 2.5rem;
-            max-width: 600px;
+            max-width: 90%;
         }
 
+        /* --- IMAGEN ANCLADA AL SUELO --- */
+        .hero-image {
+            position: absolute; 
+            bottom: 0;          /* Toca el suelo de la PANTALLA, no de la caja */
+            right: 5%;          /* Separación de la derecha */
+            
+            /* --- AJUSTE DE TAMAÑO --- */
+            height: 90vh;       /* Un poco más alto para asegurar que se ve bien */
+            width: auto;
+            
+            z-index: 1;         /* Detrás del texto si chocan */
+            pointer-events: none; 
+            
+            display: flex;
+            align-items: flex-end; 
+        }
+
+        .hero-image img {
+            height: 100%;       
+            width: auto;        
+            max-width: none;    
+            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+            object-fit: contain;
+            /* Asegura que no haya espacio extraño debajo de la imagen */
+            display: block; 
+        }
+
+        /* TARJETAS DE CURSOS */
         .course-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
             margin-bottom: 2.5rem;
+            max-width: 600px; 
         }
 
         .course-card {
             background: var(--bg-card);
-            padding: 2rem;
+            padding: 1.2rem 1.6rem;
             border-radius: 15px;
             text-decoration: none;
             color: white;
@@ -113,11 +158,10 @@
 
         .course-card:hover { transform: translateY(-5px); }
         .course-card img.logo { width: 80px; height: auto; }
-        .course-card h3 { font-size: 1.2rem; line-height: 1.2; }
+        .course-card h3 { font-size: 1.2rem; line-height: 1.2; margin: 0; }
         
         .course-card h3 span {
             display: block;
-            font-size: 1.2rem;
             text-transform: uppercase;
             margin-bottom: 0.2rem;
         }
@@ -125,91 +169,19 @@
         .course-card.pronunciation h3 span { color: var(--brand-blue); }
         .course-card.grammar h3 span { color: var(--brand-green); }
 
-        .hero-image {
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .hero-image img {
-            width: 100%;
-            max-width: 450px;
-            filter: drop-shadow(0 15px 30px rgba(0,0,0,0.5));
-        }
-
-        .contact-section {
-            padding: 6rem 2rem;
-            text-align: center;
-            background-color: #0b1120;
-        }
-
-        .contact-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--brand-red);
-        }
-
-        .contact-grid {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
-            background: var(--bg-card);
-            padding: 1.5rem 2rem;
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.05);
-            min-width: 280px;
-        }
-
-        .contact-link:hover {
-            transform: translateY(-3px);
-            border-color: var(--brand-red);
-        }
-
-        .contact-link img { width: 40px; height: 40px; }
-        .contact-link .emoji { font-size: 2.5rem; }
-
-        .btn-main {
-            display: grid;
-            text-align: center;
-            background: var(--brand-red);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-main:hover { background: var(--brand-red-hover); }
 
         /* ==========================================================
-           CORRECCIÓN RESPONSIVE (MÓVIL/TABLET)
+           RESPONSIVE (MÓVIL/TABLET)
            ========================================================== */
         
         @media (max-width: 1024px) {
             
-            /* 1. RESETEO TOTAL */
             .hero {
-                /* Padding Bottom 0 ESENCIAL para que la imagen toque el borde */
                 padding: 4rem 1.5rem 0 1.5rem !important; 
                 display: block; 
-                width: 100%;
-                height: auto;
+                height: auto;       
                 min-height: auto;
+                overflow: visible;  
             }
 
             .hero-container {
@@ -217,52 +189,48 @@
                 flex-direction: column;
                 gap: 2rem; 
                 width: 100%;
-                max-width: 100%; 
+                /* Restauramos relative en móvil por si acaso */
+                position: relative; 
             }
 
-            /* 2. REORDENAMIENTO */
-            .hero-text { 
-                order: 1;  
-                text-align: center; 
-                width: 100%; 
-            }
-
-            .hero-image { 
-                order: 2; 
-                margin-top: 1rem;
-                margin-bottom: 0 !important; /* Forzamos margen 0 al final */
-                width: 100%;
-                display: flex;
-                align-items: flex-end; /* Alinea la imagen al fondo */
-            }
-            
-            .hero-image img {
-                max-width: 280px; 
-                display: block;
-                margin: 0 auto;
-                vertical-align: bottom; /* Evita espacios fantasma debajo de la imagen */
-            }
-
-            .hero-text h1 {
-                font-size: 2rem; 
-            }
-            
-            .hero-text h1 span {
-                font-size: 1rem;
-            }
-
-            .hero-description {
-                font-size: 1rem;
-                margin: 1rem auto 2rem;
-                padding: 0 10px;
-            }
-
-            /* 3. CURSOS: 2 COLUMNAS POR DEFECTO */
-            .course-grid {
-                grid-template-columns: 1fr 1fr; 
-                gap: 10px; 
-                width: 100%;
+            .hero-text {
                 max-width: 100%;
+                text-align: center;
+                order: 1;
+                /* Quitamos z-index complejo en móvil */
+                z-index: auto;
+            }
+
+            /* --- RESETEO TOTAL DE IMAGEN EN MÓVIL --- */
+            .hero-image {
+                position: relative; /* Vuelve al flujo normal */
+                bottom: auto;
+                right: auto;
+                height: auto;       
+                width: 100%;
+                
+                order: 2; 
+                margin-top: 2rem;
+                margin-bottom: 0 !important;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+
+            .hero-image img {
+                height: auto;       
+                width: 100%;
+                max-width: 350px;   
+                display: block;
+            }
+
+            /* Textos Responsive */
+            .hero-text h1 { font-size: 2.2rem; }
+            .hero-text h1 span { font-size: 1rem; }
+            .hero-description { font-size: 1rem; margin: 1rem auto 2rem; }
+
+            .course-grid {
+                width: 100%;
                 margin: 0 auto 2rem;
             }
 
@@ -270,62 +238,25 @@
                 padding: 1rem;
                 flex-direction: column; 
                 text-align: center;
+                justify-content: center;
                 gap: 0.5rem;
-                justify-content: center;
             }
             
-            .course-card img.logo {
-                width: 45px; 
-                margin-bottom: 0.2rem;
-            }
-
-            .course-card h3 { 
-                font-size: 0.9rem; 
-                text-align: center;
-            }
-            
-            .course-card h3 span { font-size: 0.75rem; }
-
-            .btn-main {
-                width: 100%;
-                padding: 1rem;
-                font-size: 0.9rem;
-            }
-
-            /* CONTACTO */
-            .contact-section {
-                padding: 3rem 1rem;
-            }
-
-            .contact-grid {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .contact-link {
-                width: 100%;
-                min-width: 0;
-                padding: 1rem;
-                justify-content: center;
-            }
+            .course-card img.logo { width: 50px; margin-bottom: 0.2rem; }
+            .course-card h3 { font-size: 1rem; text-align: center; }
+            .course-card h3 span { font-size: 0.8rem; }
         }
 
-        /* 4. BREAKPOINT PEQUEÑO (MENOS DE 550PX) */
         @media (max-width: 550px) {
-            .course-grid {
-                grid-template-columns: 1fr; 
-            }
-
+            .course-grid { grid-template-columns: 1fr; }
+            
             .course-card {
                 flex-direction: row; 
                 text-align: left;
                 justify-content: flex-start;
                 gap: 1rem;
             }
-
-            .course-card h3 { 
-                text-align: left; 
-            }
+            .course-card h3 { text-align: left; }
         }
     </style>
 </head>
@@ -350,42 +281,16 @@
                     <a href="gramatical" class="course-card grammar">
                         <img src="imagenes/logo_gramatical.png" alt="logo" class="logo">
                         <div>
-                            <h3><span>Perfecciona</span>TU GRAMÁTICA</h3>
+                            <h3><span>Supera</span>ERRORES FRECUENTES</h3>
                         </div>
                     </a>
                 </div>
-
-                <a href="#contacto" class="btn-main">Primera Clase Gratis</a>
             </div>
 
             <div class="hero-image">
                 <img src="imagenes/gonzalo.png" alt="Gonzalo Rosae">
             </div>
         </div>
-    </section>
-
-    <section class="contact-section" id="contacto">
-        <h2>Contacto</h2>
-        <div class="contact-grid">
-            <a href="https://wa.me/34956079630?text=Hola%2C%20Gonzalo%2C%20te%20contacto%20desde%20tu%20web" target="_blank" class="contact-link">
-                <img src="imagenes/whatsapp.png" alt="WhatsApp">
-                <div>
-                    <h3 style="font-size: 1rem;">WhatsApp</h3>
-                    <p style="color: var(--text-dim); font-size: 0.8rem;">+34 956 07 96 30</p>
-                </div>
-            </a>
-
-            <a href="mailto:gonzalorosae@gmail.com" class="contact-link">
-                <div class="emoji">✉️</div>
-                <div>
-                    <h3 style="font-size: 1rem;">Correo</h3>
-                    <p style="color: var(--text-dim); font-size: 0.8rem; word-break: break-all;">gonzalorosae@gmail.com</p>
-                </div>
-            </a>
-        </div>
-        <p style="margin-top: 3rem; color: var(--text-dim); font-size: 0.7rem;">
-            &copy; 2026 GONZALO ROSAE
-        </p>
     </section>
 
 </body>
