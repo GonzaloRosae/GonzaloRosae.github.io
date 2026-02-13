@@ -109,7 +109,10 @@ section ul li {
 
 /* PORTADA */
 .portada {
-    background: linear-gradient(135deg, var(--colorDegradado), var(--colorPrimario));
+    background:
+        radial-gradient(circle at top right, rgba(39, 134, 190, 0.2), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(221, 49, 79, 0.1), transparent 40%),
+        linear-gradient(135deg, var(--colorDegradado), var(--colorPrimario));
     padding: 3rem 2rem;
     padding-bottom: 0;
     display: flex;
