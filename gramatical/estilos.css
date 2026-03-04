@@ -9,6 +9,7 @@
     --colorSecundario: #377321;
     --colorTerciario: #245014;
     --colorDegradado: #1cd31c;
+    --colorOpinion: #5ce62a;
 }
 
 * {
@@ -368,25 +369,40 @@ img.emoji {
 .opinion-contenedor {
     display: flex;
     gap: 2rem;
+    padding-top: 10px;
     padding-bottom: 1rem;
-    scroll-snap-type: x mandatory;
+    align-items: stretch;
+    overflow-x: auto;
 }
 
 .opinion-caja {
-    background-color: var(--fondoOscurito);
-    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--fondoOscurito, #1f1f1f);
     border-radius: 12px;
-    width: 31%;
-    flex-shrink: 0;
-    scroll-snap-align: start;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    text-align: left;
-    transition: transform 0.3s ease;
+    width: 350px;
+    min-width: 300px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .opinion-caja:hover {
     transform: translateY(-5px);
-    cursor: default;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    border-color: var(--colorTerciario, #00b67a);
+    z-index: 10;
+}
+
+.opinion-contenido {
+    margin-bottom: 1.5rem;
 }
 
 .opinion-encabezado {
@@ -401,29 +417,59 @@ img.emoji {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid var(--colorTerciario);
-}
-
-.opinion-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    border: 2px solid var(--colorOpinion, #00b67a);
 }
 
 .opinion-nombre {
     font-size: 1.2rem;
-    margin-bottom: 0.2rem;
-    color: var(--colorTerciario);
+    margin: 0;
+    color: #fff;
+    font-weight: 600;
 }
 
 .opinion-estrellas {
     font-size: 1.1rem;
     color: #ffdc00;
+    margin-top: 0.2rem;
 }
 
 .opinion-texto {
     font-size: 0.95rem;
-    color: #ddd;
+    color: #ccc;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.opinion-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: auto;
+}
+
+.tp-logo {
+    height: 24px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.icono-externo {
+    color: var(--colorOpinion, #4da6ff);
+    font-size: 1.2rem;
+    opacity: 0.6;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.opinion-caja:hover .tp-logo {
+    opacity: 1;
+}
+
+.opinion-caja:hover .icono-externo {
+    opacity: 1;
+    transform: translate(3px, -3px);
 }
 
 
