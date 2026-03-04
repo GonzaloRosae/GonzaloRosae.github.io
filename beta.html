@@ -9,9 +9,6 @@
         content="Aprende a hablar inglés con acento británico auténtico con Gonzalo Rosae. Clases personalizadas de pronunciación y gramática.">
     <link rel="shortcut icon" href="imagenes/rosae.png" type="image/x-icon">
     <style>
-    /* =========================================
-       CONFIGURACIÓN GLOBAL
-       ========================================= */
     html, body {
         max-width: 100vw;       
         overflow-x: hidden;
@@ -42,10 +39,6 @@
     }
 
     h1, h2, h3 { font-weight: bold; }
-
-    /* =========================================
-       ESTILOS DE ESCRITORIO
-       ========================================= */
     .hero {
         padding-left: 10% !important; 
         padding-right: 5% !important;
@@ -96,7 +89,6 @@
         font-size: 1.2rem;
         color: var(--text-dim);
         margin-bottom: 2rem;
-        max-width: 90%;
     }
 
     .limited-tag {
@@ -133,7 +125,6 @@
         display: block; 
     }
 
-    /* --- TARJETAS DE CURSOS --- */
     .course-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -144,7 +135,6 @@
 
     .course-card {
         background: var(--bg-card);
-        /* Mantenemos el padding derecho para proteger el texto de la cinta */
         padding: 1.2rem 3.5rem 1.2rem 1.6rem; 
         border-radius: 15px;
         text-decoration: none;
@@ -157,6 +147,7 @@
         box-shadow: var(--shadow);
         position: relative;
         overflow: hidden;
+        width: 105%;
     }
 
     .course-card:hover { transform: translateY(-5px); }
@@ -178,17 +169,30 @@
     .course-card.pronunciation h3 span { color: var(--brand-blue); }
     .course-card.grammar h3 span { color: var(--brand-green); }
 
-    /* --- CINTA ¡GRATIS! CORREGIDA --- */
-    .badge-free {
+    .badge-price {
         position: absolute;
-        /* Ajustamos estos valores para que sea visible pero quede en la esquina */
-        top: 8px; 
-        right: -30px; 
+        top: 15px; 
+        right: -40px; 
         background: var(--brand-red);
         color: white;
         font-size: 0.65rem;
         font-weight: 800;
-        /* Un poco más de padding vertical para que sea más gruesa */
+        padding: 6px 35px; 
+        transform: rotate(45deg);
+        letter-spacing: 1px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .badge-free {
+        position: absolute;
+        top: 11px; 
+        right: -35px; 
+        background: var(--brand-red);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 800;
         padding: 6px 35px; 
         transform: rotate(45deg);
         text-transform: uppercase;
@@ -198,9 +202,6 @@
         pointer-events: none;
     }
 
-    /* ==========================================================
-       RESPONSIVE (MÓVIL/TABLET)
-       ========================================================== */
     @media (max-width: 1024px) {
         .hero {
             padding: 4rem 1.5rem 0 1.5rem !important; 
@@ -279,7 +280,7 @@
             <div class="hero-text">
                 <h1><span>Gonzalo Rosae</span>TRANSFORMA<br>TU INGLÉS</h1>
 
-                <div class="limited-tag">🚀 Acceso Beta · Plazas Limitadas</div>
+                <!-- <div class="limited-tag">🚀 Acceso Beta · Plazas Limitadas</div> -->
 
                 <p class="hero-description">
                     Optimiza cada aspecto de tu inglés con un sistema de aprendizaje preciso, lógico y orientado a
@@ -287,8 +288,9 @@
                 </p>
 
                 <div class="course-grid">
+
                     <a href="index.html" class="course-card pronunciation">
-                        <div class="badge-free">¡Gratis!</div>
+                        <div class="badge-price">12€ / hora</div>
                         <img src="imagenes/logo.png" alt="logo" class="logo">
                         <div>
                             <h3><span>Domina</span>EL ACENTO BRITÁNICO</h3>
