@@ -4,338 +4,314 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gonzalo Rosae | Aprende inglés</title>
     <meta name="description"
-        content="Aprende a hablar inglés con acento británico auténtico con Gonzalo Rosae. Clases personalizadas, portal de práctica y resúmenes por email. ¡Primera clase gratis!">
-    <meta name="keywords"
-        content="pronunciación británica, curso de inglés online, acento británico, clases de inglés, clases de pronunciación, aprender a pronunciar">
-    <meta property="og:title" content="Curso de pronunciación británica con Gonzalo Rosae">
-    <meta property="og:description"
-        content="Aprende a pronunciar como un nativo británico con clases personalizadas. Reserva tu primera clase gratuita.">
-    <meta property="og:image" content="https://gonzalorosae.com/imagenes/rosae.png">
-    <meta property="og:url" content="https://gonzalorosae.com">
-    <meta name="author" content="Gonzalo Rosae">
-    <meta name="twitter:card" content="summary_large_image">
-    <title>Gonzalo Rosae - Curso Inglés </title>
+        content="Aprende a hablar inglés con acento británico auténtico con Gonzalo Rosae. Clases personalizadas de pronunciación y gramática.">
     <link rel="shortcut icon" href="imagenes/rosae.png" type="image/x-icon">
-    <link rel="stylesheet" href="estilos.css">
-    <meta name="trustpilot-one-time-domain-verification-id" content="84549eb7-e086-4b82-a193-56ec4deddf83" />
+    <style>
+    html, body {
+        max-width: 100vw;       
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    :root {
+        --bg-deep: #0f172a; 
+        --bg-card: #1e293b;
+        --text-main: #f8fafc;
+        --text-dim: #94a3b8;
+        --brand-red: #dd314f; 
+        --brand-red-hover: #d32a2a;
+        --brand-blue: #2786be;
+        --brand-green: #58a834;
+        --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg-deep);
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    h1, h2, h3 { font-weight: bold; }
+    .hero {
+        padding-left: 10% !important; 
+        padding-right: 5% !important;
+        padding-bottom: 0 !important; 
+        height: 100vh;
+        min-height: 600px;
+        display: flex;
+        align-items: center; 
+        position: relative; 
+        overflow: hidden;    
+        background: radial-gradient(circle at top right, rgba(39, 134, 190, 0.1), transparent),
+                    radial-gradient(circle at bottom left, rgba(221, 49, 79, 0.1), transparent);
+    }
+
+    .hero-container {
+        max-width: 1400px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+        position: static; 
+    }
+
+    .hero-text {
+        max-width: 650px;
+        position: relative;
+        z-index: 10; 
+    }
+
+    .hero-text h1 {
+        font-size: 3.5rem;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        color: var(--text-main);
+    }
+
+    .hero-text h1 span {
+        color: var(--brand-red);
+        display: block;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.2rem;
+        color: var(--text-dim);
+        margin-bottom: 2rem;
+    }
+
+    .limited-tag {
+        display: inline-block;
+        background: rgba(221, 49, 79, 0.1);
+        color: var(--brand-red);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--brand-red);
+    }
+
+    .hero-image {
+        position: absolute; 
+        bottom: 0;
+        right: 5%;
+        height: 90vh;
+        width: auto;
+        z-index: 1;
+        pointer-events: none; 
+        display: flex;
+        align-items: flex-end; 
+    }
+
+    .hero-image img {
+        height: 100%;
+        width: auto;
+        max-width: none;
+        filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+        object-fit: contain;
+        display: block; 
+    }
+
+    .course-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+        max-width: 600px; 
+    }
+
+    .course-card {
+        background: var(--bg-card);
+        padding: 1.2rem 3.5rem 1.2rem 1.6rem; 
+        border-radius: 15px;
+        text-decoration: none;
+        color: white;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        width: 105%;
+    }
+
+    .course-card:hover { transform: translateY(-5px); }
+    .course-card img.logo { width: 80px; height: auto; flex-shrink: 0; }
+    
+    .course-card h3 { 
+        font-size: 1.1rem; 
+        line-height: 1.2; 
+        margin: 0; 
+    }
+    
+    .course-card h3 span {
+        display: block;
+        text-transform: uppercase;
+        margin-bottom: 0.2rem;
+        font-size: 0.85rem;
+    }
+
+    .course-card.pronunciation h3 span { color: var(--brand-blue); }
+    .course-card.grammar h3 span { color: var(--brand-green); }
+
+    .badge-price {
+        position: absolute;
+        top: 15px; 
+        right: -40px; 
+        background: var(--brand-red);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 800;
+        padding: 6px 35px; 
+        transform: rotate(45deg);
+        letter-spacing: 1px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .badge-free {
+        position: absolute;
+        top: 11px; 
+        right: -35px; 
+        background: var(--brand-red);
+        color: white;
+        font-size: 0.65rem;
+        font-weight: 800;
+        padding: 6px 35px; 
+        transform: rotate(45deg);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    @media (max-width: 1024px) {
+        .hero {
+            padding: 4rem 1.5rem 0 1.5rem !important; 
+            display: block; 
+            height: auto;       
+            min-height: auto;
+            overflow: visible;  
+        }
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem; 
+            width: 100%;
+            position: relative; 
+        }
+        .hero-text {
+            max-width: 100%;
+            text-align: center;
+            order: 1;
+            z-index: auto;
+        }
+        .hero-image {
+            position: relative;
+            bottom: auto;
+            right: auto;
+            height: auto;       
+            width: 100%;
+            order: 2; 
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hero-image img {
+            height: auto;       
+            width: 100%;
+            max-width: 350px;
+            display: block;
+        }
+        .hero-text h1 { font-size: 2.2rem; }
+        .course-grid { width: 100%; margin: 0 auto 2rem; }
+        
+        .course-card { 
+            padding: 2.5rem 1.5rem 1.5rem 1.5rem !important; 
+            flex-direction: column; 
+            text-align: center; 
+        }
+        
+        .badge-free { 
+            top: 10px; 
+            right: -35px; 
+        }
+    }
+
+    @media (max-width: 550px) {
+        .course-grid { grid-template-columns: 1fr; }
+        .course-card { 
+            flex-direction: row; 
+            text-align: left; 
+            padding: 1.2rem 3.5rem 1.2rem 1.2rem !important;
+            justify-content: flex-start;
+            gap: 1rem;
+        }
+        .badge-free { 
+            top: 12px; 
+            right: -32px; 
+        }
+    }
+</style>
 </head>
 
 <body>
-    <section class="portada">
-        <div class="portada-contenido">
-            <div class="portada-caja">
-                <div class="portada-titulo">
-                    <img src="imagenes/logo.png" alt="logo" class="logo">
-                    <h1><span>DOMINA</span><br>EL ACENTO BRITÁNICO</h1>
-                </div>
-                <p>Hablar inglés con un buen acento nunca había sido tan fácil. Aprende de forma práctica y pronuncia
-                    como un auténtico británico.</p>
-                <p>¡Escríbeme para empezar! 😉</p>
-            </div>
-            <div class="portada-foto">
-                <img src="imagenes/gonzalo.png" alt="Instructor del curso">
-            </div>
-        </div>
-    </section>
 
-    <section class="seccion-video">
-        <h2>¿Quieres sonar así?</h2>
-        <div class="contenido-video-texto">
-            <div class="video-contenedor">
-                <iframe src="https://www.youtube.com/embed/jj29cw3pLms?cc_load_policy=0&rel=0"
-                    title="Domina el acento británico" frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="texto-video">
-                <p>🎯 <strong>Claro. Natural. Británico.</strong></p>
-                <p>🧑‍🏫 Aprenderás a <strong>hablar así</strong>, paso a paso, incluso si partes desde cero.</p>
-                <p>📚 La clave no es el talento, es el <strong>compromiso</strong>.</p>
-                <p>👇 Te cuento más.</p>
-            </div>
-        </div>
-    </section>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <h1><span>Gonzalo Rosae</span>TRANSFORMA<br>TU INGLÉS</h1>
 
-    <section>
-        <h2>Qué ofrezco</h2>
-        <div class="cajas-elementales">
-            <div class="caja-elemental">
-                <div class="emoji">👨‍🏫</div>
-                <h3>Clases 1 a 1</h3>
-                <p>Sesiones cara a cara: presenciales u <em>online</em>.</p>
-            </div>
-            <div class="caja-elemental">
-                <div class="emoji">📘</div>
-                <h3>Programa completo</h3>
-                <p>Plan didáctico estructurado que cubre todo lo necesario para dominar la pronunciación.</p>
-            </div>
-            <div class="caja-elemental">
-                <div class="emoji">📝</div>
-                <h3>Resumen por <em>email</em></h3>
-                <p>Correos personalizados con resumen de lo visto en clase, observaciones y consejos.</p>
-            </div>
-            <div class="caja-elemental">
-                <div class="emoji">🌐</div>
-                <h3>Portal de práctica</h3>
-                <p>Acceso a una plataforma web donde podrás repasar con textos y ejercicios prácticos.</p>
-            </div>
-        </div>
-    </section>
+                <!-- <div class="limited-tag">🚀 Acceso Beta · Plazas Limitadas</div> -->
 
-    <section>
-        <h2>Por qué aprender pronunciación</h2>
-        <ul>
-            <li>😯 Provoca <strong>reacciones muy positivas</strong> de los nativos</li>
-            <li>💪 Refuerza tu <strong>autoestima</strong> lingüística</li>
-            <li>🗣️ Mejora tu <strong>comprensibilidad</strong> al comunicarte</li>
-            <li>💼 Aumenta tu <strong>empleabilidad</strong> en un mundo global</li>
-            <li>🎯 Refleja tu <strong>compromiso y esfuerzo</strong> por mejorar</li>
-            <li>🧠 Es una <strong>parte esencial de la lengua</strong>, como el vocabulario o la gramática</li>
-        </ul>
-    </section>
+                <p class="hero-description">
+                    Optimiza cada aspecto de tu inglés con un sistema de aprendizaje preciso, lógico y orientado a
+                    resultados reales.
+                </p>
 
-    <section>
-        <h2>A quién está dirigido</h2>
-        <div class="cajas-elementales">
-            <div class="caja-elemental caja-3">
-                <div class="emoji">🗣️</div>
-                <h3>Hispanohablantes</h3>
-                <p>Diseñado para quienes tienen el español como lengua materna, sin importar tu origen.</p>
-            </div>
-            <div class="caja-elemental caja-3">
-                <div class="emoji">🎯</div>
-                <h3>Cualquier nivel</h3>
-                <p>No importa si sabes poco de pronunciación o ya tienes un nivel más alto: me adapto a ti.</p>
-            </div>
-            <div class="caja-elemental caja-3">
-                <div class="emoji">👧👩👵</div>
-                <h3>Cualquier edad</h3>
-                <p>No importa tu edad, solo tu compromiso y tus ganas de mejorar.</p>
-            </div>
-        </div>
-    </section>
+                <div class="course-grid">
 
-
-
-    <section>
-        <h2>Opiniones</h2>
-        <div class="opinion-contenedor">
-
-            <a href="https://www.trustpilot.com/reviews/6953aab1a026f20e1912eeda" target="_blank"
-                rel="noopener noreferrer" class="opinion-caja">
-                <div class="opinion-contenido">
-                    <div class="opinion-encabezado">
-                        <img src="imagenes/esperanza.jpg" alt="Esperanza" class="foto-opinion" loading="lazy">
-                        <div class="opinion-info">
-                            <h3 class="opinion-nombre">Esperanza M.</h3>
-                            <div class="opinion-estrellas">⭐⭐⭐⭐⭐</div>
+                    <a href="pronunciacion" class="course-card pronunciation">
+                        <div class="badge-price">12€ / hora</div>
+                        <img src="imagenes/logo.png" alt="logo" class="logo">
+                        <div>
+                            <h3><span>Domina</span>EL ACENTO BRITÁNICO</h3>
                         </div>
-                    </div>
-                    <p class="opinion-texto">
-                        Una formación única y muy completa que permite adquirir eficazmente y de forma interactiva el
-                        acento británico, así como recuperar la confianza al hablar en inglés.
-                        ¡Muy recomendado!
-                    </p>
-                </div>
+                    </a>
 
-                <div class="opinion-footer">
-                    <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/logo-white.svg" alt="Trustpilot"
-                        class="tp-logo">
-                    <span class="icono-externo">↗</span>
-                </div>
-            </a>
-
-            <a href="https://www.trustpilot.com/reviews/694eba34c7abb79065a15340" target="_blank" rel="noopener noreferrer"
-                class="opinion-caja">
-                <div class="opinion-contenido">
-                    <div class="opinion-encabezado">
-                        <img src="imagenes/vicente.jpeg" alt="Vicente" class="foto-opinion" loading="lazy">
-                        <div class="opinion-info">
-                            <h3 class="opinion-nombre">Vicente E.</h3>
-                            <div class="opinion-estrellas">⭐⭐⭐⭐⭐</div>
+                    <a href="gramatical" class="course-card grammar">
+                        <div class="badge-free">¡Gratis!</div>
+                        <img src="imagenes/logo_gramatical.png" alt="logo" class="logo">
+                        <div>
+                            <h3><span>Supera</span>ERRORES FRECUENTES</h3>
                         </div>
-                    </div>
-                    <p class="opinion-texto">
-                        Con este curso podrás sonar como el auténtico James Bond; y si se te daba mal hablar en inglés,
-                        ganarás en confianza y naturalidad.
-                        ¡No se enseña en ningún sitio y debería ser obligatorio en los colegios!
-                    </p>
-                </div>
-
-                <div class="opinion-footer">
-                    <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/logo-white.svg" alt="Trustpilot"
-                        class="tp-logo">
-                    <span class="icono-externo">↗</span>
-                </div>
-            </a>
-
-            <a href="https://www.trustpilot.com/reviews/694f3af058938fc32a2ac3b2" target="_blank"
-                rel="noopener noreferrer" class="opinion-caja">
-                <div class="opinion-contenido">
-                    <div class="opinion-encabezado">
-                        <img src="imagenes/julio.jfif" alt="Julio" class="foto-opinion" loading="lazy">
-                        <div class="opinion-info">
-                            <h3 class="opinion-nombre">Julio M.</h3>
-                            <div class="opinion-estrellas">⭐⭐⭐⭐⭐</div>
-                        </div>
-                    </div>
-                    <p class="opinion-texto">
-                        Una forma muy útil de darle ese plus a tu inglés y desenvolverte con fluidez y seguridad.
-                        Gonzalo le pone muchas ganas, y eso, sumado a su alto nivel y a la plataforma didáctica con la
-                        que trabaja, hace que mejorar te resulte muy fácil.
-                    </p>
-                </div>
-
-                <div class="opinion-footer">
-                    <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/logo-white.svg" alt="Trustpilot"
-                        class="tp-logo">
-                    <span class="icono-externo">↗</span>
-                </div>
-            </a>
-
-        </div>
-    </section>
-
-
-    <section>
-        <h2>Preguntas frecuentes (FAQ)</h2>
-        <div class="faq-acordeon">
-            <div class="faq-item">
-                <button class="faq-pregunta">¿Cuánto dura cada clase?</button>
-                <div class="faq-respuesta">
-                    <p>Me adapto a lo que prefieras: 60 o 90 minutos.</p>
+                    </a>
                 </div>
             </div>
-            <div class="faq-item">
-                <button class="faq-pregunta">¿Cuántas clases se dan a la semana?</button>
-                <div class="faq-respuesta">
-                    <p>Me adapto a lo que prefieras: 1, 2 o incluso 3 clases. En mi experiencia lo que mejor funciona
-                        son 2 a la semana.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-pregunta">¿Cuánto dura el curso?</button>
-                <div class="faq-respuesta">
-                    <p>Depende del alumno, de su nivel de partida y del tiempo que practique o repase. Probablemente de
-                        15 a 25 clases.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-pregunta">¿Qué pasa si no puedo asistir a una clase?</button>
-                <div class="faq-respuesta">
-                    <p>Podemos reprogramarla si me avisas con al menos 24 horas de antelación.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-pregunta">¿Qué materiales necesito?</button>
-                <div class="faq-respuesta">
-                    <p>Para clases presenciales, ¡nada!</p>
-                    <p>Para clases <em>online</em>, solo un ordenador con conexión a internet y un micrófono para poder
-                        oírte.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-pregunta">¿Mandas tarea?</button>
-                <div class="faq-respuesta">
-                    <p>No, cada alumno puede hacer lo que considere. Pero sí que animo a repasar los correos y practicar
-                        todo lo posible en el Portal de Práctica. Cuanto más se practique, mejor se asimilan los
-                        contenidos.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-pregunta">¿Cómo es la modalidad presencial?</button>
-                <div class="faq-respuesta">
-                    <p>Exclusivamente en la ciudad de Cádiz. Me desplazo a tu domicilio. Tiene una tarifa adicional
-                        según la distancia que me tenga que desplazar.</p>
-                </div>
+
+            <div class="hero-image">
+                <img src="imagenes/gonzalo.png" alt="Gonzalo Rosae">
             </div>
         </div>
     </section>
-
-    <section class="seccion-prueba">
-        <div class="prueba-texto">
-            <h2>¿Quieres probar?</h2>
-            <p>✨ <strong>La primera clase es gratuita</strong></p>
-            <ul class="lista-pequeña">
-                <li>Te explico cómo funciona el curso y damos la primera lección</li>
-                <li>Así puedes ver si encaja contigo, sin compromiso</li>
-                <li>¿No es lo que esperabas? ¡No pasa nada!</li>
-            </ul>
-            <p>💬 <strong>¡Pruébalo y decide después! 🙂</strong></p>
-            <p>💸 <strong>Precio:</strong> 12 € por hora de clase</p>
-        </div>
-        <div class="prueba-imagen">
-            <img src="imagenes/mockup.png" alt="Imagen ilustrativa de la clase" loading="lazy">
-        </div>
-    </section>
-
-    <!-- <section class="seccion-regalo">
-        <div class="regalo-texto">
-            <h2>Regala el curso por Navidad</h2>
-            <p>🎁 <strong>Un regalo útil, personal e intemporal</strong></p>
-            <ul class="lista-pequeña" id="lista-regalo">
-                <li>✨ Curso completo de inglés: 200 €</li>
-                <li>🕊️ Sin compromiso: no se paga hasta que la persona <br>confirme que quiere hacerlo
-                </li>
-                <li>📅 Reservo su plaza y te doy un código de reserva</li>
-                <li>🖨️ Puedes imprimir un vale y entregarlo como regalo</li>
-            </ul>
-            <p>💬 <strong>Escríbeme y te explico cómo funciona en dos minutos</strong></p>
-        </div>
-        <div class="regalo-imagen">
-            <img src="imagenes/mockup_regalo.png" alt="Vale regalo del curso de inglés" loading="lazy">
-        </div>
-    </section> -->
-
-
-    <section class="contacto">
-        <h2>Contacto</h2>
-        <div class="cajas-elementales contacto">
-            <div class="caja-elemental">
-                <a href="https://wa.me/34956079630?text=Hola%2C%20Gonzalo%2C%20te%20contacto%20desde%20tu%20web"
-                    target="_blank" class="enlace-caja">
-                    <img src="imagenes/whatsapp.png" alt="WhatsApp" loading="lazy">
-                    <h3>WhatsApp</h3>
-                    <p>+34 956 07 96 30</p>
-                </a>
-            </div>
-            <div class="caja-elemental">
-                <a href="mailto:gonzalorosae@gmail.com?subject=Consulta%20desde%20tu%20web&body=Hola%20Gonzalo%2C%20me%20gustaría%20consultarte%20sobre..."
-                    class="enlace-caja">
-                    <div class="emoji">✉️</div>
-                    <h3>Correo</h3>
-                    <p id="direccion-correo">gonzalorosae@gmail.com</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <a href="https://wa.me/34956079630" target="_blank" class="whatsapp-flotante" aria-label="Contactar por WhatsApp">
-        <img src="imagenes/whatsapp.png" alt="WhatsApp" />
-        <span class="whatsapp-texto">ESCRÍBEME</span>
-    </a>
-
-
-    <script>
-        const questions = document.querySelectorAll('.faq-pregunta');
-
-        questions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const open = answer.style.maxHeight;
-
-                // Cerrar todos
-                document.querySelectorAll('.faq-respuesta').forEach(a => a.style.maxHeight = null);
-
-                // Abrir solo si estaba cerrado
-                if (!open || open === "0px") {
-                    answer.style.maxHeight = answer.scrollHeight + "px";
-                }
-            });
-        });
-    </script>
 
 </body>
 

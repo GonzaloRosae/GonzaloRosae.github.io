@@ -10,6 +10,7 @@
     --colorTerciario: #245014;
     --colorDegradado: #1cd31c;
     --colorOpinion: #5ce62a;
+    --colorPromo: #da8400;
 }
 
 * {
@@ -261,34 +262,105 @@ section ul li {
 }
 
 
-/* SECCION PRUEBA */
+/* ==========================================================================
+   SECCION PRUEBA - VERSIÓN FINAL CORREGIDA
+   ========================================================================== */
+
+/* 1. Mantenemos la estructura original para imagen a la derecha */
 .seccion-prueba {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 2em;
+    gap: 3rem;
+    /* Espacio entre texto e imagen */
+    align-items: center;
+    /* Centrado vertical */
 }
 
 .prueba-texto {
-    flex: 1 1 300px;
-    max-width: 600px;
+    flex: 1 1 450px;
+    max-width: 650px;
+}
+
+/* 2. Estilos para el bloque de precio */
+.intro-precio {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+}
+
+#precioAntiguo {
+    text-decoration: line-through;
+    color: var(--color-tachado);
+    opacity: 0.7;
+    margin-right: 8px;
+}
+
+#precioNuevo {
+    color: var(--colorPromo);
+    font-weight: 800;
+}
+
+.nota-tiempo {
+    font-size: 0.85rem !important;
+    font-style: italic;
+    color: #bbb;
+    /* Color gris suave para la nota */
+    margin-top: -5px;
 }
 
 #lista-primera-clase {
-    list-style-type: disc;
-    margin-left: 3rem;
-    font-size: 1rem;
+    list-style-type: none;
+    /* Quitamos los puntos por defecto */
+    padding-left: 0;
+    margin-left: 0;
 }
 
+#lista-primera-clase li {
+    position: relative;
+    padding-left: 40px;
+    /* Espacio para el icono */
+    margin-bottom: 15px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+#lista-primera-clase li::before {
+    content: "✔️";
+    /* Icono visual */
+    position: absolute;
+    left: 0;
+    font-size: 1.1rem;
+    filter: grayscale(0);
+    /* Evitamos que el tema lo ponga gris */
+}
+
+/* 4. Estilos para el texto de contacto final */
+.dudas-contacto {
+    font-weight: bold;
+    margin-top: 2rem;
+}
+
+/* 5. Imagen a la derecha */
 .prueba-imagen {
-    flex: 1 1 300px;
-    max-width: 500px;
+    flex: 1 1 400px;
+    /* Asegura un tamaño decente */
+    max-width: 550px;
+    transition: transform 0.3s ease;
+}
+
+.prueba-imagen:hover {
+    transform: scale(1.03);
+    /* Efecto sutil al pasar el ratón */
 }
 
 .prueba-imagen img {
     width: 100%;
     height: auto;
     border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 /* CAJAS ELEMENTALES */
