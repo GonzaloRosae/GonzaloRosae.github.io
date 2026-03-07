@@ -259,6 +259,107 @@ section ul li {
     margin-bottom: 3.1rem;
 }
 
+/* ── Tabla QOVES adaptada ── */
+.evidencia-tabla {
+    border: 1px solid rgba(39, 134, 190, 0.25);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: rgba(255,255,255,0.02);
+}
+
+.evidencia-fila {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: background-color 0.2s ease;
+    position: relative;
+}
+
+.evidencia-fila:last-child {
+    border-bottom: none;
+}
+
+.evidencia-fila::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--colorPrimario);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.evidencia-fila:hover {
+    background-color: rgba(39, 134, 190, 0.06);
+}
+
+.evidencia-fila:hover::before {
+    opacity: 1;
+}
+
+.evidencia-etiqueta {
+    padding: 26px 28px;
+    display: flex;
+    align-items: flex-start;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.evidencia-etiqueta span {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--textoClaro);
+    line-height: 1.35;
+}
+
+.evidencia-etiqueta span strong {
+    color: var(--colorTerciario);
+}
+
+.evidencia-contenido {
+    padding: 26px 28px;
+}
+
+.evidencia-hallazgo {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--textoClaro);
+    line-height: 1.45;
+    margin-bottom: 10px;
+}
+
+.evidencia-hallazgo em {
+    color: var(--colorTerciario);
+    font-style: normal;
+}
+
+.evidencia-cita {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    font-size: 0.78rem;
+    color: #7a8a99;
+    line-height: 1.45;
+}
+
+.evidencia-cita svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    opacity: 0.55;
+    color: var(--colorPrimario);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    section { padding: 2rem 2rem 4rem 2rem; }
+    section h2 { text-align: center; border: none; padding: 0; font-size: 2rem; }
+    .evidencia-fila { grid-template-columns: 1fr; }
+    .evidencia-etiqueta { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding: 18px 18px 12px; }
+    .evidencia-etiqueta span { color: var(--colorTerciario); font-weight: bold; }
+    .evidencia-contenido { padding: 12px 18px 18px; }
+    .evidencia-hallazgo { font-weight: normal;}
+    .evidencia-hallazgo em { color: var(--textoClaro) }
+    .evidencia-cita { font-size: 0.6rem; }
+}
 
 /* SECCION PRUEBA */
 .seccion-prueba,
