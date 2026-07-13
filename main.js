@@ -190,9 +190,6 @@ document.getElementById('dqSend')?.addEventListener('click', () => {
     emailEl?.focus(); emailEl?.style.setProperty('border-color', '#e05252'); return;
   }
 
-  const waMsg = encodeURIComponent(`📘 *Lead — Guía PDF*\n\n*Nombre:* ${nombre}\n*Email:* ${email}\n*Nivel:* ${answers.nivel}`);
-  window.open(`https://wa.me/34956079630?text=${waMsg}`, '_blank');
-
   document.getElementById('dqForm').classList.add('hidden');
   document.getElementById('dqThanks').classList.remove('hidden');
   document.getElementById('dqThanksName').textContent = nombre;
