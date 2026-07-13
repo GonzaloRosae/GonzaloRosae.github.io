@@ -7,14 +7,14 @@ const CALENDLY_URL = 'https://calendly.com/gonzalorosae/auditoria';
 
 // Plazas: cambia solo este número para actualizar toda la web
 const PLAZAS_DISPONIBLES = 3;
-const PLAZAS_TOTAL       = 3;
+const PLAZAS_TOTAL = 3;
 
 /* ====================================================
    CONTADOR DE PLAZAS — puntos visuales ● ● ○
 ==================================================== */
 (function renderPlazas() {
   const disponibles = PLAZAS_DISPONIBLES;
-  const total       = PLAZAS_TOTAL;
+  const total = PLAZAS_TOTAL;
 
   // Dots en el hero
   const dotsEl = document.getElementById('plazasDots');
@@ -48,13 +48,13 @@ const PLAZAS_TOTAL       = 3;
 /* ====================================================
    MODAL DE CUALIFICACIÓN
 ==================================================== */
-const overlay         = document.getElementById('modalOverlay');
-const modalClose      = document.getElementById('modalClose');
-const formFlow        = document.getElementById('formFlow');
-const disqualifyView  = document.getElementById('disqualifyView');
-const successView     = document.getElementById('successView');
-const qualForm        = document.getElementById('qualForm');
-const successName     = document.getElementById('successName');
+const overlay = document.getElementById('modalOverlay');
+const modalClose = document.getElementById('modalClose');
+const formFlow = document.getElementById('formFlow');
+const disqualifyView = document.getElementById('disqualifyView');
+const successView = document.getElementById('successView');
+const qualForm = document.getElementById('qualForm');
+const successName = document.getElementById('successName');
 
 const answers = { nivel: null, nombre: '', telefono: '' };
 let currentStep = 1;
@@ -110,7 +110,7 @@ document.querySelectorAll('.option-grid, .option-list').forEach(list => {
     btn.classList.add('selected');
     const field = list.dataset.field;
     const value = btn.dataset.value;
-    const dq    = btn.dataset.dq;
+    const dq = btn.dataset.dq;
     answers[field] = value;
     setTimeout(() => {
       if (field === 'nivel') {
@@ -129,7 +129,7 @@ document.querySelectorAll('[data-back]').forEach(btn => {
 /* --- Submit paso 2 --- */
 qualForm.addEventListener('submit', e => {
   e.preventDefault();
-  const nombre   = document.getElementById('nombre').value.trim();
+  const nombre = document.getElementById('nombre').value.trim();
   const telefono = document.getElementById('telefono').value.trim();
   if (!nombre || !telefono) return;
   answers.nombre = nombre; answers.telefono = telefono;
@@ -173,7 +173,7 @@ function showDisqualify(nivel) {
   updateProgress(0);
 
   const title = document.getElementById('dqTitle');
-  const text  = document.getElementById('dqText');
+  const text = document.getElementById('dqText');
 
   if (nivel === 'b1') {
     title.textContent = 'Todavía no, pero estás muy cerca';
@@ -187,13 +187,13 @@ function showDisqualify(nivel) {
 /* --- Enviar datos descalificado --- */
 document.getElementById('dqSend')?.addEventListener('click', () => {
   const nombreEl = document.getElementById('dqNombre');
-  const emailEl  = document.getElementById('dqEmail');
-  const nombre   = nombreEl?.value.trim();
-  const email    = emailEl?.value.trim();
+  const emailEl = document.getElementById('dqEmail');
+  const nombre = nombreEl?.value.trim();
+  const email = emailEl?.value.trim();
 
-  if (!nombre) { nombreEl?.focus(); nombreEl?.style.setProperty('border-color','#e05252'); return; }
+  if (!nombre) { nombreEl?.focus(); nombreEl?.style.setProperty('border-color', '#e05252'); return; }
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    emailEl?.focus(); emailEl?.style.setProperty('border-color','#e05252'); return;
+    emailEl?.focus(); emailEl?.style.setProperty('border-color', '#e05252'); return;
   }
 
   const waMsg = encodeURIComponent(`📘 *Lead — Guía PDF*\n\n*Nombre:* ${nombre}\n*Email:* ${email}\n*Nivel:* ${answers.nivel}`);
@@ -212,14 +212,14 @@ function resetModal() {
 
   answers.nivel = null; answers.nombre = ''; answers.telefono = '';
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  ['nombre','telefono','dqNombre','dqEmail'].forEach(id => {
+  ['nombre', 'telefono', 'dqNombre', 'dqEmail'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.style.borderColor = ''; }
   });
 
   const dqForm = document.getElementById('dqForm');
   const dqThanks = document.getElementById('dqThanks');
-  if (dqForm)   dqForm.classList.remove('hidden');
+  if (dqForm) dqForm.classList.remove('hidden');
   if (dqThanks) dqThanks.classList.add('hidden');
 
   successView.querySelectorAll('a.btn-ghost').forEach(el => el.remove());
@@ -233,7 +233,7 @@ function resetModal() {
 ==================================================== */
 document.querySelectorAll('.faq-pregunta').forEach(btn => {
   btn.addEventListener('click', () => {
-    const item   = btn.closest('.faq-item');
+    const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(i => {
       i.classList.remove('open');
@@ -251,21 +251,21 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
    AUDIO PLAYER CUSTOM
 ==================================================== */
 (function initAudio() {
-  const fmt = s => `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`;
+  const fmt = s => `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
 
   function initPlayer(audioId, playBtnId, barsWrapId, timeCurId, timeTotalId) {
-    const audio    = document.getElementById(audioId);
-    const playBtn  = document.getElementById(playBtnId);
+    const audio = document.getElementById(audioId);
+    const playBtn = document.getElementById(playBtnId);
     const barsWrap = document.getElementById(barsWrapId);
-    const timeCur  = document.getElementById(timeCurId);
+    const timeCur = document.getElementById(timeCurId);
     const timeTotal = document.getElementById(timeTotalId);
     if (!audio || !playBtn || !barsWrap) return;
 
     const BAR_COUNT = 40;
     Array.from({ length: BAR_COUNT }, (_, i) => {
-      const env   = Math.sin((i / (BAR_COUNT - 1)) * Math.PI);
+      const env = Math.sin((i / (BAR_COUNT - 1)) * Math.PI);
       const noise = 0.3 + Math.random() * 0.7;
-      const bar   = document.createElement('span');
+      const bar = document.createElement('span');
       bar.style.height = Math.round(5 + env * noise * 88) + '%';
       barsWrap.appendChild(bar);
     });
@@ -283,8 +283,25 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
       bars.forEach(b => b.classList.remove('played'));
     });
     playBtn.addEventListener('click', () => {
-      if (audio.paused) { audio.play().catch(() => {}); playBtn.textContent = '⏸'; }
-      else              { audio.pause();                 playBtn.textContent = '▶'; }
+      if (audio.error) return;
+      if (audio.paused) {
+        // Parar todos los demás players antes de reproducir
+        document.querySelectorAll('audio').forEach(a => {
+          if (a !== audio) {
+            a.pause();
+            a.currentTime = 0;
+          }
+        });
+        // Resetear visualmente los otros botones
+        document.querySelectorAll('.audio-play-btn').forEach(b => {
+          if (b !== playBtn) b.textContent = '▶';
+        });
+        audio.play().catch(() => { });
+        playBtn.textContent = '⏸';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶';
+      }
     });
   }
 
@@ -341,20 +358,20 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
   svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
   svg.style.cssText = 'width:100%;height:100%;';
 
-  [['#2389c9',0.18,'1',-1,14],['#c9a66b',0.10,'1.5',1,18],['#2389c9',0.08,'1',-1,22]].forEach(([color,op,sw,dir,dur],l) => {
-    let d = `M0,${H*(0.35+l*0.15)}`;
-    for (let x = 0; x <= W; x += W/60) {
-      const y = H*(0.35+l*0.15) + Math.sin(x*(0.04+l*0.012)+l*Math.PI*0.7) * (28+l*14) * Math.sin((x/W)*Math.PI);
+  [['#2389c9', 0.18, '1', -1, 14], ['#c9a66b', 0.10, '1.5', 1, 18], ['#2389c9', 0.08, '1', -1, 22]].forEach(([color, op, sw, dir, dur], l) => {
+    let d = `M0,${H * (0.35 + l * 0.15)}`;
+    for (let x = 0; x <= W; x += W / 60) {
+      const y = H * (0.35 + l * 0.15) + Math.sin(x * (0.04 + l * 0.012) + l * Math.PI * 0.7) * (28 + l * 14) * Math.sin((x / W) * Math.PI);
       d += ` L${x.toFixed(1)},${y.toFixed(1)}`;
     }
-    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-    path.setAttribute('d',d); path.setAttribute('fill','none');
-    path.setAttribute('stroke',color); path.setAttribute('stroke-width',sw);
-    path.setAttribute('opacity',op);
-    const anim = document.createElementNS('http://www.w3.org/2000/svg','animateTransform');
-    anim.setAttribute('attributeName','transform'); anim.setAttribute('type','translate');
-    anim.setAttribute('values',`0 0;${W*0.04*dir} 0;0 0`);
-    anim.setAttribute('dur',`${dur}s`); anim.setAttribute('repeatCount','indefinite');
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d); path.setAttribute('fill', 'none');
+    path.setAttribute('stroke', color); path.setAttribute('stroke-width', sw);
+    path.setAttribute('opacity', op);
+    const anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
+    anim.setAttribute('attributeName', 'transform'); anim.setAttribute('type', 'translate');
+    anim.setAttribute('values', `0 0;${W * 0.04 * dir} 0;0 0`);
+    anim.setAttribute('dur', `${dur}s`); anim.setAttribute('repeatCount', 'indefinite');
     path.appendChild(anim); svg.appendChild(path);
   });
   container.appendChild(svg);
@@ -366,6 +383,6 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.getElementById(a.getAttribute('href').slice(1));
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth', block:'start' }); }
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
