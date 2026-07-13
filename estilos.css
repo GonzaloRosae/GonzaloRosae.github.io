@@ -989,13 +989,13 @@ section { position: relative; padding: 7rem 0; }
   margin: 0 auto;
 }
 
-.audio-card {
+.antesdespues-card {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.audio-label {
+.antesdespues-label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1006,7 +1006,7 @@ section { position: relative; padding: 7rem 0; }
   color: var(--text-low);
 }
 
-.audio-dot {
+.antesdespues-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
@@ -1015,7 +1015,7 @@ section { position: relative; padding: 7rem 0; }
 .antes-dot { background: #e05252; box-shadow: 0 0 0 3px rgba(224,82,82,0.18); }
 .despues-dot { background: var(--green-ok); box-shadow: 0 0 0 3px rgba(46,158,106,0.18); }
 
-.audio-divider {
+.antesdespues-divider {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1023,7 +1023,7 @@ section { position: relative; padding: 7rem 0; }
   flex-shrink: 0;
 }
 
-.audio-arrow {
+.antesdespues-arrow {
   font-size: 1.4rem;
   color: var(--gold);
   opacity: 0.7;
@@ -1034,7 +1034,7 @@ section { position: relative; padding: 7rem 0; }
 .despues-btn:hover { background: #25855a; }
 
 /* Disclaimer antes/después */
-.audio-disclaimer {
+.antesdespues-disclaimer {
   display: flex;
   align-items: flex-start;
   gap: 0.5rem;
@@ -1048,7 +1048,7 @@ section { position: relative; padding: 7rem 0; }
   font-style: italic;
 }
 
-.audio-disclaimer svg {
+.antesdespues-disclaimer svg {
   flex-shrink: 0;
   margin-top: 1px;
   opacity: 0.6;
@@ -1058,7 +1058,7 @@ section { position: relative; padding: 7rem 0; }
   .antes-despues {
     grid-template-columns: 1fr;
   }
-  .audio-divider {
+  .antesdespues-divider {
     transform: rotate(90deg);
     margin: 0 auto;
   }
