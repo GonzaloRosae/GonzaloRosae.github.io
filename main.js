@@ -85,19 +85,11 @@ document.addEventListener('keydown', e => {
 document.getElementById('dqClose')?.addEventListener('click', closeModal);
 document.getElementById('dqThanksClose')?.addEventListener('click', closeModal);
 
-/* --- Progress dots --- */
-function updateProgress(filled) {
-  document.querySelectorAll('.step-dot').forEach((dot, i) => {
-    dot.classList.toggle('done', i < filled);
-  });
-}
-
 /* --- Mostrar step --- */
 function showStep(step) {
   document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
   const target = document.querySelector(`.form-step[data-step="${step}"]`);
   if (target) target.classList.add('active');
-  updateProgress(step - 1);
   currentStep = step;
 }
 
@@ -131,7 +123,11 @@ qualForm.addEventListener('submit', e => {
   e.preventDefault();
   const nombre = document.getElementById('nombre').value.trim();
   const telefono = document.getElementById('telefono').value.trim();
-  if (!nombre || !telefono) return;
+  if (!validarTelefono(telefono)) {
+    document.getElementById('telefono').style.borderColor = '#e05252';
+    document.getElementById('telefono').focus();
+    return;
+  }
   answers.nombre = nombre; answers.telefono = telefono;
   showSuccess(nombre);
 });
@@ -140,7 +136,6 @@ qualForm.addEventListener('submit', e => {
 function showSuccess(nombre) {
   formFlow.classList.add('hidden');
   successView.classList.remove('hidden');
-  updateProgress(TOTAL_STEPS);
   successName.textContent = nombre;
 
   const container = document.getElementById('calendlyWidget');
@@ -170,17 +165,16 @@ function showSuccess(nombre) {
 function showDisqualify(nivel) {
   formFlow.classList.add('hidden');
   disqualifyView.classList.remove('hidden');
-  updateProgress(0);
 
   const title = document.getElementById('dqTitle');
   const text = document.getElementById('dqText');
 
   if (nivel === 'b1') {
     title.textContent = 'Todavía no, pero estás muy cerca';
-    text.innerHTML = 'Con B1 el programa aún no sería lo más efectivo — pero estás a un paso. Si quieres, te mando gratis una <strong>Guía de Pronunciación Británica</strong> para que llegues antes de lo que crees.';
+    text.innerHTML = 'Con B1 el programa aún no sería lo más efectivo, pero estás a un paso. Si quieres puedes escribirme un mensaje o correo para ver tu caso en específico. Puedes encontrar mis datos de contacto abajo del todo.';
   } else {
     title.textContent = 'Aún no es el momento';
-    text.innerHTML = 'El programa está diseñado para B2–C2. Con nivel ' + nivel.toUpperCase() + ' lo que más te ayudaría ahora es consolidar el inglés general — pero te mando igualmente la guía si te interesa.';
+    text.innerHTML = 'El programa está diseñado para B2–C2. Con nivel ' + nivel.toUpperCase() + ' lo que más te ayudaría ahora es consolidar el inglés general.';
   }
 }
 
@@ -386,3 +380,17 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
+
+function validarTelefono(valor) {
+  const limpio = valor.trim().replace(/[\s\-().]/g, '');
+
+  // Con prefijo internacional
+  if (limpio.startsWith('+')) {
+    return /^\+[1-9]\d{6,14}$/.test(limpio);
+  }
+
+  // Sin prefijo — se asume España
+  // Móviles: 6xx, 7xx — Fijos: 8xx, 9xx
+  // 9 dígitos exactos
+  return /^[6789]\d{8}$/.test(limpio);
+}

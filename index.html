@@ -177,7 +177,7 @@
           <div class="audio-card">
             <button class="audio-play-btn" id="audioPlayBtnAntes" aria-label="Reproducir antes">▶</button>
             <div class="audio-meta">
-              <div class="audio-title">Acento español típico en inglés</div>
+              <div class="audio-title">Acento inglés españolizado</div>
               <div class="audio-bars" id="audioBaresAntes"></div>
               <div class="audio-time"><span id="audioTimeCurrentAntes">0:00</span> / <span id="audioTimeTotalAntes">0:00</span></div>
             </div>
@@ -197,7 +197,7 @@
           <div class="audio-card">
             <button class="audio-play-btn despues-btn" id="audioPlayBtnDespues" aria-label="Reproducir después">▶</button>
             <div class="audio-meta">
-              <div class="audio-title">Standard Southern British</div>
+              <div class="audio-title">Acento inglés perfeccionado</div>
               <div class="audio-bars" id="audioBaresDespues"></div>
               <div class="audio-time"><span id="audioTimeCurrentDespues">0:00</span> / <span id="audioTimeTotalDespues">0:00</span></div>
             </div>
@@ -309,7 +309,7 @@
         </div>
 
         <div class="comp-fila alt">
-          <div class="comp-col-feature"><span class="comp-icon">🧬</span> Diagnóstico personalizado de tu acento</div>
+          <div class="comp-col-feature"><span class="comp-icon">🧬</span> Diagnóstico inicial personalizado</div>
           <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
           <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
         </div>
@@ -684,11 +684,9 @@
 
       <div id="formFlow">
         <h3>Reserva tu Auditoría de Acento</h3>
-        <p class="modal-sub">2 preguntas rápidas para preparar tu sesión de 15 minutos.</p>
+        <p class="modal-sub">Dos preguntas rápidas para reservar tu auditoría.</p>
         <div class="modal-progress">
-          <span class="step-dot" data-dot="1"></span>
-          <span class="step-dot" data-dot="2"></span>
-          <span class="step-dot" data-dot="3"></span>
+          <span class="step-dot done"></span>
         </div>
 
         <form id="qualForm">
@@ -730,20 +728,6 @@
           <strong>Guía de Pronunciación Británica</strong> para que llegues antes de lo que crees. Solo necesito tu
           nombre y tu email.
         </p>
-        <div id="dqForm">
-          <div class="field-group" style="margin-top:1.2rem">
-            <label for="dqNombre">Nombre</label>
-            <input type="text" id="dqNombre" placeholder="Tu nombre">
-          </div>
-          <div class="field-group" style="margin-top:0.7rem">
-            <label for="dqEmail">Email</label>
-            <input type="email" id="dqEmail" placeholder="tu@email.com">
-          </div>
-          <div style="display:flex;gap:0.7rem;margin-top:1.1rem">
-            <button class="btn btn-primary" style="flex:1" id="dqSend">Enviarme la guía gratis</button>
-            <button class="btn btn-ghost" id="dqClose">Cerrar</button>
-          </div>
-        </div>
         <div class="hidden" id="dqThanks" style="margin-top:1.2rem;text-align:center">
           <div style="font-size:1.8rem;margin-bottom:0.6rem">✓</div>
           <p style="color:var(--text-high);font-weight:600;margin-bottom:0.3rem">¡Perfecto, <span
