@@ -2,318 +2,773 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gonzalo Rosae | Aprende inglés</title>
-    <meta name="description"
-        content="Aprende a hablar inglés con acento británico auténtico con Gonzalo Rosae. Clases personalizadas de pronunciación y gramática.">
-    <link rel="shortcut icon" href="imagenes/rosae.png" type="image/x-icon">
-    <style>
-    html, body {
-        max-width: 100vw;       
-        overflow-x: hidden;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-
-    :root {
-        --bg-deep: #0f172a; 
-        --bg-card: #1e293b;
-        --text-main: #f8fafc;
-        --text-dim: #94a3b8;
-        --brand-red: #dd314f; 
-        --brand-red-hover: #d32a2a;
-        --brand-blue: #2786be;
-        --brand-green: #58a834;
-        --shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: var(--bg-deep);
-        color: var(--text-main);
-        line-height: 1.6;
-    }
-
-    h1, h2, h3 { font-weight: bold; }
-    .hero {
-        padding-left: 10% !important; 
-        padding-right: 5% !important;
-        padding-bottom: 0 !important; 
-        height: 100vh;
-        min-height: 600px;
-        display: flex;
-        align-items: center; 
-        position: relative; 
-        overflow: hidden;    
-        background: radial-gradient(circle at top right, rgba(39, 134, 190, 0.1), transparent),
-                    radial-gradient(circle at bottom left, rgba(221, 49, 79, 0.1), transparent);
-    }
-
-    .hero-container {
-        max-width: 1400px;
-        width: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        align-items: center;
-        position: static; 
-    }
-
-    .hero-text {
-        max-width: 650px;
-        position: relative;
-        z-index: 10; 
-    }
-
-    .hero-text h1 {
-        font-size: 3.5rem;
-        line-height: 1.1;
-        margin-bottom: 1.5rem;
-        color: var(--text-main);
-    }
-
-    .hero-text h1 span {
-        color: var(--brand-red);
-        display: block;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .hero-description {
-        font-size: 1.2rem;
-        color: var(--text-dim);
-        margin-bottom: 2rem;
-    }
-
-    .limited-tag {
-        display: inline-block;
-        background: rgba(221, 49, 79, 0.1);
-        color: var(--brand-red);
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        font-weight: bold;
-        text-transform: uppercase;
-        margin-bottom: 1.5rem;
-        border: 1px solid var(--brand-red);
-    }
-
-    .hero-image {
-        position: absolute; 
-        bottom: 0;
-        right: 5%;
-        height: 90vh;
-        width: auto;
-        z-index: 1;
-        pointer-events: none; 
-        display: flex;
-        align-items: flex-end; 
-    }
-
-    .hero-image img {
-        height: 100%;
-        width: auto;
-        max-width: none;
-        filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
-        object-fit: contain;
-        display: block; 
-    }
-
-    .course-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-        margin-bottom: 2.5rem;
-        max-width: 600px; 
-    }
-
-    .course-card {
-        background: var(--bg-card);
-        padding: 1.2rem 3.5rem 1.2rem 1.6rem; 
-        border-radius: 15px;
-        text-decoration: none;
-        color: white;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        box-shadow: var(--shadow);
-        position: relative;
-        overflow: hidden;
-        width: 105%;
-    }
-
-    .course-card:hover { transform: translateY(-5px); }
-    .course-card img.logo { width: 80px; height: auto; flex-shrink: 0; }
-    
-    .course-card h3 { 
-        font-size: 1.1rem; 
-        line-height: 1.2; 
-        margin: 0; 
-    }
-    
-    .course-card h3 span {
-        display: block;
-        text-transform: uppercase;
-        margin-bottom: 0.2rem;
-        font-size: 0.85rem;
-    }
-
-    .course-card.pronunciation h3 span { color: var(--brand-blue); }
-    .course-card.grammar h3 span { color: var(--brand-green); }
-
-    .badge-price {
-        position: absolute;
-        top: 15px; 
-        right: -40px; 
-        background: var(--brand-red);
-        color: white;
-        font-size: 0.65rem;
-        font-weight: 800;
-        padding: 6px 35px; 
-        transform: rotate(45deg);
-        letter-spacing: 1px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        z-index: 5;
-        pointer-events: none;
-    }
-
-    .badge-free {
-        position: absolute;
-        top: 11px; 
-        right: -35px; 
-        background: var(--brand-red);
-        color: white;
-        font-size: 0.65rem;
-        font-weight: 800;
-        padding: 6px 35px; 
-        transform: rotate(45deg);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        z-index: 5;
-        pointer-events: none;
-    }
-
-    @media (max-width: 1024px) {
-        .hero {
-            padding: 4rem 1.5rem 0 1.5rem !important; 
-            display: block; 
-            height: auto;       
-            min-height: auto;
-            overflow: visible;  
-        }
-        .hero-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem; 
-            width: 100%;
-            position: relative; 
-        }
-        .hero-text {
-            max-width: 100%;
-            text-align: center;
-            order: 1;
-            z-index: auto;
-        }
-        .hero-image {
-            position: relative;
-            bottom: auto;
-            right: auto;
-            height: auto;       
-            width: 100%;
-            order: 2; 
-            margin-top: 2rem;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-        }
-        .hero-image img {
-            height: auto;       
-            width: 100%;
-            max-width: 350px;
-            display: block;
-        }
-        .hero-text h1 { font-size: 2.2rem; }
-        .course-grid { width: 100%; margin: 0 auto 2rem; }
-        
-        .course-card { 
-            padding: 2.5rem 1.5rem 1.5rem 1.5rem !important; 
-            flex-direction: column; 
-            text-align: center; 
-        }
-        
-        .badge-free { 
-            top: 10px; 
-            right: -35px; 
-        }
-    }
-
-    @media (max-width: 550px) {
-        .course-grid { grid-template-columns: 1fr; }
-        .course-card { 
-            flex-direction: row; 
-            text-align: left; 
-            padding: 1.2rem 3.5rem 1.2rem 1.2rem !important;
-            justify-content: flex-start;
-            gap: 1rem;
-            width: 97%;
-        }
-        .badge-free { 
-            top: 12px; 
-            right: -32px; 
-        }
-    }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The British Voice Method | Gonzalo Rosae</title>
+  <meta name="description"
+    content="Suena con autoridad en inglés. Programa 1 a 1 de transformación de acento británico para hablantes de nivel B2–C2. Auditoría de Acento gratuita de 15 minutos.">
+  <meta name="keywords"
+    content="acento británico, pronunciación inglés, coach de acento, fonética inglesa, mejorar pronunciación inglés">
+  <meta property="og:title" content="The British Voice Method | Gonzalo Rosae">
+  <meta property="og:description"
+    content="Suena con autoridad en inglés. Programa 1 a 1 para hablantes de nivel B2–C2 que quieren llevar su pronunciación al siguiente nivel. Reserva tu Auditoría de Acento gratuita.">
+  <meta property="og:image" content="https://gonzalorosae.es/imagenes/logo.png">
+  <meta property="og:url" content="https://gonzalorosae.es">
+  <meta name="author" content="Gonzalo Rosae">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="shortcut icon" href="./img/logo.png" type="image/png">
+  <link rel="stylesheet" href="./estilos.css">
+  <meta name="trustpilot-one-time-domain-verification-id" content="84549eb7-e086-4b82-a193-56ec4deddf83">
 </head>
 
 <body>
 
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-text">
-                <h1><span>Gonzalo Rosae</span>TRANSFORMA<br>TU INGLÉS</h1>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <img src="./img/logo.png" alt="Gonzalo Rosae">
+        <span>Gonzalo Rosae</span>
+      </div>
+    </div>
+  </nav>
 
-                <!-- <div class="limited-tag">🚀 Acceso Beta · Plazas Limitadas</div> -->
-
-                <p class="hero-description">
-                    Optimiza cada aspecto de tu inglés con un sistema de aprendizaje preciso, lógico y orientado a
-                    resultados reales.
-                </p>
-
-                <div class="course-grid">
-
-                    <a href="pronunciacion" class="course-card pronunciation">
-                        <div class="badge-price">12€ / hora</div>
-                        <img src="imagenes/logo.png" alt="logo" class="logo">
-                        <div>
-                            <h3><span>Domina</span>EL ACENTO BRITÁNICO</h3>
-                        </div>
-                    </a>
-
-                    <a href="gramatical" class="course-card grammar">
-                        <div class="badge-free">¡Gratis!</div>
-                        <img src="imagenes/logo_gramatical.png" alt="logo" class="logo">
-                        <div>
-                            <h3><span>Supera</span>ERRORES FRECUENTES</h3>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="hero-image">
-                <img src="imagenes/gonzalo.png" alt="Gonzalo Rosae">
-            </div>
+  <!-- ============ HERO ============ -->
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-h1-nueva">Hablas inglés.<br>Pero <em>no suena</em><br>como debería.</h1>
+        <p class="hero-sub">Transforma por completo cómo suenas para hacerle justicia a tu nivel.</p>
+        <blockquote class="hero-quote">
+          No necesitas más vocabulario.<br>
+          <strong>Necesitas corregir cómo suenas.</strong>
+        </blockquote>
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-lg" data-open-modal>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Reservar auditoría gratuita
+          </button>
         </div>
-    </section>
+        <p class="hero-microcopy-nueva">
+          <span class="plazas-dots" id="plazasDots"></span>
+          <span id="plazasContador" style="display:none">3</span>
+          Solo <strong id="plazasTexto"></strong> de <strong id="plazasTotal"></strong> plazas disponibles — auditoría
+          gratuita, sin compromiso
+        </p>
+      </div>
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-card">
+          <div class="hero-photo-backdrop"></div>
+          <img src="./img/gonzalo.png" alt="Gonzalo Rosae, instructor de acento británico">
+          <div class="hero-badge">
+            <div class="badge-icon">5.0</div>
+            <div class="badge-text"><strong>Trustpilot</strong>Valorado por mis alumnos</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <div class="trust-strip">
+    <div class="wrap">
+      <span><strong>Especialista en fonética británica</strong> · <em>Standard Southern British</em></span>
+      <span><strong>Metodología</strong> basada en evidencia científica</span>
+      <span><strong>5/5</strong> en Trustpilot</span>
+    </div>
+  </div>
+
+  <!-- ============ EVIDENCIA / DIAGNÓSTICO ============ -->
+  <section class="bg-base" id="evidencia">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Por qué importa</p>
+        <h2>Tu acento ya está decidiendo cosas por ti</h2>
+        <p>No es una opinión. Es lo que dice la investigación sobre cómo el acento condiciona cómo te perciben en
+          procesos de selección, reuniones y negociaciones.</p>
+      </div>
+
+      <div class="evidencia-tabla">
+        <div class="evidencia-fila">
+          <div class="evidencia-etiqueta">
+            <span class="ev-icon">💼</span>
+            <span>Empleabilidad</span>
+          </div>
+          <div class="evidencia-contenido">
+            <div>
+              <p class="evidencia-hallazgo">Los candidatos con <em>acento extranjero marcado</em> son penalizados
+                sistemáticamente frente a hablantes con acento estándar, incluso a igualdad de cualificación.</p>
+              <p class="evidencia-fuente">Spence et al. (2022), <em>Personality and Social Psychology Bulletin</em> — <a
+                  href="https://pubmed.ncbi.nlm.nih.gov/36326202/" target="_blank" rel="noopener">ver estudio ↗</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="evidencia-fila">
+          <div class="evidencia-etiqueta">
+            <span class="ev-icon">💵</span>
+            <span>Salario</span>
+          </div>
+          <div class="evidencia-contenido">
+            <div>
+              <p class="evidencia-hallazgo">Un acento marcado reduce el salario percibido en una proporción
+                <em>comparable a la brecha salarial de género</em>.
+              </p>
+              <p class="evidencia-fuente">Grogger &amp; Eriksson (2019), NBER Working Paper No. 26719 — <a
+                  href="https://econpapers.repec.org/paper/nbrnberwo/26719.htm" target="_blank" rel="noopener">ver
+                  estudio ↗</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="evidencia-fila">
+          <div class="evidencia-etiqueta">
+            <span class="ev-icon">📜</span>
+            <span>Credibilidad</span>
+          </div>
+          <div class="evidencia-contenido">
+            <div>
+              <p class="evidencia-hallazgo">Los hablantes con acento extranjero son percibidos como <em>menos
+                  creíbles</em>, al margen de si lo que dicen es cierto.</p>
+              <p class="evidencia-fuente">Lev-Ari &amp; Keysar (2010), <em>Journal of Experimental Social
+                  Psychology</em> — <a
+                  href="https://www.sciencedirect.com/science/article/abs/pii/S0022103110001459?via%3Dihub"
+                  target="_blank" rel="noopener">ver estudio ↗</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="evidencia-fila">
+          <div class="evidencia-etiqueta">
+            <span class="ev-icon">✨</span>
+            <span>Confianza al hablar</span>
+          </div>
+          <div class="evidencia-contenido">
+            <div>
+              <p class="evidencia-hallazgo">La gran mayoría de estudiantes de inglés se preocupan por su acento,
+                generando <em>ansiedad que bloquea la participación</em> en reuniones y entrevistas.</p>
+              <p class="evidencia-fuente">Coppinger &amp; Sheridan (2022), <em>Journal for the Psychology of Language
+                  Learning</em> — <a href="https://www.jpll.org/index.php/journal/article/view/93" target="_blank"
+                  rel="noopener">ver estudio ↗</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AUDIO DEMO ============ -->
+  <section class="bg-panel" id="audio-demo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Escúchalo</p>
+        <h2>Así es como podrías sonar:</h2>
+      </div>
+      <div class="antes-despues">
+
+        <div class="ad-card antes">
+          <div class="ad-label">
+            <span class="ad-dot antes-dot"></span>
+            Antes (simulada)
+          </div>
+          <div class="audio-card">
+            <button class="audio-play-btn" id="audioPlayBtnAntes" aria-label="Reproducir antes">▶</button>
+            <div class="audio-meta">
+              <div class="audio-title">Acento español típico en inglés</div>
+              <div class="audio-bars" id="audioBaresAntes"></div>
+              <div class="audio-time"><span id="audioTimeCurrentAntes">0:00</span> / <span id="audioTimeTotalAntes">0:00</span></div>
+            </div>
+          </div>
+          <audio id="audioDemoAntes" src="https://gonzalorosae.es/audios/antes.mp3" preload="metadata"></audio>
+        </div>
+
+        <div class="ad-divider">
+          <span class="ad-arrow">→</span>
+        </div>
+
+        <div class="ad-card despues">
+          <div class="ad-label">
+            <span class="ad-dot despues-dot"></span>
+            Después (tú)
+          </div>
+          <div class="audio-card">
+            <button class="audio-play-btn despues-btn" id="audioPlayBtnDespues" aria-label="Reproducir después">▶</button>
+            <div class="audio-meta">
+              <div class="audio-title">Standard Southern British</div>
+              <div class="audio-bars" id="audioBarésDespues"></div>
+              <div class="audio-time"><span id="audioTimeCurrentDespues">0:00</span> / <span id="audioTimeTotalDespues">0:00</span></div>
+            </div>
+          </div>
+          <audio id="audioDemo" src="https://gonzalorosae.es/audios/demo.mp3" preload="metadata"></audio>
+        </div>
+
+      </div>
+      <p class="ad-disclaimer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Por confidencialidad, no publico grabaciones de alumnos. Este es el tipo de cambio que conseguimos en el programa.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ A QUIÉN VA DIRIGIDO ============ -->
+  <section class="bg-panel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Para quién es esto</p>
+        <h2>Para quien siente que su inglés es mejor de lo que suena</h2>
+        <p>Si tienes nivel B2–C2 y ya no es cuestión de gramática ni vocabulario, sino de que tu pronunciación refleje
+          realmente quién eres, este programa es para ti.</p>
+      </div>
+      <div class="icp-grid">
+        <div class="icp-card">
+          <div class="icp-icon">🏆</div>
+          <h3>Sientes que tu acento te resta autoridad</h3>
+          <p>Tienes las ideas y el conocimiento. Sin embargo, al
+            hablar, tu pronunciación no proyecta lo que realmente eres. Quieres que
+            la gente se centre en lo que dices y no en cómo lo dices.</p>
+        </div>
+        <div class="icp-card">
+          <div class="icp-icon">📚</div>
+          <h3>Nunca te enseñaron a pronunciar</h3>
+          <p>Te enseñaron vocabulario y gramática, pero no las reglas que hacen que el inglés suene como suena.
+            Quieres entender el sistema y poder descifrar y pronunciar cualquier palabra con seguridad.</p>
+        </div>
+        <div class="icp-card">
+          <div class="icp-icon">😮‍💨</div>
+          <h3>Estás harto de autocensurarte o tener que repetir las cosas</h3>
+          <p>Ese segundo de duda antes de intervenir por miedo a no sonar natural, o la frustración de tener que
+            repetir una frase porque no te han entendido. Quieres acabar ya con esta situación.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DIFERENCIADOR ============ -->
+  <section class="bg-base">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">El método</p>
+        <h2>Fonética tratada como un sistema, no como una lista de palabras</h2>
+      </div>
+
+      <div class="icp-grid">
+        <div class="icp-card">
+          <div class="icp-icon">🎯</div>
+          <h3>Práctica guiada con corrección</h3>
+          <p>Cada sesión es 1 a 1 y centrada en que practiques. Te explico la teoría, la ponemos en práctica con ejercicios y te doy correcciones precisas
+            en el momento para ajustar tu pronunciación.</p>
+        </div>
+
+        <div class="icp-card">
+          <div class="icp-icon">🧠</div>
+          <h3>Aproximación sistemática</h3>
+          <p>Sigues un programa estructurado que cubre todos los sonidos del inglés: consonantes, vocales y otros
+            fenómenos integrales. Entiendes las reglas y construyes una base sólida.</p>
+        </div>
+
+        <div class="icp-card">
+          <div class="icp-icon">📈</div>
+          <h3>Lectura y control de la pronunciación</h3>
+          <p>Te enseño el Alfabeto Fonético Internacional para poder leer cualquier pronunciación de forma autónoma y
+            precisa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARATIVA ============ -->
+  <section class="bg-panel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Por qué esto es diferente</p>
+        <h2>Lo que no encuentras en una academia de idiomas</h2>
+        <p>Una comparativa honesta. Hay cosas en las que una academia gana, pero mira dónde importa de verdad.</p>
+      </div>
+
+      <div class="comp-tabla">
+        <div class="comp-fila comp-header">
+          <div class="comp-col-feature"></div>
+          <div class="comp-col-them">
+            <div class="comp-badge them">🏫 Academia tradicional</div>
+          </div>
+          <div class="comp-col-me">
+            <div class="comp-badge me">
+              <img src="./img/logo.png" alt="Gonzalo Rosae" style="width:20px;height:20px;border-radius:4px"> Este
+              programa
+            </div>
+          </div>
+        </div>
+
+        <div class="comp-fila">
+          <div class="comp-col-feature"><span class="comp-icon">🎯</span> Enfocado en pronunciación</div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+
+        <div class="comp-fila alt">
+          <div class="comp-col-feature"><span class="comp-icon">🧬</span> Diagnóstico personalizado de tu acento</div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+
+        <div class="comp-fila">
+          <div class="comp-col-feature"><span class="comp-icon">📅</span> Duración definida (2–3 meses)</div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+
+        <div class="comp-fila alt">
+          <div class="comp-col-feature"><span class="comp-icon">💬</span> Soporte entre clases</div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+
+        <div class="comp-fila">
+          <div class="comp-col-feature"><span class="comp-icon">📊</span> Resumen de progreso tras cada sesión</div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+
+        <div class="comp-fila alt">
+          <div class="comp-col-feature"><span class="comp-icon">🧑‍🏫</span> Clases 1 a 1</div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+
+        <div class="comp-fila">
+          <div class="comp-col-feature"><span class="comp-icon">📚</span> Materiales digitales sin coste extra</div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+
+        <div class="comp-fila alt">
+          <div class="comp-col-feature"><span class="comp-icon">🛡️</span> Garantía de devolución (2 primeras clases)
+          </div>
+          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIOS ============ -->
+  <section class="bg-panel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Resultados reales</p>
+        <h2>Lo que dicen quienes ya lo han hecho</h2>
+        <p>5 de 5 estrellas en Trustpilot, de alumnos reales del programa.</p>
+      </div>
+
+      <div class="opinion-contenedor">
+        <a href="https://www.trustpilot.com/reviews/6953aab1a026f20e1912eeda" target="_blank" rel="noopener noreferrer"
+          class="opinion-caja">
+          <div>
+            <div class="opinion-encabezado">
+              <img src="./img/esperanza.jpg" alt="Esperanza" class="foto-opinion">
+              <div>
+                <div class="opinion-nombre">Esperanza M.</div>
+                <div class="opinion-estrellas">★★★★★</div>
+              </div>
+            </div>
+            <p class="opinion-texto">Una formación única y muy completa que permite adquirir eficazmente y de forma
+              interactiva el acento británico, así como recuperar la confianza al hablar en inglés. ¡Muy recomendado!
+            </p>
+          </div>
+          <div class="opinion-footer">
+            <span class="tp-mark">★ TRUSTPILOT</span>
+            <span class="icono-externo">↗</span>
+          </div>
+        </a>
+
+        <a href="https://www.trustpilot.com/reviews/694eba34c7abb79065a15340" target="_blank" rel="noopener noreferrer"
+          class="opinion-caja">
+          <div>
+            <div class="opinion-encabezado">
+              <img src="./img/vicente.jpg" alt="Vicente" class="foto-opinion">
+              <div>
+                <div class="opinion-nombre">Vicente E.</div>
+                <div class="opinion-estrellas">★★★★★</div>
+              </div>
+            </div>
+            <p class="opinion-texto">Con este curso podrás sonar con muchísima más naturalidad y confianza al hablar en
+              inglés. No se enseña en ningún sitio y debería ser obligatorio en los colegios.</p>
+          </div>
+          <div class="opinion-footer">
+            <span class="tp-mark">★ TRUSTPILOT</span>
+            <span class="icono-externo">↗</span>
+          </div>
+        </a>
+
+        <a href="https://www.trustpilot.com/reviews/694f3af058938fc32a2ac3b2" target="_blank" rel="noopener noreferrer"
+          class="opinion-caja">
+          <div>
+            <div class="opinion-encabezado">
+              <img src="./img/julio.jpg" alt="Julio" class="foto-opinion">
+              <div>
+                <div class="opinion-nombre">Julio M.</div>
+                <div class="opinion-estrellas">★★★★★</div>
+              </div>
+            </div>
+            <p class="opinion-texto">Una forma muy útil de darle ese plus a tu inglés y desenvolverte con fluidez y
+              seguridad. Gonzalo le pone muchas ganas, y eso, sumado a su alto nivel, hace que mejorar te resulte muy
+              fácil.</p>
+          </div>
+          <div class="opinion-footer">
+            <span class="tp-mark">★ TRUSTPILOT</span>
+            <span class="icono-externo">↗</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OFERTA / PROGRAMA ============ -->
+  <section class="bg-base" id="programa">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">La oferta</p>
+        <h2>The British Voice Method</h2>
+        <p>Un proceso completo de 2 a 3 meses, no clases sueltas. La duración exacta depende de tu nivel de partida,
+          pero siempre con un mínimo garantizado.</p>
+      </div>
+
+      <div class="offer-panel">
+        <div class="offer-head">
+          <h3>Todo lo incluido en The British Voice Method</h3>
+          <span class="offer-slots">⏳ <span id="plazasOferta"></span> · Verano 2026</span>
+        </div>
+
+        <div class="offer-stack">
+          <div class="offer-item">
+            <span class="ck">✓</span>
+            <div><strong>Diagnóstico fonético inicial</strong><span>Mapa exacto de tus patrones de interferencia desde
+                el español.</span></div>
+          </div>
+          <div class="offer-item">
+            <span class="ck">✓</span>
+            <div><strong>Sesiones 1 a 1 · mínimo 16 garantizadas</strong><span>2 sesiones semanales de 60 min + 1h de
+                repaso por tu cuenta. Solo 3 horas a la semana para un cambio permanente.</span></div>
+          </div>
+          <div class="offer-item">
+            <span class="ck">✓</span>
+            <div><strong>Plan didáctico estructurado</strong><span>Progresión diseñada como un sistema, no una colección
+                de ejercicios sueltos.</span></div>
+          </div>
+          <div class="offer-item">
+            <span class="ck">✓</span>
+            <div><strong>Resumen por email tras cada sesión</strong><span>Qué se ha corregido, qué practicar y
+                observaciones específicas para ti.</span></div>
+          </div>
+          <div class="offer-item">
+            <span class="ck">✓</span>
+            <div><strong>Acceso al Portal de Práctica</strong><span>La 1h de repaso semanal que marca la diferencia.
+                Ejercicios concretos para practicar fuera de sesión sin invertir más tiempo del necesario.</span></div>
+          </div>
+          <div class="offer-item">
+            <span class="ck">✓</span>
+            <div><strong>Soporte directo por WhatsApp 24/7</strong><span>Dudas puntuales entre sesiones en cualquier
+                momento, sin esperar a la próxima clase.</span></div>
+          </div>
+        </div>
+
+        <div class="permanencia-strip">
+          <div class="perm-item">
+            <span class="perm-num">2–3</span>
+            <span class="perm-label">meses de programa</span>
+          </div>
+          <div class="perm-divider"></div>
+          <div class="perm-item">
+            <span class="perm-num">∞</span>
+            <span class="perm-label">años con ese acento</span>
+          </div>
+          <div class="perm-divider"></div>
+          <div class="perm-item">
+            <span class="perm-num">1×</span>
+            <span class="perm-label">lo haces una sola vez</span>
+          </div>
+        </div>
+
+        <div class="offer-footer">
+          <div class="offer-price">
+            <div class="price-label">Inversión del programa</div>
+            <div class="price-value">500 € <span>/ programa completo</span></div>
+            <p class="price-note">Una inversión única. Lo que construyes en el programa es tuyo para siempre, sin
+              cuotas mensuales, sin academias indefinidas. Incluye mínimo 16 sesiones, soporte WhatsApp 24/7 y todos los
+              materiales de forma gratuita.</p>
+          </div>
+          <button class="btn btn-primary btn-lg" data-open-modal>Reservar mi Auditoría gratuita</button>
+        </div>
+      </div>
+
+      <div class="guarantee-strip">
+        <div class="g-icon">🛡️</div>
+        <div>
+          <strong>Garantía de las 2 primeras clases</strong>
+          <span>Si tras las dos primeras sesiones sientes que la metodología no es para ti, te devuelvo el 100% de tu
+            inversión. Sin preguntas, sin letra pequeña.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESO DE LA AUDITORÍA ============ -->
+  <section class="bg-panel">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Cómo empezar</p>
+        <h2>Así es tu Auditoría de Acento gratuita</h2>
+        <p>15 minutos por videollamada. Sin guion de ventas, sin presión: un diagnóstico real de tu punto de partida.
+        </p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num"></div>
+          <h3>Cuéntame tu situación</h3>
+          <p>Completas un breve formulario de 1 minuto sobre tu nivel actual y qué quieres conseguir con tu
+            pronunciación.</p>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <h3>Auditoría en videollamada</h3>
+          <p>Hablamos 15 minutos. Escucho tu acento, identifico tus patrones principales y te digo honestamente si puedo
+            ayudarte.</p>
+        </div>
+        <div class="step">
+          <div class="step-num"></div>
+          <h3>Plan claro, decides tú</h3>
+          <p>Si encajamos, te explico el programa y el precio exacto para tu caso. Sin compromiso de continuar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="bg-light">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center" style="color:var(--blue-deep)">Preguntas frecuentes</p>
+        <h2>Antes de que preguntes</h2>
+      </div>
+      <div class="faq-acordeon">
+        <div class="faq-item">
+          <button class="faq-pregunta">¿En qué se diferencia esto de clases de inglés normales? <span
+              class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">No trabajamos gramática ni vocabulario: el programa está enfocado
+              exclusivamente en pronunciación y acento. Es un complemento a tu nivel de inglés actual, no un curso
+              general.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-pregunta">¿Y si no tengo buen oído?<span class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">Precisamente por eso necesitas un método científico y no clases
+              tradicionales. En este programa no te voy a pedir que "escuches y repitas a ver si aciertas". Te voy a
+              enseñar la
+              mecánica exacta de dónde colocar la lengua y cómo regular el flujo de aire para que el sonido salga
+              perfecto, tengas el oído que tengas.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-pregunta">¿No es mejor entrenar la pronunciación con un profesor nativo?<span
+              class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">Para practicar conversación, un nativo es una opción excelente. Para
+              reconfigurar tu acento desde cero, rotundamente no. Un profesor nativo produce los sonidos británicos de
+              forma inconsciente porque aprendió de bebé, los hace
+              de forma insconsciente y automática.
+              <br>
+              <br>
+              Yo empecé exactamente en el mismo punto en el que tú estás hoy. Tuve que analizar, descifrar y
+              sistematizar el camino exacto para eliminar el acento hispanohablante y lograr una fonética limpia. Yo
+              conozco los vicios de tu lengua, los errores que vas a cometer antes de que los hagas y cómo corregirlos,
+              porque yo ya recorrí ese mapa paso a paso. Te doy el atajo que un nativo no te puede explicar.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-pregunta">¿Qué pasa si al final no noto el cambio? <span class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">Seré directo: si vienes a clase y practicas lo que se trabaja en sesión,
+              mejorar es inevitable. La fonética funciona como cualquier habilidad motora: el cerebro y la boca se
+              adaptan con práctica deliberada. Dicho esto, existe la Garantía de las 2 Primeras Clases: si tras las dos
+              primeras sesiones sientes que la metodología no es para ti, te devuelvo el 100% de tu inversión sin
+              preguntas.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-pregunta">¿Las clases son online o presenciales? <span class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">Ambas. Online para cualquier ubicación, o presencial si te encuentras en
+              la ciudad de Cádiz (con un suplemento según distancia de desplazamiento).</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-pregunta">¿Cuánto dura cada sesión y cuántas hay? <span class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">Sesiones de 1 hora, 2 veces por semana. La fonética necesita práctica
+              frecuente pero sin saturar, así que la idea es que le dediques solo 3 horas semanales: 2h de clase y 1h de
+              repaso por tu cuenta. Daremos un mínimo de 16 clases. El programa completo a este ritmo dura de 2 a 3
+              meses.</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-pregunta">¿La Auditoría de Acento tiene algún compromiso? <span
+              class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">Ninguno. Son 15 minutos de diagnóstico real. Si no encajamos o no es el
+              momento, te lo digo directamente y sin presión.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="final-cta">
+    <div class="wrap">
+      <h2>Un acento que suena como debería. Para siempre.</h2>
+      <p>Reserva tu Auditoría de Acento gratuita de 15 minutos. Sin compromiso: te digo exactamente qué te frena y si
+        puedo ayudarte.</p>
+      <button class="btn btn-primary btn-lg" data-open-modal>Reservar Auditoría de Acento gratuita</button>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="bg-base">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>¿Prefieres escribirme directamente?</h2>
+      </div>
+      <div class="contacto-grid">
+        <a href="https://wa.me/34956079630?text=Hola%2C%20Gonzalo%2C%20te%20contacto%20desde%20tu%20web" target="_blank"
+          class="contacto-card">
+          <div class="c-icon">💬</div>
+          <h3>WhatsApp</h3>
+          <p>+34 956 07 96 30</p>
+        </a>
+        <a href="mailto:gonzalorosae@gmail.com?subject=Consulta%20desde%20tu%20web" class="contacto-card">
+          <div class="c-icon">✉️</div>
+          <h3>Correo</h3>
+          <p>gonzalorosae@gmail.com</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 Gonzalo Rosae · The British Voice Method</p>
+    </div>
+  </footer>
+
+  <button class="fab-auditoria" data-open-modal aria-label="Reservar Auditoría de Acento gratuita">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+      stroke-linejoin="round" width="22" height="22">
+      <rect x="3" y="4" width="18" height="18" rx="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
+    </svg>
+    <span class="fab-text">Reservar Auditoría gratuita</span>
+  </button>
+
+  <!-- ============ MODAL DE CUALIFICACIÓN ============ -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+
+      <div id="formFlow">
+        <h3>Reserva tu Auditoría de Acento</h3>
+        <p class="modal-sub">2 preguntas rápidas para preparar tu sesión de 15 minutos.</p>
+        <div class="modal-progress">
+          <span class="step-dot" data-dot="1"></span>
+          <span class="step-dot" data-dot="2"></span>
+          <span class="step-dot" data-dot="3"></span>
+        </div>
+
+        <form id="qualForm">
+          <div class="form-step active" data-step="1">
+            <p class="form-question">¿Cuál es tu nivel actual de inglés?</p>
+            <div class="option-grid" data-field="nivel">
+              <button type="button" class="option-btn" data-value="a1" data-dq="dq">A1 — Principiante</button>
+              <button type="button" class="option-btn" data-value="a2" data-dq="dq">A2 — Básico</button>
+              <button type="button" class="option-btn" data-value="b1" data-dq="dq">B1 — Intermedio</button>
+              <button type="button" class="option-btn" data-value="b2">B2 — Intermedio alto</button>
+              <button type="button" class="option-btn" data-value="c1">C1 — Avanzado</button>
+              <button type="button" class="option-btn" data-value="c2">C2 — Maestría</button>
+            </div>
+          </div>
+
+          <div class="form-step" data-step="2">
+            <p class="form-question">Tus datos de contacto</p>
+            <div class="field-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="field-group">
+              <label for="telefono">WhatsApp</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="+34 600 000 000" required>
+            </div>
+            <div class="form-nav">
+              <button type="button" class="btn btn-ghost" data-back>Atrás</button>
+              <button type="submit" class="btn btn-primary">Ver calendario</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Pantalla descalificación unificada (A1/A2/B1) -->
+      <div class="modal-disqualify hidden" id="disqualifyView">
+        <div class="dq-icon">📘</div>
+        <h4 id="dqTitle">Todavía no, pero estás cerca</h4>
+        <p id="dqText">Con ese nivel el programa aún no sería lo más efectivo. Pero si quieres, te mando gratis una
+          <strong>Guía de Pronunciación Británica</strong> para que llegues antes de lo que crees. Solo necesito tu
+          nombre y tu email.
+        </p>
+        <div id="dqForm">
+          <div class="field-group" style="margin-top:1.2rem">
+            <label for="dqNombre">Nombre</label>
+            <input type="text" id="dqNombre" placeholder="Tu nombre">
+          </div>
+          <div class="field-group" style="margin-top:0.7rem">
+            <label for="dqEmail">Email</label>
+            <input type="email" id="dqEmail" placeholder="tu@email.com">
+          </div>
+          <div style="display:flex;gap:0.7rem;margin-top:1.1rem">
+            <button class="btn btn-primary" style="flex:1" id="dqSend">Enviarme la guía gratis</button>
+            <button class="btn btn-ghost" id="dqClose">Cerrar</button>
+          </div>
+        </div>
+        <div class="hidden" id="dqThanks" style="margin-top:1.2rem;text-align:center">
+          <div style="font-size:1.8rem;margin-bottom:0.6rem">✓</div>
+          <p style="color:var(--text-high);font-weight:600;margin-bottom:0.3rem">¡Perfecto, <span
+              id="dqThanksName"></span>!</p>
+          <p style="color:var(--text-mid);font-size:0.9rem">Te escribo en las próximas horas con la guía.</p>
+          <button class="btn btn-ghost btn-block" style="margin-top:1rem" id="dqThanksClose">Cerrar</button>
+        </div>
+      </div>
+
+      <div class="modal-success hidden" id="successView">
+        <div class="ok-icon">✓</div>
+        <h4>¡Perfecto, <span id="successName"></span>!</h4>
+        <p>Elige el hueco que mejor te venga. La sesión es de 15 minutos por videollamada, sin compromiso.</p>
+        <!-- Calendly inline widget -->
+        <div id="calendlyWidget"
+          style="min-width:280px;height:400px;margin-top:0.8rem;border-radius:10px;overflow:hidden;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
+  <script src="main.js" defer></script>
 </body>
 
 </html>
