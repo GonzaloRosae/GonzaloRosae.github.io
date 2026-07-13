@@ -53,12 +53,9 @@ const modalClose = document.getElementById('modalClose');
 const formFlow = document.getElementById('formFlow');
 const disqualifyView = document.getElementById('disqualifyView');
 const successView = document.getElementById('successView');
-const qualForm = document.getElementById('qualForm');
-const successName = document.getElementById('successName');
 
-const answers = { nivel: null, nombre: '', telefono: '' };
+const answers = { nivel: null };
 let currentStep = 1;
-const TOTAL_STEPS = 2;
 
 /* --- Abrir / cerrar --- */
 document.querySelectorAll('[data-open-modal]').forEach(btn => {
@@ -107,43 +104,23 @@ document.querySelectorAll('.option-grid, .option-list').forEach(list => {
     setTimeout(() => {
       if (field === 'nivel') {
         if (dq === 'dq') { showDisqualify(value); return; }
-        showStep(2);
+        showSuccess();
       }
     }, 280);
   });
 });
 
-/* --- Botón atrás --- */
-document.querySelectorAll('[data-back]').forEach(btn => {
-  btn.addEventListener('click', () => { if (currentStep > 1) showStep(currentStep - 1); });
-});
-
-/* --- Submit paso 2 --- */
-qualForm.addEventListener('submit', e => {
-  e.preventDefault();
-  const nombre = document.getElementById('nombre').value.trim();
-  const telefono = document.getElementById('telefono').value.trim();
-  if (!validarTelefono(telefono)) {
-    document.getElementById('telefono').style.borderColor = '#e05252';
-    document.getElementById('telefono').focus();
-    return;
-  }
-  answers.nombre = nombre; answers.telefono = telefono;
-  showSuccess(nombre);
-});
-
 /* --- Vista éxito + Calendly --- */
-function showSuccess(nombre) {
+function showSuccess() {
   formFlow.classList.add('hidden');
   successView.classList.remove('hidden');
-  successName.textContent = nombre;
 
   const container = document.getElementById('calendlyWidget');
   if (container && window.Calendly) {
-    window.Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: container, prefill: { name: nombre }, utm: {} });
+    window.Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: container, utm: {} });
   } else if (container) {
     const link = document.createElement('a');
-    link.href = `${CALENDLY_URL}?name=${encodeURIComponent(nombre)}`;
+    link.href = CALENDLY_URL;
     link.target = '_blank'; link.rel = 'noopener noreferrer';
     link.className = 'btn btn-primary btn-lg btn-block';
     link.style.marginTop = '1rem';
@@ -151,7 +128,7 @@ function showSuccess(nombre) {
     container.replaceWith(link);
   }
 
-  const waMsg = encodeURIComponent(`📋 *Nueva Auditoría*\n\n*Nombre:* ${nombre}\n*WhatsApp:* ${answers.telefono}\n*Nivel:* ${answers.nivel}`);
+  const waMsg = encodeURIComponent('Hola, quiero reservar mi Auditoría de Acento gratuita.');
   const waEl = document.createElement('a');
   waEl.href = `https://wa.me/34956079630?text=${waMsg}`;
   waEl.target = '_blank'; waEl.rel = 'noopener noreferrer';
@@ -201,9 +178,9 @@ function resetModal() {
   disqualifyView.classList.add('hidden');
   successView.classList.add('hidden');
 
-  answers.nivel = null; answers.nombre = ''; answers.telefono = '';
+  answers.nivel = null;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  ['nombre', 'telefono', 'dqNombre', 'dqEmail'].forEach(id => {
+  ['dqNombre', 'dqEmail'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.style.borderColor = ''; }
   });
@@ -377,17 +354,3 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
-
-function validarTelefono(valor) {
-  const limpio = valor.trim().replace(/[\s\-().]/g, '');
-
-  // Con prefijo internacional
-  if (limpio.startsWith('+')) {
-    return /^\+[1-9]\d{6,14}$/.test(limpio);
-  }
-
-  // Sin prefijo — se asume España
-  // Móviles: 6xx, 7xx — Fijos: 8xx, 9xx
-  // 9 dígitos exactos
-  return /^[6789]\d{8}$/.test(limpio);
-}
