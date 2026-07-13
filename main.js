@@ -291,7 +291,7 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
   // Player "antes"
   initPlayer('audioDemoAntes', 'audioPlayBtnAntes', 'audioBaresAntes', 'audioTimeCurrentAntes', 'audioTimeTotalAntes');
   // Player "después"
-  initPlayer('audioDemo', 'audioPlayBtnDespues', 'audioBarésDespues', 'audioTimeCurrentDespues', 'audioTimeTotalDespues');
+  initPlayer('audioDemo', 'audioPlayBtnDespues', 'audioBaresDespues', 'audioTimeCurrentDespues', 'audioTimeTotalDespues');
 })();
 
 /* ====================================================
