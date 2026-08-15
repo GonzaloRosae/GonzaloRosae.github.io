@@ -6,11 +6,11 @@
 const CALENDLY_URL = 'https://calendly.com/gonzalorosae/auditoria';
 
 // Plazas: cambia solo este número para actualizar toda la web
-const PLAZAS_DISPONIBLES = 1;
+const PLAZAS_DISPONIBLES = 0;
 const PLAZAS_TOTAL = 3;
 
 /* ====================================================
-   CONTADOR DE PLAZAS — puntos visuales ● ● ○
+   CONTADOR DE PLAZAS - puntos visuales ● ● ○
 ==================================================== */
 (function renderPlazas() {
   const disponibles = PLAZAS_DISPONIBLES;
