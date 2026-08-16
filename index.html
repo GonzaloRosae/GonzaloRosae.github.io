@@ -43,7 +43,8 @@
           <strong>Necesitas corregir cómo suenas.</strong>
         </blockquote>
         <div class="hero-ctas">
-          <button class="btn btn-primary btn-lg" data-open-modal>
+          <button class="btn btn-primary btn-lg" data-open-modal
+            data-label-agotado="Entrar en la lista con prioridad">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
               stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -51,14 +52,14 @@
               <line x1="8" y1="2" x2="8" y2="6" />
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
-            Reservar auditoría gratuita
+            <span class="btn-label">Reservar auditoría gratuita</span>
           </button>
         </div>
         <p class="hero-microcopy-nueva">
           <span class="plazas-dots" id="plazasDots"></span>
           <span id="plazasContador" style="display:none">3</span>
-          Solo <strong id="plazasTexto"></strong> de <strong id="plazasTotal"></strong> plazas disponibles - auditoría
-          gratuita, sin compromiso
+          <span id="plazasFrase">Solo <strong id="plazasTexto"></strong> de <strong id="plazasTotal"></strong> plazas
+            disponibles - auditoría gratuita, sin compromiso</span>
         </p>
       </div>
       <div class="hero-photo-wrap">
@@ -73,6 +74,32 @@
       </div>
     </div>
   </header>
+
+  <!-- ============ AVISO: PLAZAS AGOTADAS (solo si PLAZAS_DISPONIBLES = 0) ============ -->
+  <section class="agotado-strip" data-solo-agotado hidden>
+    <div class="wrap agotado-inner">
+      <div class="agotado-main">
+        <div class="agotado-sello">
+          <span class="agotado-pill">Plazas agotadas</span>
+          <span class="agotado-temporada" data-temporada></span>
+        </div>
+        <p class="agotado-titulo">Las <strong data-plazas-total></strong> plazas de esta temporada están cubiertas.</p>
+        <p class="agotado-sub">No abro más porque el programa es 1 a 1 y cada alumno ocupa dos sesiones semanales fijas
+          de mi agenda. La próxima apertura es <strong data-proxima-apertura></strong>.</p>
+        <p class="agotado-mecanismo">
+          <span class="agotado-mec-icon">→</span>
+          <span><strong>Las plazas nuevas se asignan por orden de auditoría realizada</strong>, no por orden de
+            apuntarse a una lista. Si haces la tuya ahora, entras por delante de quien llegue después.</span>
+        </p>
+      </div>
+      <div class="agotado-cta">
+        <button class="btn btn-primary btn-lg" data-open-modal>
+          <span class="btn-label">Reservar mi prioridad</span>
+        </button>
+        <span class="agotado-nota">Gratis · 15 min · no pagas nada hasta que haya plaza</span>
+      </div>
+    </div>
+  </section>
 
   <div class="trust-strip">
     <div class="wrap">
@@ -439,7 +466,7 @@
       <div class="offer-panel">
         <div class="offer-head">
           <h3>Todo lo incluido en The British Voice Method</h3>
-          <span class="offer-slots">⏳ <span id="plazasOferta"></span> · Verano 2026</span>
+          <span class="offer-slots" id="offerSlots"><span id="plazasOferta"></span></span>
         </div>
 
         <div class="offer-stack">
@@ -500,7 +527,10 @@
               cuotas mensuales, sin academias indefinidas. Incluye mínimo 16 sesiones, soporte WhatsApp 24/7 y todos los
               materiales de forma gratuita.</p>
           </div>
-          <button class="btn btn-primary btn-lg" data-open-modal>Reservar mi Auditoría gratuita</button>
+          <button class="btn btn-primary btn-lg" data-open-modal
+            data-label-agotado="Reservar mi sitio para la próxima plaza">
+            <span class="btn-label">Reservar mi Auditoría gratuita</span>
+          </button>
         </div>
       </div>
 
@@ -616,6 +646,20 @@
               meses.</div>
           </div>
         </div>
+        <div class="faq-item" data-solo-agotado hidden>
+          <button class="faq-pregunta">Si no quedan plazas, ¿para qué hago la auditoría ahora? <span
+              class="faq-icon">+</span></button>
+          <div class="faq-respuesta">
+            <div class="faq-respuesta-inner">Porque las plazas no se reparten por orden de lista, sino entre las
+              personas cuya auditoría ya está hecha. Cuando se libera un hueco necesito empezar esa misma semana, y no
+              puedo perder días diagnosticando desde cero: llamo primero a quien ya tiene su diagnóstico sobre la mesa.
+              <br><br>
+              Además, la auditoría es útil por sí sola aunque nunca llegues a entrar en el programa: sales sabiendo qué
+              sonidos concretos te están delatando y en qué orden atacarlos. No pagas nada por ella ni adquieres ningún
+              compromiso.
+            </div>
+          </div>
+        </div>
         <div class="faq-item">
           <button class="faq-pregunta">¿La Auditoría de Acento tiene algún compromiso? <span
               class="faq-icon">+</span></button>
@@ -632,9 +676,14 @@
   <section class="final-cta">
     <div class="wrap">
       <h2>Un acento que suena como debería. Para siempre.</h2>
-      <p>Reserva tu Auditoría de Acento gratuita de 15 minutos. Sin compromiso: te digo exactamente qué te frena y si
-        puedo ayudarte.</p>
-      <button class="btn btn-primary btn-lg" data-open-modal>Reservar Auditoría de Acento gratuita</button>
+      <p data-solo-disponible>Reserva tu Auditoría de Acento gratuita de 15 minutos. Sin compromiso: te digo exactamente
+        qué te frena y si puedo ayudarte.</p>
+      <p data-solo-agotado hidden>Esta temporada ya está cerrada, pero la siguiente se llena con quien ya tiene su
+        auditoría hecha. Son 15 minutos, es gratis y no te compromete a nada.</p>
+      <button class="btn btn-primary btn-lg" data-open-modal
+        data-label-agotado="Reservar mi prioridad para la próxima plaza">
+        <span class="btn-label">Reservar Auditoría de Acento gratuita</span>
+      </button>
     </div>
   </section>
 
@@ -666,7 +715,8 @@
     </div>
   </footer>
 
-  <button class="fab-auditoria" data-open-modal aria-label="Reservar Auditoría de Acento gratuita">
+  <button class="fab-auditoria" data-open-modal aria-label="Reservar Auditoría de Acento gratuita"
+    data-label-agotado="Entrar en la lista">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
       stroke-linejoin="round" width="22" height="22">
       <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -710,11 +760,67 @@
 
       <div class="modal-success hidden" id="successView">
         <div class="ok-icon">✓</div>
-        <h4>¡Perfecto!</h4>
-        <p>Elige el hueco que mejor te venga. La sesión es de 15 minutos por videollamada, sin compromiso.</p>
+        <h4 id="successTitulo">¡Perfecto!</h4>
+        <p id="successTexto">Elige el hueco que mejor te venga. La sesión es de 15 minutos por videollamada, sin
+          compromiso.</p>
         <!-- Calendly inline widget -->
         <div id="calendlyWidget"
           style="min-width:280px;height:400px;margin-top:0.8rem;border-radius:10px;overflow:hidden;"></div>
+      </div>
+
+      <!-- Pantalla: no quedan plazas -->
+      <div class="modal-soldout hidden" id="soldOutView">
+        <span class="so-pill">Plazas agotadas</span>
+        <h4>Encajas en el programa, pero ahora mismo no hay hueco</h4>
+        <p class="so-lead">Las <strong data-plazas-total></strong> plazas están cubiertas. La próxima apertura es
+          <strong data-proxima-apertura></strong>. Así funciona a partir de aquí:</p>
+
+        <ol class="so-pasos">
+          <li>
+            <span class="so-num">1</span>
+            <div>Hacemos tu auditoría ahora: 15 minutos, gratis, y sales con tu diagnóstico fonético hecho.</div>
+          </li>
+          <li>
+            <span class="so-num">2</span>
+            <div>Quedas en la lista de prioridad. <strong>Las plazas se asignan por orden de auditoría realizada</strong>,
+              no por orden de apuntarse.</div>
+          </li>
+          <li>
+            <span class="so-num">3</span>
+            <div>Cuando se libere una plaza te aviso a ti antes que a nadie. <strong>No pagas nada hasta entonces</strong>
+              y puedes decir que no.</div>
+          </li>
+        </ol>
+
+        <button class="btn btn-primary btn-lg btn-block" id="soAgendar">Reservar mi auditoría y mi prioridad</button>
+        <button type="button" class="btn-linkish" id="soLista">Prefiero que solo me avises por email →</button>
+      </div>
+
+      <!-- Pantalla: lista de espera -->
+      <div class="modal-waitlist hidden" id="waitlistView">
+        <h4>Te aviso en cuanto se abra una plaza</h4>
+        <p class="wl-lead">Ni newsletter ni spam: un solo email, y solo cuando haya hueco de verdad.</p>
+        <div class="field-group">
+          <label for="wlNombre">Tu nombre</label>
+          <input type="text" id="wlNombre" autocomplete="given-name" placeholder="Nombre">
+        </div>
+        <div class="field-group">
+          <label for="wlEmail">Tu email</label>
+          <input type="email" id="wlEmail" autocomplete="email" placeholder="tu@email.com">
+        </div>
+        <p class="wl-error hidden" id="wlError"></p>
+        <button class="btn btn-primary btn-block" id="wlSend">Avísame cuando haya plaza</button>
+        <button type="button" class="btn-linkish" id="wlBack">← Mejor hago la auditoría y reservo prioridad</button>
+      </div>
+
+      <!-- Pantalla: lista de espera OK -->
+      <div class="modal-waitlist hidden" id="waitlistOk">
+        <div class="ok-icon">✓</div>
+        <h4>Ya estás en la lista, <span id="wlOkName"></span></h4>
+        <p class="wl-lead">Te escribo en cuanto se libere una plaza.</p>
+        <p class="wl-upsell">Una cosa más, y te dejo tranquilo: estar en la lista <strong>no reserva nada</strong>. Las
+          plazas se dan primero a quien ya tiene la auditoría hecha. Son 15 minutos y es gratis.</p>
+        <button class="btn btn-primary btn-block" id="wlOkAgendar">Hacer mi auditoría ahora</button>
       </div>
 
     </div>

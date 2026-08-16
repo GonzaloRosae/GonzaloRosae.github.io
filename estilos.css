@@ -1414,3 +1414,268 @@ footer p { font-size: 0.82rem; color: var(--text-low); }
 @media (max-width: 980px) {
   .icp-grid, .opinion-contenedor { grid-template-columns: 1fr; }
 }
+/* ====================================================
+   ESTADO "PLAZAS AGOTADAS"
+==================================================== */
+[hidden] { display: none !important; }
+
+/* --- Dots del hero cuando no queda ninguna --- */
+.plaza-dot.ocupada {
+  background: rgba(224, 82, 82, 0.6);
+  box-shadow: 0 0 0 2px rgba(224, 82, 82, 0.16);
+}
+
+.plazas-alerta {
+  color: #e88a8a;
+  font-weight: 700;
+}
+
+/* --- Banda de aviso bajo el hero --- */
+.agotado-strip {
+  background:
+    radial-gradient(circle at 12% 50%, rgba(201, 166, 107, 0.10), transparent 55%),
+    linear-gradient(180deg, var(--bg-panel-2), var(--bg-panel));
+  border-top: 1px solid rgba(201, 166, 107, 0.28);
+  border-bottom: 1px solid rgba(201, 166, 107, 0.28);
+  padding: 2.4rem 0;
+}
+
+.agotado-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.6rem 3rem;
+  align-items: center;
+}
+
+.agotado-sello {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.agotado-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e88a8a;
+  background: rgba(224, 82, 82, 0.12);
+  border: 1px solid rgba(224, 82, 82, 0.35);
+  padding: 0.32rem 0.7rem;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.agotado-temporada {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-low);
+}
+
+.agotado-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  line-height: 1.3;
+  color: var(--text-high);
+  margin-bottom: 0.5rem;
+}
+
+.agotado-titulo strong { color: var(--gold); font-weight: 600; }
+
+.agotado-sub {
+  color: var(--text-mid);
+  font-size: 0.95rem;
+  max-width: 62ch;
+  margin-bottom: 0.9rem;
+}
+
+.agotado-sub strong { color: var(--text-high); }
+
+.agotado-mecanismo {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  background: rgba(201, 166, 107, 0.07);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.92rem;
+  color: var(--text-mid);
+  max-width: 66ch;
+}
+
+.agotado-mecanismo strong { color: var(--text-high); }
+
+.agotado-mec-icon {
+  color: var(--gold);
+  font-weight: 700;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.agotado-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.agotado-cta .btn { white-space: nowrap; }
+
+.agotado-nota {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-low);
+}
+
+@media (max-width: 860px) {
+  .agotado-inner { grid-template-columns: 1fr; }
+  .agotado-cta .btn { width: 100%; }
+  .agotado-cta .btn,
+  .agotado-mecanismo { white-space: normal; }
+}
+
+/* --- Badge de la sección de oferta --- */
+.offer-slots.agotado {
+  background: rgba(224, 82, 82, 0.10);
+  border-color: rgba(224, 82, 82, 0.35);
+  color: #e88a8a;
+}
+
+/* --- Modal: pantalla de plazas agotadas --- */
+.modal-soldout { padding: 0.3rem 0 0; }
+
+.so-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #e88a8a;
+  background: rgba(224, 82, 82, 0.12);
+  border: 1px solid rgba(224, 82, 82, 0.35);
+  padding: 0.3rem 0.65rem;
+  border-radius: 100px;
+  margin-bottom: 0.9rem;
+}
+
+.modal-soldout h4 {
+  font-size: 1.25rem;
+  line-height: 1.35;
+  color: var(--text-high);
+  margin-bottom: 0.6rem;
+  padding-right: 2rem;
+}
+
+.so-lead {
+  color: var(--text-mid);
+  font-size: 0.93rem;
+  margin-bottom: 1.3rem;
+}
+
+.so-lead strong { color: var(--text-high); }
+
+.so-pasos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.6rem;
+}
+
+.so-pasos li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.so-pasos strong { color: var(--text-high); }
+
+.so-num {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--gold-soft);
+  border: 1px solid rgba(201, 166, 107, 0.35);
+  color: var(--gold);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+
+/* --- Botón secundario tipo enlace --- */
+.btn-linkish {
+  display: block;
+  width: 100%;
+  margin-top: 0.9rem;
+  background: none;
+  border: none;
+  color: var(--text-low);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  text-align: center;
+  transition: color 0.2s;
+}
+
+.btn-linkish:hover { color: var(--gold); }
+
+/* --- Modal: lista de espera --- */
+.modal-waitlist { padding: 0.3rem 0 0; text-align: center; }
+
+.modal-waitlist h4 {
+  font-size: 1.25rem;
+  color: var(--text-high);
+  margin-bottom: 0.5rem;
+  padding-right: 2rem;
+}
+
+.modal-waitlist .field-group { text-align: left; }
+
+.wl-lead {
+  color: var(--text-mid);
+  font-size: 0.92rem;
+  margin-bottom: 1.4rem;
+}
+
+.wl-error {
+  color: #e88a8a;
+  font-size: 0.85rem;
+  text-align: left;
+  margin-bottom: 0.8rem;
+}
+
+.wl-error a { color: var(--gold); text-decoration: underline; }
+
+.wl-upsell {
+  background: rgba(201, 166, 107, 0.07);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  padding: 0.8rem 1rem;
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.wl-upsell strong { color: var(--text-high); }
+
+.modal-waitlist .ok-icon {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: rgba(46, 158, 106, 0.15);
+  color: var(--green-ok);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 1.1rem;
+}

@@ -5,24 +5,54 @@
 ==================================================== */
 const CALENDLY_URL = 'https://calendly.com/gonzalorosae/auditoria';
 
-// Plazas: cambia solo este número para actualizar toda la web
+// Plazas: cambia solo este número para actualizar toda la web.
+// Si lo pones a 0, la web entra automáticamente en modo "plazas agotadas".
 const PLAZAS_DISPONIBLES = 0;
 const PLAZAS_TOTAL = 3;
 
+// Se usan cuando no quedan plazas
+const TEMPORADA_ACTUAL = 'Verano 2026';
+const PROXIMA_APERTURA = 'enero de 2027';   // déjalo en '' si aún no tienes fecha
+
+// A dónde llegan los emails de la lista de espera.
+// Con FormSubmit no hace falta backend: la primera vez que alguien envíe el
+// formulario recibirás un email de activación que tienes que confirmar una sola vez.
+// Si lo dejas vacío, el formulario abre el cliente de correo del visitante.
+const FORM_ENDPOINT = 'https://formsubmit.co/ajax/gonzalorosae@gmail.com';
+
+const SIN_PLAZAS = PLAZAS_DISPONIBLES <= 0;
+
 /* ====================================================
    CONTADOR DE PLAZAS - puntos visuales ● ● ○
+   y conmutación de todo el estado "agotado"
 ==================================================== */
 (function renderPlazas() {
-  const disponibles = PLAZAS_DISPONIBLES;
+  const disponibles = Math.max(0, PLAZAS_DISPONIBLES);
   const total = PLAZAS_TOTAL;
+  const apertura = PROXIMA_APERTURA || 'la próxima temporada';
+
+  document.body.classList.toggle('sin-plazas', SIN_PLAZAS);
+
+  // Bloques que solo existen en uno de los dos estados
+  document.querySelectorAll('[data-solo-agotado]').forEach(el => { el.hidden = !SIN_PLAZAS; });
+  document.querySelectorAll('[data-solo-disponible]').forEach(el => { el.hidden = SIN_PLAZAS; });
+
+  // Textos reutilizados
+  document.querySelectorAll('[data-plazas-total]').forEach(el => { el.textContent = total; });
+  document.querySelectorAll('[data-temporada]').forEach(el => { el.textContent = TEMPORADA_ACTUAL; });
+  document.querySelectorAll('[data-proxima-apertura]').forEach(el => { el.textContent = apertura; });
 
   // Dots en el hero
   const dotsEl = document.getElementById('plazasDots');
   if (dotsEl) {
     let html = '';
     for (let i = 0; i < total; i++) {
-      const filled = i < disponibles;
-      html += `<span class="plaza-dot ${filled ? 'filled' : 'empty'}" title="${filled ? 'Plaza disponible' : 'Plaza ocupada'}"></span>`;
+      if (SIN_PLAZAS) {
+        html += '<span class="plaza-dot ocupada" title="Plaza ocupada"></span>';
+      } else {
+        const filled = i < disponibles;
+        html += `<span class="plaza-dot ${filled ? 'filled' : 'empty'}" title="${filled ? 'Plaza disponible' : 'Plaza ocupada'}"></span>`;
+      }
     }
     dotsEl.innerHTML = html;
   }
@@ -35,10 +65,27 @@ const PLAZAS_TOTAL = 3;
 
   // Badge en la oferta
   const ofertaEl = document.getElementById('plazasOferta');
-  if (ofertaEl) ofertaEl.textContent = `${disponibles} de ${total} plazas disponibles`;
+  const offerSlots = document.getElementById('offerSlots');
+  if (ofertaEl) {
+    ofertaEl.textContent = SIN_PLAZAS
+      ? `Plazas agotadas · ${TEMPORADA_ACTUAL}`
+      : `⏳ ${disponibles} de ${total} plazas disponibles · ${TEMPORADA_ACTUAL}`;
+  }
+  if (offerSlots) offerSlots.classList.toggle('agotado', SIN_PLAZAS);
 
-  // Color urgencia
-  if (disponibles === 1) {
+  if (SIN_PLAZAS) {
+    // Frase del hero
+    const fraseEl = document.getElementById('plazasFrase');
+    if (fraseEl) {
+      fraseEl.innerHTML = `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - próxima apertura ${apertura}`;
+    }
+    // Etiquetas alternativas de los CTA
+    document.querySelectorAll('[data-label-agotado]').forEach(btn => {
+      const target = btn.querySelector('.btn-label, .fab-text') || btn;
+      target.textContent = btn.dataset.labelAgotado;
+    });
+  } else if (disponibles === 1) {
+    // Color urgencia
     [textoEl, ofertaEl].forEach(el => {
       if (el) { el.style.color = '#e05252'; el.style.fontWeight = '700'; }
     });
@@ -110,38 +157,156 @@ document.querySelectorAll('.option-grid, .option-list').forEach(list => {
   });
 });
 
-/* --- Vista éxito + Calendly --- */
-function showSuccess() {
-  formFlow.classList.add('hidden');
-  successView.classList.remove('hidden');
+/* --- Gestión de vistas del modal --- */
+const VISTAS = ['formFlow', 'disqualifyView', 'successView', 'soldOutView', 'waitlistView', 'waitlistOk'];
 
-  const container = document.getElementById('calendlyWidget');
-  if (container && window.Calendly) {
-    window.Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: container, utm: {} });
-  } else if (container) {
-    const link = document.createElement('a');
-    link.href = CALENDLY_URL;
-    link.target = '_blank'; link.rel = 'noopener noreferrer';
-    link.className = 'btn btn-primary btn-lg btn-block';
-    link.style.marginTop = '1rem';
-    link.textContent = 'Abrir calendario ↗';
-    container.replaceWith(link);
+function mostrarVista(id) {
+  VISTAS.forEach(v => {
+    const el = document.getElementById(v);
+    if (el) el.classList.toggle('hidden', v !== id);
+  });
+}
+
+/* --- Cualificado: si no hay plazas, pasa antes por la pantalla de espera --- */
+function showSuccess() {
+  if (SIN_PLAZAS) { mostrarVista('soldOutView'); return; }
+  mostrarCalendly();
+}
+
+/* --- Vista éxito + Calendly --- */
+function mostrarCalendly() {
+  mostrarVista('successView');
+
+  if (SIN_PLAZAS) {
+    const titulo = document.getElementById('successTitulo');
+    const texto = document.getElementById('successTexto');
+    if (titulo) titulo.textContent = 'Vamos a reservar tu prioridad';
+    if (texto) {
+      texto.textContent = 'Elige el hueco que mejor te venga. Son 15 minutos por videollamada y, al terminarlos, '
+        + 'entras en la lista de prioridad para la próxima plaza. No pagas nada.';
+    }
   }
 
-  const waMsg = encodeURIComponent('Hola, quiero reservar mi Auditoría de Acento gratuita.');
-  const waEl = document.createElement('a');
-  waEl.href = `https://wa.me/34956079630?text=${waMsg}`;
-  waEl.target = '_blank'; waEl.rel = 'noopener noreferrer';
-  waEl.className = 'btn btn-ghost btn-block';
-  waEl.style.cssText = 'margin-top:0.6rem;font-size:0.85rem';
-  waEl.textContent = '¿Prefieres avisarme por WhatsApp?';
-  document.getElementById('calendlyWidget')?.insertAdjacentElement('afterend', waEl);
+  const container = document.getElementById('calendlyWidget');
+  if (container && !container.dataset.cargado) {
+    container.dataset.cargado = '1';
+    if (window.Calendly) {
+      window.Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: container, utm: {} });
+    } else {
+      const link = document.createElement('a');
+      link.href = CALENDLY_URL;
+      link.target = '_blank'; link.rel = 'noopener noreferrer';
+      link.className = 'btn btn-primary btn-lg btn-block';
+      link.style.marginTop = '1rem';
+      link.textContent = 'Abrir calendario ↗';
+      container.replaceWith(link);
+    }
+  }
+
+  if (!document.getElementById('waLink')) {
+    const waMsg = encodeURIComponent('Hola, quiero reservar mi Auditoría de Acento gratuita.');
+    const waEl = document.createElement('a');
+    waEl.id = 'waLink';
+    waEl.href = `https://wa.me/34956079630?text=${waMsg}`;
+    waEl.target = '_blank'; waEl.rel = 'noopener noreferrer';
+    waEl.className = 'btn btn-ghost btn-block';
+    waEl.style.cssText = 'margin-top:0.6rem;font-size:0.85rem';
+    waEl.textContent = '¿Prefieres avisarme por WhatsApp?';
+    successView.appendChild(waEl);
+  }
 }
+
+/* ====================================================
+   PLAZAS AGOTADAS: prioridad o lista de espera
+==================================================== */
+document.getElementById('soAgendar')?.addEventListener('click', mostrarCalendly);
+document.getElementById('wlOkAgendar')?.addEventListener('click', mostrarCalendly);
+document.getElementById('soLista')?.addEventListener('click', () => mostrarVista('waitlistView'));
+document.getElementById('wlBack')?.addEventListener('click', () => mostrarVista('soldOutView'));
+
+function wlMostrarError(msgHtml) {
+  const err = document.getElementById('wlError');
+  if (!err) return;
+  err.innerHTML = msgHtml;
+  err.classList.remove('hidden');
+}
+
+function wlMailtoFallback(nombre, email) {
+  const asunto = encodeURIComponent('Lista de espera - The British Voice Method');
+  const cuerpo = encodeURIComponent(`Hola Gonzalo:\n\nQuiero que me avises cuando se abra una plaza.\n\nNombre: ${nombre}\nEmail: ${email}\n`);
+  return `mailto:gonzalorosae@gmail.com?subject=${asunto}&body=${cuerpo}`;
+}
+
+document.getElementById('wlSend')?.addEventListener('click', async () => {
+  const nombreEl = document.getElementById('wlNombre');
+  const emailEl = document.getElementById('wlEmail');
+  const btn = document.getElementById('wlSend');
+  const err = document.getElementById('wlError');
+
+  const nombre = nombreEl?.value.trim() || '';
+  const email = emailEl?.value.trim() || '';
+
+  err?.classList.add('hidden');
+  [nombreEl, emailEl].forEach(el => { if (el) el.style.borderColor = ''; });
+
+  if (!nombre) {
+    nombreEl?.focus();
+    nombreEl?.style.setProperty('border-color', '#e05252');
+    wlMostrarError('Escribe tu nombre para que sepa a quién aviso.');
+    return;
+  }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    emailEl?.focus();
+    emailEl?.style.setProperty('border-color', '#e05252');
+    wlMostrarError('Revisa el email: parece que falta algo.');
+    return;
+  }
+
+  const wlOk = () => {
+    const nameEl = document.getElementById('wlOkName');
+    if (nameEl) nameEl.textContent = nombre;
+    mostrarVista('waitlistOk');
+  };
+
+  if (!FORM_ENDPOINT) {
+    window.location.href = wlMailtoFallback(nombre, email);
+    wlOk();
+    return;
+  }
+
+  const textoOriginal = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+
+  try {
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        nombre,
+        email,
+        _subject: `Lista de espera - ${nombre}`,
+        _captcha: 'false',
+        origen: 'Lista de espera (plazas agotadas)',
+        temporada: TEMPORADA_ACTUAL
+      })
+    });
+    if (!res.ok) throw new Error('Respuesta ' + res.status);
+    wlOk();
+  } catch (e) {
+    wlMostrarError(
+      'No he podido enviarlo desde aquí. <a href="' + wlMailtoFallback(nombre, email) + '">Mándamelo por correo</a> '
+      + 'y te apunto yo mismo.'
+    );
+  } finally {
+    btn.disabled = false;
+    btn.textContent = textoOriginal;
+  }
+});
 
 /* --- Descalificación unificada --- */
 function showDisqualify(nivel) {
-  formFlow.classList.add('hidden');
-  disqualifyView.classList.remove('hidden');
+  mostrarVista('disqualifyView');
 
   const title = document.getElementById('dqTitle');
   const text = document.getElementById('dqText');
@@ -174,13 +339,11 @@ document.getElementById('dqSend')?.addEventListener('click', () => {
 
 /* --- Reset modal --- */
 function resetModal() {
-  formFlow.classList.remove('hidden');
-  disqualifyView.classList.add('hidden');
-  successView.classList.add('hidden');
+  mostrarVista('formFlow');
 
   answers.nivel = null;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  ['dqNombre', 'dqEmail'].forEach(id => {
+  ['dqNombre', 'dqEmail', 'wlNombre', 'wlEmail'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.style.borderColor = ''; }
   });
@@ -189,10 +352,8 @@ function resetModal() {
   const dqThanks = document.getElementById('dqThanks');
   if (dqForm) dqForm.classList.remove('hidden');
   if (dqThanks) dqThanks.classList.add('hidden');
+  document.getElementById('wlError')?.classList.add('hidden');
 
-  successView.querySelectorAll('a.btn-ghost').forEach(el => el.remove());
-  const widget = document.getElementById('calendlyWidget');
-  if (widget) widget.innerHTML = '';
   showStep(1);
 }
 
