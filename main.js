@@ -12,7 +12,7 @@ const PLAZAS_TOTAL = 3;
 
 // Se usan cuando no quedan plazas
 const TEMPORADA_ACTUAL = 'Verano 2026';
-const PROXIMA_APERTURA = 'enero de 2027';   // déjalo en '' si aún no tienes fecha
+const PROXIMA_APERTURA = '';   // '' si aún no hay fecha
 
 // A dónde llegan los emails de la lista de espera.
 // Con FormSubmit no hace falta backend: la primera vez que alguien envíe el
@@ -29,7 +29,7 @@ const SIN_PLAZAS = PLAZAS_DISPONIBLES <= 0;
 (function renderPlazas() {
   const disponibles = Math.max(0, PLAZAS_DISPONIBLES);
   const total = PLAZAS_TOTAL;
-  const apertura = PROXIMA_APERTURA || 'la próxima temporada';
+  const apertura = PROXIMA_APERTURA || '';
 
   document.body.classList.toggle('sin-plazas', SIN_PLAZAS);
 
@@ -77,8 +77,18 @@ const SIN_PLAZAS = PLAZAS_DISPONIBLES <= 0;
     // Frase del hero
     const fraseEl = document.getElementById('plazasFrase');
     if (fraseEl) {
-      fraseEl.innerHTML = `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - próxima apertura ${apertura}`;
+      fraseEl.innerHTML = apertura
+        ? `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - próxima apertura ${apertura}`
+        : `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - reserva tu plaza para la próxima temporada ya`;
     }
+
+    const soldOutAperturaEl = document.getElementById('soldOutApertura');
+    if (soldOutAperturaEl) {
+      soldOutAperturaEl.innerHTML = apertura
+        ? 'La próxima apertura es <strong data-proxima-apertura></strong>.'
+        : 'Reserva tu plaza para la próxima temporada ya.';
+    }
+
     // Etiquetas alternativas de los CTA
     document.querySelectorAll('[data-label-agotado]').forEach(btn => {
       const target = btn.querySelector('.btn-label, .fab-text') || btn;
@@ -316,7 +326,7 @@ function showDisqualify(nivel) {
     text.innerHTML = 'Con B1 el programa aún no sería lo más efectivo, pero estás a un paso. Si quieres puedes escribirme un mensaje o correo para ver tu caso en específico. Puedes encontrar mis datos de contacto abajo del todo.';
   } else {
     title.textContent = 'Aún no es el momento';
-    text.innerHTML = 'El programa está diseñado para B2–C2. Con nivel ' + nivel.toUpperCase() + ' lo que más te ayudaría ahora es consolidar el inglés general.';
+    text.innerHTML = 'El programa está diseñado para B2-C2. Con nivel ' + nivel.toUpperCase() + ' lo que más te ayudaría ahora es consolidar el inglés general.';
   }
 }
 
