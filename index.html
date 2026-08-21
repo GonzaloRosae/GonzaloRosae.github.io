@@ -12,11 +12,25 @@
   <meta property="og:title" content="The British Voice Method | Gonzalo Rosae">
   <meta property="og:description"
     content="Suena con autoridad en inglés. Programa 1 a 1 para hablantes de nivel B2-C2 que quieren llevar su pronunciación al siguiente nivel. Reserva tu Auditoría de Acento gratuita.">
-  <meta property="og:image" content="https://gonzalorosae.es/imagenes/logo.png">
-  <meta property="og:url" content="https://gonzalorosae.es">
+  <meta property="og:image" content="https://gonzalorosae.es/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Gonzalo Rosae - Hablas inglés, pero no suena como debería.">
+  <meta property="og:url" content="https://gonzalorosae.es/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Gonzalo Rosae">
   <meta name="author" content="Gonzalo Rosae">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="shortcut icon" href="./img/logo.png" type="image/png">
+  <meta name="twitter:title" content="The British Voice Method | Gonzalo Rosae">
+  <meta name="twitter:description"
+    content="Programa 1 a 1 de acento británico para nivel B2-C2. Auditoría de Acento gratuita de 15 minutos.">
+  <meta name="twitter:image" content="https://gonzalorosae.es/img/og.jpg">
+  <link rel="canonical" href="https://gonzalorosae.es/">
+  <meta name="theme-color" content="#0a0f1a">
+  <link rel="icon" href="./img/favicon.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+  <link rel="preload" as="image" href="./img/gonzalo.webp" fetchpriority="high">
   <link rel="stylesheet" href="./estilos.css">
   <meta name="trustpilot-one-time-domain-verification-id" content="84549eb7-e086-4b82-a193-56ec4deddf83">
 </head>
@@ -26,7 +40,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <div class="nav-brand">
-        <img src="./img/logo.png" alt="Gonzalo Rosae">
+        <img src="./img/logo.webp" alt="Gonzalo Rosae" width="300" height="300" decoding="async">
         <span>Gonzalo Rosae</span>
       </div>
     </div>
@@ -43,7 +57,7 @@
           <strong>Necesitas corregir cómo suenas.</strong>
         </blockquote>
         <div class="hero-ctas">
-          <button class="btn btn-primary btn-lg" data-open-modal
+          <button class="btn btn-primary btn-lg" data-open-modal data-origen="hero"
             data-label-agotado="Entrar en la lista con prioridad">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
               stroke-linecap="round" stroke-linejoin="round">
@@ -65,7 +79,11 @@
       <div class="hero-photo-wrap">
         <div class="hero-photo-card">
           <div class="hero-photo-backdrop"></div>
-          <img src="./img/gonzalo.png" alt="Gonzalo Rosae, instructor de acento británico">
+          <picture>
+            <source srcset="./img/gonzalo.webp" type="image/webp">
+            <img src="./img/gonzalo.png" alt="Gonzalo Rosae, instructor de acento británico" width="650" height="1038"
+              fetchpriority="high" decoding="async">
+          </picture>
           <div class="hero-badge">
             <div class="badge-icon">5.0</div>
             <div class="badge-text"><strong>Trustpilot</strong>Valorado por mis alumnos</div>
@@ -90,7 +108,7 @@
         </p>
       </div>
       <div class="agotado-cta">
-        <button class="btn btn-primary btn-lg" data-open-modal>
+        <button class="btn btn-primary btn-lg" data-open-modal data-origen="banda-agotado">
           <span class="btn-label">Reservar mi prioridad</span>
         </button>
         <span class="agotado-nota">Gratis · 15 min · no pagas nada hasta que haya plaza</span>
@@ -203,7 +221,8 @@
             <div class="audio-meta">
               <div class="audio-title">Acento inglés españolizado</div>
               <div class="audio-bars" id="audioBaresAntes"></div>
-              <div class="audio-time"><span id="audioTimeCurrentAntes">0:00</span> / <span id="audioTimeTotalAntes">0:00</span></div>
+              <div class="audio-time"><span id="audioTimeCurrentAntes">0:00</span> / <span
+                  id="audioTimeTotalAntes">0:00</span></div>
             </div>
           </div>
           <audio id="audioDemoAntes" src="./audios/antes.mp3" preload="metadata"></audio>
@@ -216,14 +235,16 @@
         <div class="antesdespues-card despues">
           <div class="antesdespues-label">
             <span class="antesdespues-dot despues-dot"></span>
-            Después
+            Después · mi voz real
           </div>
           <div class="audio-card">
-            <button class="audio-play-btn despues-btn" id="audioPlayBtnDespues" aria-label="Reproducir después">▶</button>
+            <button class="audio-play-btn despues-btn" id="audioPlayBtnDespues"
+              aria-label="Reproducir después">▶</button>
             <div class="audio-meta">
-              <div class="audio-title">Acento inglés perfeccionado</div>
+              <div class="audio-title">Así sueno yo hoy</div>
               <div class="audio-bars" id="audioBaresDespues"></div>
-              <div class="audio-time"><span id="audioTimeCurrentDespues">0:00</span> / <span id="audioTimeTotalDespues">0:00</span></div>
+              <div class="audio-time"><span id="audioTimeCurrentDespues">0:00</span> / <span
+                  id="audioTimeTotalDespues">0:00</span></div>
             </div>
           </div>
           <audio id="audioDemo" src="./audios/despues.mp3" preload="metadata"></audio>
@@ -231,9 +252,73 @@
 
       </div>
       <p class="antesdespues-disclaimer">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        Por confidencialidad, no publico grabaciones de alumnos. Este es el tipo de cambio que conseguimos en el programa.
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        Por confidencialidad, no publico grabaciones de alumnos. La voz de la derecha es la mía, y hace unos años sonaba
+        como la de la izquierda. Este es el tipo de cambio que conseguimos en el programa.
       </p>
+    </div>
+  </section>
+
+  <!-- ============ QUIÉN TE ENSEÑA ============ -->
+  <section class="bg-base" id="quien-soy">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Quién te va a enseñar</p>
+        <h2>No soy nativo. Precisamente por eso puedo enseñarte esto.</h2>
+      </div>
+
+      <div class="bio-grid">
+        <div class="bio-texto">
+          <p class="bio-lead">Yo empecé exactamente en el mismo punto en el que estás tú hoy.</p>
+          <p>Tuve que analizar, descifrar y sistematizar el camino completo para quitarme el acento hispanohablante y
+            llegar a una fonética limpia. Nadie me dio ese mapa: lo levanté yo, sonido a sonido, y por el camino
+            descubrí que casi todo lo que nos enseñan sobre pronunciación es «escucha y repite a ver si aciertas».</p>
+          <p>Un nativo produce esos sonidos sin pensarlos, porque los aprendió de bebé. Puede decirte que algo suena
+            raro, pero no puede explicarte por qué tu lengua se está colocando mal, porque la suya nunca lo hizo. Yo sí
+            conozco los vicios de tu lengua y los errores que vas a cometer antes de que los cometas, porque ya recorrí
+            ese camino paso a paso.</p>
+          <p class="bio-cierre">Eso es exactamente lo que te doy: <strong>el atajo que un nativo no te puede
+              explicar.</strong></p>
+        </div>
+
+        <aside class="bio-pruebas">
+          <p class="bio-pruebas-titulo">La prueba</p>
+
+          <div class="bio-prueba">
+            <span class="bio-prueba-icon">🎧</span>
+            <div>
+              <strong>La voz del «después» soy yo</strong>
+              <span>Lo que acabas de escuchar no es una muestra de archivo ni un nativo contratado. Es el resultado
+                aplicado sobre mí mismo.</span>
+              <a href="#audio-demo" class="bio-prueba-link">Volver a escucharlo ↑</a>
+            </div>
+          </div>
+
+          <div class="bio-prueba">
+            <span class="bio-prueba-icon">★</span>
+            <div>
+              <strong>5 de 5 en Trustpilot</strong>
+              <span>Valoraciones verificables de alumnos reales del programa, no testimonios recogidos por mí.</span>
+              <!-- TODO Gonzalo: pega aquí la URL de tu perfil de Trustpilot y quita este comentario.
+                   No la he puesto yo porque no sé si tu perfil sigue bajo gonzalorosae.com o ya bajo el .es.
+              <a href="URL_DE_TU_PERFIL" target="_blank" rel="noopener" class="bio-prueba-link">Ver el perfil ↗</a> -->
+            </div>
+          </div>
+
+          <div class="bio-prueba">
+            <span class="bio-prueba-icon">🗺️</span>
+            <div>
+              <strong>Mismo punto de partida</strong>
+              <span>Español nativo, inglés aprendido. Los errores que vas a cometer los cometí yo antes.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
     </div>
   </section>
 
@@ -282,7 +367,8 @@
         <div class="icp-card">
           <div class="icp-icon">🎯</div>
           <h3>Práctica guiada con corrección</h3>
-          <p>Cada sesión es 1 a 1 y centrada en que practiques. Te explico la teoría, la ponemos en práctica con ejercicios y te doy correcciones precisas
+          <p>Cada sesión es 1 a 1 y centrada en que practiques. Te explico la teoría, la ponemos en práctica con
+            ejercicios y te doy correcciones precisas
             en el momento para ajustar tu pronunciación.</p>
         </div>
 
@@ -320,7 +406,8 @@
           </div>
           <div class="comp-col-me">
             <div class="comp-badge me">
-              <img src="./img/logo.png" alt="Gonzalo Rosae" style="width:20px;height:20px;border-radius:4px"> Este
+              <img src="./img/logo.webp" alt="Gonzalo Rosae" width="20" height="20" loading="lazy" decoding="async"
+                style="width:20px;height:20px;border-radius:4px"> Este
               programa
             </div>
           </div>
@@ -392,7 +479,8 @@
           class="opinion-caja">
           <div>
             <div class="opinion-encabezado">
-              <img src="./img/esperanza.jpg" alt="Esperanza" class="foto-opinion">
+              <img src="./img/esperanza.webp" alt="Esperanza" class="foto-opinion" width="56" height="56" loading="lazy"
+                decoding="async">
               <div>
                 <div class="opinion-nombre">Esperanza M.</div>
                 <div class="opinion-estrellas">★★★★★</div>
@@ -412,7 +500,8 @@
           class="opinion-caja">
           <div>
             <div class="opinion-encabezado">
-              <img src="./img/vicente.jpg" alt="Vicente" class="foto-opinion">
+              <img src="./img/vicente.webp" alt="Vicente" class="foto-opinion" width="56" height="56" loading="lazy"
+                decoding="async">
               <div>
                 <div class="opinion-nombre">Vicente E.</div>
                 <div class="opinion-estrellas">★★★★★</div>
@@ -431,7 +520,8 @@
           class="opinion-caja">
           <div>
             <div class="opinion-encabezado">
-              <img src="./img/julio.jpg" alt="Julio" class="foto-opinion">
+              <img src="./img/julio.webp" alt="Julio" class="foto-opinion" width="56" height="56" loading="lazy"
+                decoding="async">
               <div>
                 <div class="opinion-nombre">Julio M.</div>
                 <div class="opinion-estrellas">★★★★★</div>
@@ -524,7 +614,7 @@
               cuotas mensuales, sin academias indefinidas. Incluye mínimo 16 sesiones, soporte WhatsApp 24/7 y todos los
               materiales de forma gratuita.</p>
           </div>
-          <button class="btn btn-primary btn-lg" data-open-modal
+          <button class="btn btn-primary btn-lg" data-open-modal data-origen="oferta"
             data-label-agotado="Reservar mi sitio para la próxima plaza">
             <span class="btn-label">Reservar mi Auditoría gratuita</span>
           </button>
@@ -605,15 +695,9 @@
               class="faq-icon">+</span></button>
           <div class="faq-respuesta">
             <div class="faq-respuesta-inner">Para practicar conversación, un nativo es una opción excelente. Para
-              reconfigurar tu acento desde cero, rotundamente no. Un profesor nativo produce los sonidos británicos de
-              forma inconsciente porque aprendió de bebé, los hace
-              de forma insconsciente y automática.
-              <br>
-              <br>
-              Yo empecé exactamente en el mismo punto en el que tú estás hoy. Tuve que analizar, descifrar y
-              sistematizar el camino exacto para eliminar el acento hispanohablante y lograr una fonética limpia. Yo
-              conozco los vicios de tu lengua, los errores que vas a cometer antes de que los hagas y cómo corregirlos,
-              porque yo ya recorrí ese mapa paso a paso. Te doy el atajo que un nativo no te puede explicar.
+              reconfigurar tu acento desde cero, rotundamente no: aprendió esos sonidos de bebé y los produce de forma
+              inconsciente, así que puede decirte que algo suena raro pero no explicarte qué está haciendo mal tu
+              lengua. Lo desarrollo entero en <a href="#quien-soy">quién te va a enseñar</a>.
             </div>
           </div>
         </div>
@@ -677,7 +761,7 @@
         qué te frena y si puedo ayudarte.</p>
       <p data-solo-agotado hidden>Esta temporada ya está cerrada, pero la siguiente se llena con quien ya tiene su
         auditoría hecha. Son 15 minutos, es gratis y no te compromete a nada.</p>
-      <button class="btn btn-primary btn-lg" data-open-modal
+      <button class="btn btn-primary btn-lg" data-open-modal data-origen="cta-final"
         data-label-agotado="Reservar mi prioridad para la próxima plaza">
         <span class="btn-label">Reservar Auditoría de Acento gratuita</span>
       </button>
@@ -692,12 +776,13 @@
       </div>
       <div class="contacto-grid">
         <a href="https://wa.me/34956079630?text=Hola%2C%20Gonzalo%2C%20te%20contacto%20desde%20tu%20web" target="_blank"
-          class="contacto-card">
+          rel="noopener" class="contacto-card" data-track="contacto_whatsapp">
           <div class="c-icon">💬</div>
           <h3>WhatsApp</h3>
           <p>+34 956 07 96 30</p>
         </a>
-        <a href="mailto:gonzalorosae@gmail.com?subject=Consulta%20desde%20tu%20web" class="contacto-card">
+        <a href="mailto:gonzalorosae@gmail.com?subject=Consulta%20desde%20tu%20web" class="contacto-card"
+          data-track="contacto_email">
           <div class="c-icon">✉️</div>
           <h3>Correo</h3>
           <p>gonzalorosae@gmail.com</p>
@@ -709,10 +794,17 @@
   <footer>
     <div class="wrap">
       <p>© 2026 Gonzalo Rosae · The British Voice Method</p>
+      <p class="footer-legal">
+        <a href="./privacidad.html">Política de privacidad y aviso legal</a>
+        <span aria-hidden="true">·</span>
+        <a href="mailto:gonzalorosae@gmail.com?subject=Ejercicio%20de%20derechos%20RGPD">Ejercer mis derechos sobre
+          mis datos</a>
+      </p>
+      <p class="footer-nota">Esta web no usa cookies de seguimiento ni publicidad.</p>
     </div>
   </footer>
 
-  <button class="fab-auditoria" data-open-modal aria-label="Reservar Auditoría de Acento gratuita"
+  <button class="fab-auditoria" data-open-modal data-origen="fab" aria-label="Reservar Auditoría de Acento gratuita"
     data-label-agotado="Entrar en la lista">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
       stroke-linejoin="round" width="22" height="22">
@@ -752,7 +844,8 @@
       <div class="modal-disqualify hidden" id="disqualifyView">
         <div class="dq-icon">📘</div>
         <h4 id="dqTitle">Aún no es el momento</h4>
-        <p id="dqText">El programa está diseñado para B2-C2. Con ese nivel lo que más te ayudaría ahora es consolidar el inglés general.</p>
+        <p id="dqText">El programa está diseñado para B2-C2. Con ese nivel lo que más te ayudaría ahora es consolidar el
+          inglés general.</p>
       </div>
 
       <div class="modal-success hidden" id="successView">
@@ -771,7 +864,8 @@
         <h4>Encajas en el programa, pero ahora mismo no hay hueco</h4>
         <p class="so-lead">Las <strong data-plazas-total></strong> plazas están cubiertas.
           <span id="soldOutApertura">La próxima apertura es <strong data-proxima-apertura></strong>.</span>
-          Así funciona a partir de aquí:</p>
+          Así funciona a partir de aquí:
+        </p>
 
         <ol class="so-pasos">
           <li>
@@ -780,12 +874,14 @@
           </li>
           <li>
             <span class="so-num">2</span>
-            <div>Quedas en la lista de prioridad. <strong>Las plazas se asignan por orden de auditoría realizada</strong>,
+            <div>Quedas en la lista de prioridad. <strong>Las plazas se asignan por orden de auditoría
+                realizada</strong>,
               no por orden de apuntarse.</div>
           </li>
           <li>
             <span class="so-num">3</span>
-            <div>Cuando se libere una plaza te aviso a ti antes que a nadie. <strong>No pagas nada hasta entonces</strong>
+            <div>Cuando se libere una plaza te aviso a ti antes que a nadie. <strong>No pagas nada hasta
+                entonces</strong>
               y puedes decir que no.</div>
           </li>
         </ol>
@@ -806,6 +902,12 @@
           <label for="wlEmail">Tu email</label>
           <input type="email" id="wlEmail" autocomplete="email" placeholder="tu@email.com">
         </div>
+        <label class="wl-consent" for="wlConsent">
+          <input type="checkbox" id="wlConsent">
+          <span>He leído y acepto la <a href="./privacidad.html" target="_blank" rel="noopener">política de
+              privacidad</a>. Guardaré tu nombre y tu correo con el único fin de avisarte cuando haya una plaza libre.
+            Ni newsletter ni cesión a terceros, y puedes darte de baja cuando quieras.</span>
+        </label>
         <p class="wl-error hidden" id="wlError"></p>
         <button class="btn btn-primary btn-block" id="wlSend">Avísame cuando haya plaza</button>
         <button type="button" class="btn-linkish" id="wlBack">← Mejor hago la auditoría y reservo prioridad</button>
@@ -823,6 +925,8 @@
 
     </div>
   </div>
+
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="2ed09e71-5e60-47dd-847e-ea361bef72ea"></script>
 
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
   <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>

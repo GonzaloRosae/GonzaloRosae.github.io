@@ -23,6 +23,28 @@ const FORM_ENDPOINT = 'https://formsubmit.co/ajax/gonzalorosae@gmail.com';
 const SIN_PLAZAS = PLAZAS_DISPONIBLES <= 0;
 
 /* ====================================================
+   ANALÍTICA
+   Envoltorio agnóstico: hoy habla con Umami, y si algún día
+   cambias de herramienta solo tienes que tocar esta función.
+   No se envía ningún dato personal, solo el nombre del paso.
+==================================================== */
+const ESTADO_PLAZAS = () => (SIN_PLAZAS ? 'agotadas' : 'disponibles');
+
+function track(evento, datos) {
+  try {
+    if (window.umami && typeof window.umami.track === 'function') {
+      datos ? window.umami.track(evento, datos) : window.umami.track(evento);
+    }
+  } catch (e) { /* la analítica nunca debe romper la página */ }
+}
+
+// Enlaces y botones marcados con data-track se registran solos
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-track]');
+  if (el) track(el.dataset.track);
+});
+
+/* ====================================================
    CONTADOR DE PLAZAS - puntos visuales ● ● ○
    y conmutación de todo el estado "agotado"
 ==================================================== */
@@ -85,7 +107,7 @@ const SIN_PLAZAS = PLAZAS_DISPONIBLES <= 0;
     const soldOutAperturaEl = document.getElementById('soldOutApertura');
     if (soldOutAperturaEl) {
       soldOutAperturaEl.innerHTML = apertura
-        ? 'La próxima apertura es <strong data-proxima-apertura></strong>.'
+        ? `La próxima apertura es <strong>${apertura}</strong>.`
         : 'Reserva tu plaza para la próxima temporada ya.';
     }
 
@@ -116,7 +138,10 @@ let currentStep = 1;
 
 /* --- Abrir / cerrar --- */
 document.querySelectorAll('[data-open-modal]').forEach(btn => {
-  btn.addEventListener('click', openModal);
+  btn.addEventListener('click', () => {
+    track('modal_abierto', { origen: btn.dataset.origen || 'sin-marcar', plazas: ESTADO_PLAZAS() });
+    openModal();
+  });
 });
 
 function openModal() {
@@ -160,6 +185,7 @@ document.querySelectorAll('.option-grid, .option-list').forEach(list => {
     answers[field] = value;
     setTimeout(() => {
       if (field === 'nivel') {
+        track('nivel_elegido', { nivel: value, cualifica: dq === 'dq' ? 'no' : 'si' });
         if (dq === 'dq') { showDisqualify(value); return; }
         showSuccess();
       }
@@ -179,12 +205,17 @@ function mostrarVista(id) {
 
 /* --- Cualificado: si no hay plazas, pasa antes por la pantalla de espera --- */
 function showSuccess() {
-  if (SIN_PLAZAS) { mostrarVista('soldOutView'); return; }
+  if (SIN_PLAZAS) {
+    track('agotado_pantalla');
+    mostrarVista('soldOutView');
+    return;
+  }
   mostrarCalendly();
 }
 
 /* --- Vista éxito + Calendly --- */
 function mostrarCalendly() {
+  track('calendly_mostrado', { plazas: ESTADO_PLAZAS() });
   mostrarVista('successView');
 
   if (SIN_PLAZAS) {
@@ -220,6 +251,7 @@ function mostrarCalendly() {
     waEl.href = `https://wa.me/34956079630?text=${waMsg}`;
     waEl.target = '_blank'; waEl.rel = 'noopener noreferrer';
     waEl.className = 'btn btn-ghost btn-block';
+    waEl.dataset.track = 'calendly_prefiere_whatsapp';
     waEl.style.cssText = 'margin-top:0.6rem;font-size:0.85rem';
     waEl.textContent = '¿Prefieres avisarme por WhatsApp?';
     successView.appendChild(waEl);
@@ -229,9 +261,18 @@ function mostrarCalendly() {
 /* ====================================================
    PLAZAS AGOTADAS: prioridad o lista de espera
 ==================================================== */
-document.getElementById('soAgendar')?.addEventListener('click', mostrarCalendly);
-document.getElementById('wlOkAgendar')?.addEventListener('click', mostrarCalendly);
-document.getElementById('soLista')?.addEventListener('click', () => mostrarVista('waitlistView'));
+document.getElementById('soAgendar')?.addEventListener('click', () => {
+  track('agotado_elige_auditoria');
+  mostrarCalendly();
+});
+document.getElementById('wlOkAgendar')?.addEventListener('click', () => {
+  track('agotado_rescate_auditoria');
+  mostrarCalendly();
+});
+document.getElementById('soLista')?.addEventListener('click', () => {
+  track('agotado_elige_lista');
+  mostrarVista('waitlistView');
+});
 document.getElementById('wlBack')?.addEventListener('click', () => mostrarVista('soldOutView'));
 
 function wlMostrarError(msgHtml) {
@@ -243,7 +284,10 @@ function wlMostrarError(msgHtml) {
 
 function wlMailtoFallback(nombre, email) {
   const asunto = encodeURIComponent('Lista de espera - The British Voice Method');
-  const cuerpo = encodeURIComponent(`Hola Gonzalo:\n\nQuiero que me avises cuando se abra una plaza.\n\nNombre: ${nombre}\nEmail: ${email}\n`);
+  const cuerpo = encodeURIComponent(
+    `Hola Gonzalo:\n\nQuiero que me avises cuando se abra una plaza.\n\n`
+    + `Nombre: ${nombre}\nEmail: ${email}\n`
+    + `Acepto la política de privacidad (${new Date().toISOString()}).\n`);
   return `mailto:gonzalorosae@gmail.com?subject=${asunto}&body=${cuerpo}`;
 }
 
@@ -272,7 +316,15 @@ document.getElementById('wlSend')?.addEventListener('click', async () => {
     return;
   }
 
+  const consentEl = document.getElementById('wlConsent');
+  if (consentEl && !consentEl.checked) {
+    wlMostrarError('Necesito que aceptes la política de privacidad para poder guardar tu correo.');
+    consentEl.focus();
+    return;
+  }
+
   const wlOk = () => {
+    track('lista_espera_alta');
     const nameEl = document.getElementById('wlOkName');
     if (nameEl) nameEl.textContent = nombre;
     mostrarVista('waitlistOk');
@@ -298,10 +350,21 @@ document.getElementById('wlSend')?.addEventListener('click', async () => {
         _subject: `Lista de espera - ${nombre}`,
         _captcha: 'false',
         origen: 'Lista de espera (plazas agotadas)',
-        temporada: TEMPORADA_ACTUAL
+        temporada: TEMPORADA_ACTUAL,
+        consentimiento: 'Aceptada la política de privacidad en el formulario web',
+        consentimiento_fecha: new Date().toISOString()
       })
     });
     if (!res.ok) throw new Error('Respuesta ' + res.status);
+
+    // Un 200 no basta: si el endpoint aún no está activado, FormSubmit responde
+    // correctamente pero NO reenvía el correo. Solo damos el alta por buena
+    // cuando la respuesta confirma el éxito de forma explícita.
+    let data = null;
+    try { data = await res.json(); } catch (_) { data = null; }
+    const confirmado = data && String(data.success).toLowerCase() === 'true';
+    if (!confirmado) throw new Error('Envío no confirmado por el servicio de formularios');
+
     wlOk();
   } catch (e) {
     wlMostrarError(
@@ -363,6 +426,8 @@ function resetModal() {
   if (dqForm) dqForm.classList.remove('hidden');
   if (dqThanks) dqThanks.classList.add('hidden');
   document.getElementById('wlError')?.classList.add('hidden');
+  const consentReset = document.getElementById('wlConsent');
+  if (consentReset) consentReset.checked = false;
 
   showStep(1);
 }
@@ -374,6 +439,7 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
     const isOpen = item.classList.contains('open');
+    if (!isOpen) track('faq_abierta', { pregunta: btn.textContent.replace('+', '').trim().slice(0, 60) });
     document.querySelectorAll('.faq-item').forEach(i => {
       i.classList.remove('open');
       i.querySelector('.faq-respuesta').style.maxHeight = null;
@@ -436,6 +502,7 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
           if (b !== playBtn) b.textContent = '▶';
         });
         audio.play().catch(() => { });
+        track('audio_play', { pista: audioId === 'audioDemo' ? 'despues' : 'antes' });
         playBtn.textContent = '⏸';
       } else {
         audio.pause();

@@ -1679,3 +1679,256 @@ footer p { font-size: 0.82rem; color: var(--text-low); }
   font-size: 1.5rem;
   margin: 0 auto 1.1rem;
 }
+
+/* ====================================================
+   QUIÉN TE ENSEÑA (bio / prueba)
+==================================================== */
+.hero-photo-card picture { display: block; position: relative; z-index: 2; }
+
+.bio-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 2.6rem;
+  align-items: start;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.bio-texto p {
+  color: var(--text-mid);
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 1.1rem;
+}
+
+.bio-texto p.bio-lead {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+  line-height: 1.4;
+  color: var(--text-high);
+  border-left: 3px solid var(--gold);
+  padding-left: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.bio-texto p.bio-cierre {
+  color: var(--text-high);
+  font-size: 1.08rem;
+  margin-bottom: 0;
+}
+
+.bio-cierre strong { color: var(--gold); }
+
+.bio-pruebas {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-m);
+  padding: 1.5rem 1.4rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.bio-pruebas-titulo {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+
+.bio-prueba {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.bio-prueba:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
+
+.bio-prueba-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: var(--gold-soft);
+  border: 1px solid rgba(201, 166, 107, 0.28);
+  color: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+
+.bio-prueba strong {
+  display: block;
+  color: var(--text-high);
+  font-size: 0.92rem;
+  margin-bottom: 0.2rem;
+}
+
+.bio-prueba span:not(.bio-prueba-icon) {
+  display: block;
+  color: var(--text-mid);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.bio-prueba-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--gold);
+  border-bottom: 1px solid rgba(201, 166, 107, 0.35);
+}
+
+.bio-prueba-link:hover { border-bottom-color: var(--gold); }
+
+@media (max-width: 860px) {
+  .bio-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+}
+
+/* ====================================================
+   CONSENTIMIENTO Y PIE LEGAL
+==================================================== */
+.wl-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  text-align: left;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--text-low);
+  margin: 0.2rem 0 1.1rem;
+  cursor: pointer;
+}
+
+.wl-consent input[type="checkbox"] {
+  flex-shrink: 0;
+  width: 17px; height: 17px;
+  margin-top: 2px;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+.wl-consent a { color: var(--gold); border-bottom: 1px solid rgba(201, 166, 107, 0.4); }
+.wl-consent a:hover { border-bottom-color: var(--gold); }
+
+.footer-legal {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.footer-legal a { color: var(--text-mid); border-bottom: 1px solid transparent; }
+.footer-legal a:hover { color: var(--gold); border-bottom-color: rgba(201, 166, 107, 0.4); }
+.footer-legal span { color: var(--text-low); }
+
+.footer-nota {
+  margin-top: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-low);
+}
+
+/* ====================================================
+   PÁGINA LEGAL
+==================================================== */
+.legal { padding-top: 3.5rem; }
+
+.legal-wrap { max-width: 760px; }
+
+.legal-wrap h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--text-high);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.legal-fecha {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-low);
+  margin-bottom: 2rem;
+}
+
+.legal-aviso {
+  background: rgba(201, 166, 107, 0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  padding: 1rem 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-mid);
+  margin-bottom: 2.4rem;
+}
+
+.legal-aviso strong { color: var(--gold); }
+
+.legal-wrap h2 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text-high);
+  margin: 2.2rem 0 0.8rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.legal-wrap h3 {
+  font-size: 1rem;
+  color: var(--gold);
+  margin: 1.4rem 0 0.5rem;
+}
+
+.legal-wrap p, .legal-wrap li {
+  color: var(--text-mid);
+  font-size: 0.94rem;
+  line-height: 1.75;
+}
+
+.legal-wrap p { margin-bottom: 0.9rem; }
+
+.legal-wrap ul {
+  margin: 0 0 1.1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.legal-wrap li::marker { color: var(--gold); }
+.legal-wrap strong { color: var(--text-high); }
+
+.legal-wrap a {
+  color: var(--gold);
+  border-bottom: 1px solid rgba(201, 166, 107, 0.35);
+}
+.legal-wrap a:hover { border-bottom-color: var(--gold); }
+
+.legal-datos { list-style: none; margin-left: 0 !important; }
+.legal-datos li { padding-left: 0; }
+
+.legal-volver {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+.nav-brand { display: flex; align-items: center; }
+
+/* ====================================================
+   ANCLAS BAJO LA BARRA FIJA
+   Sin esto, cualquier enlace #seccion deja el titular
+   escondido detrás del nav de 64px.
+==================================================== */
+section[id], header[id], div[id^="audio"] {
+  scroll-margin-top: 84px;
+}
+
+.legal-nota-contacto {
+  font-size: 0.86rem !important;
+  color: var(--text-low) !important;
+  margin-top: -0.4rem;
+}
