@@ -7,11 +7,11 @@ const CALENDLY_URL = 'https://calendly.com/gonzalorosae/auditoria';
 
 // Plazas: cambia solo este número para actualizar toda la web.
 // Si lo pones a 0, la web entra automáticamente en modo "plazas agotadas".
-const PLAZAS_DISPONIBLES = 0;
+const PLAZAS_DISPONIBLES = 3;
 const PLAZAS_TOTAL = 3;
 
 // Se usan cuando no quedan plazas
-const TEMPORADA_ACTUAL = 'Verano 2026';
+const TEMPORADA_ACTUAL = 'Otoño 2026';
 const PROXIMA_APERTURA = '';   // '' si aún no hay fecha
 
 // A dónde llegan los emails de la lista de espera.
