@@ -2012,3 +2012,36 @@ section[id], header[id], div[id^="audio"] {
   /* Tras ocultar las pruebas repetidas de la bio, la que queda no lleva separador debajo */
   .bio-prueba:not(.solo-escritorio) { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
 }
+
+/* ====================================================
+   MÓVIL: tamaños de letra (hasta 700 px; escritorio y tablet no cambian)
+   Criterio: baja el texto grande y el de lectura de 15-16 px. Lo que ya mide
+   14 px o menos (descripciones, captions, fuentes de estudios, pie) no se toca,
+   para no dejar nada por debajo de un tamaño cómodo de leer.
+==================================================== */
+@media (max-width: 700px) {
+  /* Titulares (30,4 px -> 28 px; el de la oferta 25,6 -> 24 px) */
+  .section-head h2, .final-cta h2 { font-size: 1.75rem; }
+  .offer-head h3 { font-size: 1.5rem; }
+
+  /* Subtítulos de sección (17,3 px -> 16 px) */
+  .section-head p { font-size: 1rem; }
+  /* Etiquetas «QUIÉN TE VA A ENSEÑAR», etc.: una regla general las dejaba en 17,3 px; en móvil 13,6 px */
+  .section-head .eyebrow { font-size: 0.85rem; }
+
+  /* Portada: subtítulo y cita (17,9 -> 16,8 px; 16 -> 15 px) */
+  .hero-sub { font-size: 1.05rem; }
+  .hero-quote { font-size: 0.94rem; }
+
+  /* Bio (16 -> 15 px; destacado 20 -> 18,4 px; cierre 17,3 -> 16 px) */
+  .bio-texto p { font-size: 0.94rem; }
+  .bio-texto p.bio-lead { font-size: 1.15rem; }
+  .bio-texto p.bio-cierre { font-size: 1rem; }
+
+  /* Textos de lectura de 15-16 px (-1 px) */
+  .evidencia-hallazgo { font-size: 0.92rem; }
+  .icp-card p { font-size: 0.9rem; }
+  .step p { font-size: 0.9rem; }
+  .faq-pregunta { font-size: 0.96rem; }
+  .faq-respuesta-inner { font-size: 0.9rem; }
+}
