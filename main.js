@@ -89,9 +89,11 @@ document.addEventListener('click', e => {
   const ofertaEl = document.getElementById('plazasOferta');
   const offerSlots = document.getElementById('offerSlots');
   if (ofertaEl) {
-    ofertaEl.innerHTML = SIN_PLAZAS
-      ? `Plazas agotadas · ${TEMPORADA_ACTUAL}`
-      : `<span aria-hidden="true">⏳</span> ${disponibles} de ${total} plazas disponibles · ${TEMPORADA_ACTUAL}`;
+    const cuenta = SIN_PLAZAS
+      ? 'Plazas agotadas'
+      : `<span aria-hidden="true">⏳</span> ${disponibles} de ${total} plazas disponibles`;
+    ofertaEl.innerHTML = `<span class="slot-cuenta">${cuenta}</span><span class="slot-sep"> · </span>`
+      + `<span class="slot-temp">${TEMPORADA_ACTUAL}</span>`;
   }
   if (offerSlots) offerSlots.classList.toggle('agotado', SIN_PLAZAS);
 
@@ -99,9 +101,11 @@ document.addEventListener('click', e => {
     // Frase del hero
     const fraseEl = document.getElementById('plazasFrase');
     if (fraseEl) {
-      fraseEl.innerHTML = apertura
-        ? `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - próxima apertura ${apertura}`
-        : `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - reserva tu plaza para la próxima temporada ya`;
+      const subtexto = apertura
+        ? `próxima apertura ${apertura}`
+        : 'reserva tu plaza para la próxima temporada ya';
+      fraseEl.innerHTML = '<span class="plazas-cuenta"><strong class="plazas-alerta">Plazas agotadas esta temporada</strong></span>'
+        + `<span class="plazas-sep"> - </span><span class="plazas-sub">${subtexto}</span>`;
     }
 
     const soldOutAperturaEl = document.getElementById('soldOutApertura');

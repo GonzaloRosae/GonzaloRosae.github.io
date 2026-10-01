@@ -373,6 +373,17 @@ section { position: relative; padding: 7rem 0; }
   gap: 5px;
 }
 
+/* Móvil: «● ● ○  Solo 2 de 3 plazas disponibles» en una sola línea alineada con los puntos,
+   y «Auditoría gratuita, sin compromiso» como línea propia debajo. En escritorio todo sigue en una línea. */
+@media (max-width: 700px) {
+  .hero-microcopy-nueva { flex-wrap: wrap; row-gap: 0.3rem; }
+  .plazas-texto { display: contents; }
+  .plazas-cuenta { white-space: nowrap; }
+  .plazas-sep { display: none; }
+  .plazas-sub { flex: 0 0 100%; text-align: center; font-size: 0.82rem; }
+  .plazas-sub::first-letter { text-transform: uppercase; }
+}
+
 .plaza-dot {
   width: 10px; height: 10px;
   border-radius: 50%;
@@ -483,6 +494,11 @@ section { position: relative; padding: 7rem 0; }
 }
 
 .trust-strip strong { color: var(--text-high); font-family: var(--font-body); }
+
+/* En móvil se oculta: el hero ya cuenta lo mismo y la franja ocupaba tres líneas sueltas */
+@media (max-width: 640px) {
+  .trust-strip { display: none; }
+}
 
 /* ====================================================
    DIAGNOSTIC / EVIDENCE PANEL (signature element)
@@ -642,6 +658,12 @@ section { position: relative; padding: 7rem 0; }
   gap: 1rem 2.2rem;
   margin-bottom: 2.2rem;
   position: relative;
+}
+
+/* Móvil estrecho: «2 de 3 plazas disponibles» y «Otoño 2026» en líneas propias, sin palabra huérfana */
+@media (max-width: 480px) {
+  .slot-cuenta, .slot-temp { display: block; }
+  .slot-sep { display: none; }
 }
 
 .offer-item {
@@ -1954,4 +1976,14 @@ section[id], header[id], div[id^="audio"] {
 
 @media (prefers-reduced-motion: reduce) {
   .cal-sk, .audio-bars.is-loading span { animation: none; }
+}
+
+/* ====================================================
+   MÓVIL: saltos de línea más limpios
+   Reparte los titulares en líneas equilibradas y evita la palabra suelta al final
+   de los párrafos. Solo afecta a pantallas pequeñas; el escritorio no cambia.
+==================================================== */
+@media (max-width: 700px) {
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
 }
