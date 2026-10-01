@@ -566,7 +566,7 @@ window.addEventListener('resize', () => {
     }
     const bars = barsWrap.querySelectorAll('span');
 
-    // La forma de onda se calcula cuando la sección está cerca de la pantalla
+    // La forma de onda se calcula cuando la sección está a punto de verse (no antes: son unos 580 KB de audio)
     let ondaIniciada = false;
     const cargarOnda = () => {
       if (ondaIniciada) return;
@@ -579,7 +579,7 @@ window.addEventListener('resize', () => {
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver(entradas => {
         if (entradas.some(en => en.isIntersecting)) { cargarOnda(); io.disconnect(); }
-      }, { rootMargin: '400px 0px' });
+      }, { rootMargin: '120px 0px' });
       io.observe(playBtn);
     } else {
       cargarOnda();

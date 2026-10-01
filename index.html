@@ -125,8 +125,69 @@
     </div>
   </div>
 
+  <!-- ============ AUDIO DEMO ============ -->
+  <section class="bg-base" id="audio-demo">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow center">Escúchalo</p>
+        <h2>Así es como podrías sonar:</h2>
+      </div>
+      <div class="antes-despues">
+        <div class="antesdespues-card antes">
+          <div class="antesdespues-label">
+            <span class="antesdespues-dot antes-dot"></span>
+            Antes (simulado)
+          </div>
+          <div class="audio-card">
+            <button type="button" class="audio-play-btn" id="audioPlayBtnAntes" aria-label="Reproducir antes">▶</button>
+            <div class="audio-meta">
+              <div class="audio-title">Acento inglés españolizado</div>
+              <div class="audio-bars" id="audioBaresAntes"></div>
+              <div class="audio-time"><span id="audioTimeCurrentAntes">0:00</span> / <span
+                  id="audioTimeTotalAntes">0:00</span></div>
+            </div>
+          </div>
+          <audio id="audioDemoAntes" src="./audios/antes.mp3" preload="metadata"></audio>
+        </div>
+
+        <div class="antesdespues-divider" aria-hidden="true">
+          <span class="antesdespues-arrow">→</span>
+        </div>
+
+        <div class="antesdespues-card despues">
+          <div class="antesdespues-label">
+            <span class="antesdespues-dot despues-dot"></span>
+            Después · mi voz real
+          </div>
+          <div class="audio-card">
+            <button type="button" class="audio-play-btn despues-btn" id="audioPlayBtnDespues"
+              aria-label="Reproducir después">▶</button>
+            <div class="audio-meta">
+              <div class="audio-title">Así sueno yo hoy</div>
+              <div class="audio-bars" id="audioBaresDespues"></div>
+              <div class="audio-time"><span id="audioTimeCurrentDespues">0:00</span> / <span
+                  id="audioTimeTotalDespues">0:00</span></div>
+            </div>
+          </div>
+          <audio id="audioDemo" src="./audios/despues.mp3" preload="metadata"></audio>
+        </div>
+
+      </div>
+      <p class="antesdespues-disclaimer">
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        Por confidencialidad, no publico grabaciones de alumnos. La voz de «Después» es la mía, y hace unos años sonaba
+        como la de «Antes». Este es el tipo de cambio que conseguimos en el programa.
+      </p>
+    </div>
+  </section>
+
   <!-- ============ EVIDENCIA / DIAGNÓSTICO ============ -->
-  <section class="bg-base" id="evidencia">
+  <section class="bg-panel" id="evidencia">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow center">Por qué importa</p>
@@ -204,67 +265,6 @@
     </div>
   </section>
 
-  <!-- ============ AUDIO DEMO ============ -->
-  <section class="bg-panel" id="audio-demo">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow center">Escúchalo</p>
-        <h2>Así es como podrías sonar:</h2>
-      </div>
-      <div class="antes-despues">
-        <div class="antesdespues-card antes">
-          <div class="antesdespues-label">
-            <span class="antesdespues-dot antes-dot"></span>
-            Antes (simulado)
-          </div>
-          <div class="audio-card">
-            <button type="button" class="audio-play-btn" id="audioPlayBtnAntes" aria-label="Reproducir antes">▶</button>
-            <div class="audio-meta">
-              <div class="audio-title">Acento inglés españolizado</div>
-              <div class="audio-bars" id="audioBaresAntes"></div>
-              <div class="audio-time"><span id="audioTimeCurrentAntes">0:00</span> / <span
-                  id="audioTimeTotalAntes">0:00</span></div>
-            </div>
-          </div>
-          <audio id="audioDemoAntes" src="./audios/antes.mp3" preload="metadata"></audio>
-        </div>
-
-        <div class="antesdespues-divider" aria-hidden="true">
-          <span class="antesdespues-arrow">→</span>
-        </div>
-
-        <div class="antesdespues-card despues">
-          <div class="antesdespues-label">
-            <span class="antesdespues-dot despues-dot"></span>
-            Después · mi voz real
-          </div>
-          <div class="audio-card">
-            <button type="button" class="audio-play-btn despues-btn" id="audioPlayBtnDespues"
-              aria-label="Reproducir después">▶</button>
-            <div class="audio-meta">
-              <div class="audio-title">Así sueno yo hoy</div>
-              <div class="audio-bars" id="audioBaresDespues"></div>
-              <div class="audio-time"><span id="audioTimeCurrentDespues">0:00</span> / <span
-                  id="audioTimeTotalDespues">0:00</span></div>
-            </div>
-          </div>
-          <audio id="audioDemo" src="./audios/despues.mp3" preload="metadata"></audio>
-        </div>
-
-      </div>
-      <p class="antesdespues-disclaimer">
-        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="12" />
-          <line x1="12" y1="16" x2="12.01" y2="16" />
-        </svg>
-        Por confidencialidad, no publico grabaciones de alumnos. La voz de la derecha es la mía, y hace unos años sonaba
-        como la de la izquierda. Este es el tipo de cambio que conseguimos en el programa.
-      </p>
-    </div>
-  </section>
-
   <!-- ============ QUIÉN TE ENSEÑA ============ -->
   <section class="bg-base" id="quien-soy">
     <div class="wrap">
@@ -294,7 +294,7 @@
             <span class="bio-prueba-icon" aria-hidden="true">🎧</span>
             <div>
               <strong>La voz del «después» soy yo</strong>
-              <span>Lo que acabas de escuchar no es una muestra de archivo ni un nativo contratado. Es el resultado
+              <span>Lo que has escuchado no es una muestra de archivo ni un nativo contratado. Es el resultado
                 aplicado sobre mí mismo.</span>
               <a href="#audio-demo" class="bio-prueba-link">Volver a escucharlo <span class="sym" aria-hidden="true">↑</span></a>
             </div>
@@ -356,42 +356,8 @@
     </div>
   </section>
 
-  <!-- ============ DIFERENCIADOR ============ -->
-  <section class="bg-base">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow center">El método</p>
-        <h2>Fonética tratada como un sistema, no como una lista de palabras</h2>
-      </div>
-
-      <div class="icp-grid">
-        <div class="icp-card">
-          <div class="icp-icon" aria-hidden="true">🎯</div>
-          <h3>Práctica guiada con corrección</h3>
-          <p>Cada sesión es 1 a 1 y centrada en que practiques. Te explico la teoría, la ponemos en práctica con
-            ejercicios y te doy correcciones precisas
-            en el momento para ajustar tu pronunciación.</p>
-        </div>
-
-        <div class="icp-card">
-          <div class="icp-icon" aria-hidden="true">🧠</div>
-          <h3>Aproximación sistemática</h3>
-          <p>Sigues un programa estructurado que cubre todos los sonidos del inglés: consonantes, vocales y otros
-            fenómenos integrales. Entiendes las reglas y construyes una base sólida.</p>
-        </div>
-
-        <div class="icp-card">
-          <div class="icp-icon" aria-hidden="true">📈</div>
-          <h3>Lectura y control de la pronunciación</h3>
-          <p>Te enseño el Alfabeto Fonético Internacional para poder leer cualquier pronunciación de forma autónoma y
-            precisa.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ COMPARATIVA ============ -->
-  <section class="bg-panel">
+  <section class="bg-base">
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow center">Por qué esto es diferente</p>
@@ -570,8 +536,9 @@
           </div>
           <div class="offer-item">
             <span class="ck" aria-hidden="true">✓</span>
-            <div><strong>Plan didáctico estructurado</strong><span>Progresión diseñada como un sistema, no una colección
-                de ejercicios sueltos.</span></div>
+            <div><strong>Plan didáctico estructurado</strong><span>Progresión diseñada como un sistema que cubre todos los sonidos del
+                inglés, no una colección de ejercicios sueltos. Incluye el Alfabeto Fonético Internacional para leer
+                cualquier pronunciación de forma autónoma.</span></div>
           </div>
           <div class="offer-item">
             <span class="ck" aria-hidden="true">✓</span>
