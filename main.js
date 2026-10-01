@@ -129,12 +129,9 @@ document.addEventListener('click', e => {
 ==================================================== */
 const overlay = document.getElementById('modalOverlay');
 const modalClose = document.getElementById('modalClose');
-const formFlow = document.getElementById('formFlow');
-const disqualifyView = document.getElementById('disqualifyView');
 const successView = document.getElementById('successView');
 
 const answers = { nivel: null };
-let currentStep = 1;
 
 /* --- Abrir / cerrar --- */
 document.querySelectorAll('[data-open-modal]').forEach(btn => {
@@ -195,11 +192,10 @@ function showStep(step) {
   document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
   const target = document.querySelector(`.form-step[data-step="${step}"]`);
   if (target) target.classList.add('active');
-  currentStep = step;
 }
 
 /* --- Opciones de nivel en rejilla --- */
-document.querySelectorAll('.option-grid, .option-list').forEach(list => {
+document.querySelectorAll('.option-grid').forEach(list => {
   list.addEventListener('click', e => {
     const btn = e.target.closest('.option-btn');
     if (!btn) return;
@@ -470,38 +466,17 @@ document.getElementById('dqBack')?.addEventListener('click', () => {
   mostrarVista('formFlow');
 });
 
-/* --- Enviar datos descalificado --- */
-document.getElementById('dqSend')?.addEventListener('click', () => {
-  const nombreEl = document.getElementById('dqNombre');
-  const emailEl = document.getElementById('dqEmail');
-  const nombre = nombreEl?.value.trim();
-  const email = emailEl?.value.trim();
-
-  if (!nombre) { nombreEl?.focus(); nombreEl?.style.setProperty('border-color', '#e05252'); return; }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    emailEl?.focus(); emailEl?.style.setProperty('border-color', '#e05252'); return;
-  }
-
-  document.getElementById('dqForm').classList.add('hidden');
-  document.getElementById('dqThanks').classList.remove('hidden');
-  document.getElementById('dqThanksName').textContent = nombre;
-});
-
 /* --- Reset modal --- */
 function resetModal() {
   mostrarVista('formFlow');
 
   answers.nivel = null;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  ['dqNombre', 'dqEmail', 'wlNombre', 'wlEmail'].forEach(id => {
+  ['wlNombre', 'wlEmail'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.style.borderColor = ''; }
   });
 
-  const dqForm = document.getElementById('dqForm');
-  const dqThanks = document.getElementById('dqThanks');
-  if (dqForm) dqForm.classList.remove('hidden');
-  if (dqThanks) dqThanks.classList.add('hidden');
   document.getElementById('wlError')?.classList.add('hidden');
   const consentReset = document.getElementById('wlConsent');
   if (consentReset) consentReset.checked = false;
@@ -680,37 +655,6 @@ window.addEventListener('resize', () => {
   }, { threshold: 0.08 });
 
   targets.forEach(el => io.observe(el));
-})();
-
-/* ====================================================
-   WAVEFORM HERO SVG
-==================================================== */
-(function initHeroWaveform() {
-  const container = document.querySelector('.waveform-bg');
-  if (!container) return;
-  const W = 1400, H = 280;
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-  svg.style.cssText = 'width:100%;height:100%;';
-
-  [['#2389c9', 0.18, '1', -1, 14], ['#c9a66b', 0.10, '1.5', 1, 18], ['#2389c9', 0.08, '1', -1, 22]].forEach(([color, op, sw, dir, dur], l) => {
-    let d = `M0,${H * (0.35 + l * 0.15)}`;
-    for (let x = 0; x <= W; x += W / 60) {
-      const y = H * (0.35 + l * 0.15) + Math.sin(x * (0.04 + l * 0.012) + l * Math.PI * 0.7) * (28 + l * 14) * Math.sin((x / W) * Math.PI);
-      d += ` L${x.toFixed(1)},${y.toFixed(1)}`;
-    }
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', d); path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', color); path.setAttribute('stroke-width', sw);
-    path.setAttribute('opacity', op);
-    const anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
-    anim.setAttribute('attributeName', 'transform'); anim.setAttribute('type', 'translate');
-    anim.setAttribute('values', `0 0;${W * 0.04 * dir} 0;0 0`);
-    anim.setAttribute('dur', `${dur}s`); anim.setAttribute('repeatCount', 'indefinite');
-    path.appendChild(anim); svg.appendChild(path);
-  });
-  container.appendChild(svg);
 })();
 
 /* ====================================================
