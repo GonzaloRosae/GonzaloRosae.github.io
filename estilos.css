@@ -1808,6 +1808,12 @@ footer p { font-size: 0.82rem; color: var(--text-low); }
 .footer-legal a:hover { color: var(--gold); border-bottom-color: rgba(201, 166, 107, 0.4); }
 .footer-legal span { color: var(--text-low); }
 
+/* En móvil los enlaces legales van uno por línea y sin separadores colgando */
+@media (max-width: 640px) {
+  .footer-legal { flex-direction: column; gap: 0.45rem; }
+  .footer-legal span { display: none; }
+}
+
 .footer-nota {
   margin-top: 0.5rem;
   font-family: var(--font-mono);
@@ -1836,19 +1842,6 @@ footer p { font-size: 0.82rem; color: var(--text-low); }
   color: var(--text-low);
   margin-bottom: 2rem;
 }
-
-.legal-aviso {
-  background: rgba(201, 166, 107, 0.08);
-  border-left: 3px solid var(--gold);
-  border-radius: 0 var(--radius-s) var(--radius-s) 0;
-  padding: 1rem 1.2rem;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-mid);
-  margin-bottom: 2.4rem;
-}
-
-.legal-aviso strong { color: var(--gold); }
 
 .legal-wrap h2 {
   font-family: var(--font-display);
