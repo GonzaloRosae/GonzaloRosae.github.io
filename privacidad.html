@@ -11,6 +11,9 @@
   <meta name="theme-color" content="#0a0f1a">
   <link rel="icon" href="./img/favicon.png" type="image/png" sizes="48x48">
   <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+  <link rel="preload" as="font" type="font/woff2" href="./fonts/fraunces-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="./fonts/fraunces-italic-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="./fonts/inter-latin.woff2" crossorigin>
   <link rel="stylesheet" href="./estilos.css">
 </head>
 
@@ -31,12 +34,13 @@
       <h1>Política de privacidad y aviso legal</h1>
       <p class="legal-fecha">Última actualización: 21 de agosto de 2026</p>
 
-      <div class="legal-aviso">
-        <strong>Nota para el titular de la web:</strong> este documento es una plantilla de partida, no un texto
-        validado por un abogado. Rellena tu nombre en el apartado 1 y revisa que todo lo que dice se corresponde con lo
-        que realmente haces con los datos. Cuando te des de alta y empieces a facturar, descomenta el bloque del NIF y
-        el domicilio que hay en el código de esta página, y borra esta nota.
-      </div>
+      <!--
+        NOTA PARA EL TITULAR DE LA WEB (antes se mostraba a los visitantes; ahora solo se ve en el código):
+        este documento es una plantilla de partida, no un texto validado por un abogado. Rellena tu nombre en el
+        apartado 1 y revisa que todo lo que dice se corresponde con lo que realmente haces con los datos.
+        Cuando te des de alta y empieces a facturar, descomenta el bloque del NIF y el domicilio que hay más abajo
+        y borra esta nota.
+      -->
 
       <h2>1. Quién es responsable de tus datos</h2>
       <ul class="legal-datos">
@@ -140,6 +144,11 @@
   <footer>
     <div class="wrap">
       <p>© 2026 Gonzalo Rosae · The British Voice Method</p>
+      <p class="footer-legal">
+        <a href="./privacidad.html">Política de privacidad y aviso legal</a>
+        <span aria-hidden="true">·</span>
+        <a href="./condiciones.html">Condiciones del programa</a>
+      </p>
     </div>
   </footer>
 

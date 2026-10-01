@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gonzalo Rosae | British Accent</title>
+  <title>Acento británico: programa 1 a 1 | Gonzalo Rosae</title>
   <meta name="description"
     content="Suena con autoridad en inglés. Programa 1 a 1 de transformación de acento británico para hablantes de nivel B2-C2. Auditoría de Acento gratuita de 15 minutos.">
   <meta name="keywords"
@@ -30,6 +30,9 @@
   <meta name="theme-color" content="#0a0f1a">
   <link rel="icon" href="./img/favicon.png" type="image/png" sizes="48x48">
   <link rel="apple-touch-icon" href="./img/apple-touch-icon.png">
+  <link rel="preload" as="font" type="font/woff2" href="./fonts/fraunces-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="./fonts/fraunces-italic-latin.woff2" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" href="./fonts/inter-latin.woff2" crossorigin>
   <link rel="preload" as="image" href="./img/gonzalo.webp" fetchpriority="high">
   <link rel="stylesheet" href="./estilos.css">
   <meta name="trustpilot-one-time-domain-verification-id" content="84549eb7-e086-4b82-a193-56ec4deddf83">
@@ -57,9 +60,9 @@
           <strong>Necesitas corregir cómo suenas.</strong>
         </blockquote>
         <div class="hero-ctas">
-          <button class="btn btn-primary btn-lg" data-open-modal data-origen="hero"
+          <button type="button" class="btn btn-primary btn-lg" data-open-modal data-origen="hero"
             data-label-agotado="Entrar en la lista con prioridad">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
               stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2" />
               <line x1="16" y1="2" x2="16" y2="6" />
@@ -71,9 +74,7 @@
         </div>
         <p class="hero-microcopy-nueva">
           <span class="plazas-dots" id="plazasDots"></span>
-          <span id="plazasContador" style="display:none">3</span>
-          <span id="plazasFrase">Solo <strong id="plazasTexto"></strong> de <strong id="plazasTotal"></strong> plazas
-            disponibles - auditoría gratuita, sin compromiso</span>
+          <span class="plazas-texto" id="plazasFrase"><span class="plazas-cuenta">Solo <strong id="plazasTexto"></strong> de <strong id="plazasTotal"></strong> plazas disponibles</span><span class="plazas-sep"> - </span><span class="plazas-sub">auditoría gratuita, sin compromiso</span></span>
         </p>
       </div>
       <div class="hero-photo-wrap">
@@ -108,7 +109,7 @@
         </p>
       </div>
       <div class="agotado-cta">
-        <button class="btn btn-primary btn-lg" data-open-modal data-origen="banda-agotado">
+        <button type="button" class="btn btn-primary btn-lg" data-open-modal data-origen="banda-agotado">
           <span class="btn-label">Reservar mi prioridad</span>
         </button>
         <span class="agotado-nota">Gratis · 15 min · no pagas nada hasta que haya plaza</span>
@@ -130,14 +131,14 @@
       <div class="section-head">
         <p class="eyebrow center">Por qué importa</p>
         <h2>Tu acento ya está decidiendo cosas por ti</h2>
-        <p>No es una opinión. Es lo que dice la investigación sobre cómo el acento condiciona cómo te perciben en
+        <p class="solo-escritorio">No es una opinión. Es lo que dice la investigación sobre cómo el acento condiciona cómo te perciben en
           procesos de selección, reuniones y negociaciones.</p>
       </div>
 
       <div class="evidencia-tabla">
         <div class="evidencia-fila">
           <div class="evidencia-etiqueta">
-            <span class="ev-icon">💼</span>
+            <span class="ev-icon" aria-hidden="true">💼</span>
             <span>Empleabilidad</span>
           </div>
           <div class="evidencia-contenido">
@@ -145,14 +146,14 @@
               <p class="evidencia-hallazgo">Los candidatos con <em>acento extranjero marcado</em> son penalizados
                 sistemáticamente frente a hablantes con acento estándar, incluso a igualdad de cualificación.</p>
               <p class="evidencia-fuente">Spence et al. (2022), <em>Personality and Social Psychology Bulletin</em> — <a
-                  href="https://pubmed.ncbi.nlm.nih.gov/36326202/" target="_blank" rel="noopener">ver estudio ↗</a></p>
+                  href="https://pubmed.ncbi.nlm.nih.gov/36326202/" target="_blank" rel="noopener">ver estudio <span aria-hidden="true">↗</span></a></p>
             </div>
           </div>
         </div>
 
         <div class="evidencia-fila">
           <div class="evidencia-etiqueta">
-            <span class="ev-icon">💵</span>
+            <span class="ev-icon" aria-hidden="true">💵</span>
             <span>Salario</span>
           </div>
           <div class="evidencia-contenido">
@@ -162,14 +163,14 @@
               </p>
               <p class="evidencia-fuente">Grogger &amp; Eriksson (2019), NBER Working Paper No. 26719 — <a
                   href="https://econpapers.repec.org/paper/nbrnberwo/26719.htm" target="_blank" rel="noopener">ver
-                  estudio ↗</a></p>
+                  estudio <span aria-hidden="true">↗</span></a></p>
             </div>
           </div>
         </div>
 
         <div class="evidencia-fila">
           <div class="evidencia-etiqueta">
-            <span class="ev-icon">📜</span>
+            <span class="ev-icon" aria-hidden="true">📜</span>
             <span>Credibilidad</span>
           </div>
           <div class="evidencia-contenido">
@@ -179,14 +180,14 @@
               <p class="evidencia-fuente">Lev-Ari &amp; Keysar (2010), <em>Journal of Experimental Social
                   Psychology</em> — <a
                   href="https://www.sciencedirect.com/science/article/abs/pii/S0022103110001459?via%3Dihub"
-                  target="_blank" rel="noopener">ver estudio ↗</a></p>
+                  target="_blank" rel="noopener">ver estudio <span aria-hidden="true">↗</span></a></p>
             </div>
           </div>
         </div>
 
         <div class="evidencia-fila">
           <div class="evidencia-etiqueta">
-            <span class="ev-icon">✨</span>
+            <span class="ev-icon" aria-hidden="true">✨</span>
             <span>Confianza al hablar</span>
           </div>
           <div class="evidencia-contenido">
@@ -195,7 +196,7 @@
                 generando <em>ansiedad que bloquea la participación</em> en reuniones y entrevistas.</p>
               <p class="evidencia-fuente">Coppinger &amp; Sheridan (2022), <em>Journal for the Psychology of Language
                   Learning</em> — <a href="https://www.jpll.org/index.php/journal/article/view/93" target="_blank"
-                  rel="noopener">ver estudio ↗</a></p>
+                  rel="noopener">ver estudio <span aria-hidden="true">↗</span></a></p>
             </div>
           </div>
         </div>
@@ -217,7 +218,7 @@
             Antes (simulado)
           </div>
           <div class="audio-card">
-            <button class="audio-play-btn" id="audioPlayBtnAntes" aria-label="Reproducir antes">▶</button>
+            <button type="button" class="audio-play-btn" id="audioPlayBtnAntes" aria-label="Reproducir antes">▶</button>
             <div class="audio-meta">
               <div class="audio-title">Acento inglés españolizado</div>
               <div class="audio-bars" id="audioBaresAntes"></div>
@@ -228,7 +229,7 @@
           <audio id="audioDemoAntes" src="./audios/antes.mp3" preload="metadata"></audio>
         </div>
 
-        <div class="antesdespues-divider">
+        <div class="antesdespues-divider" aria-hidden="true">
           <span class="antesdespues-arrow">→</span>
         </div>
 
@@ -238,7 +239,7 @@
             Después · mi voz real
           </div>
           <div class="audio-card">
-            <button class="audio-play-btn despues-btn" id="audioPlayBtnDespues"
+            <button type="button" class="audio-play-btn despues-btn" id="audioPlayBtnDespues"
               aria-label="Reproducir después">▶</button>
             <div class="audio-meta">
               <div class="audio-title">Así sueno yo hoy</div>
@@ -252,7 +253,7 @@
 
       </div>
       <p class="antesdespues-disclaimer">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="10" />
           <line x1="12" y1="8" x2="12" y2="12" />
@@ -290,17 +291,17 @@
           <p class="bio-pruebas-titulo">La prueba</p>
 
           <div class="bio-prueba">
-            <span class="bio-prueba-icon">🎧</span>
+            <span class="bio-prueba-icon" aria-hidden="true">🎧</span>
             <div>
               <strong>La voz del «después» soy yo</strong>
               <span>Lo que acabas de escuchar no es una muestra de archivo ni un nativo contratado. Es el resultado
                 aplicado sobre mí mismo.</span>
-              <a href="#audio-demo" class="bio-prueba-link">Volver a escucharlo ↑</a>
+              <a href="#audio-demo" class="bio-prueba-link">Volver a escucharlo <span class="sym" aria-hidden="true">↑</span></a>
             </div>
           </div>
 
-          <div class="bio-prueba">
-            <span class="bio-prueba-icon">★</span>
+          <div class="bio-prueba solo-escritorio">
+            <span class="bio-prueba-icon" aria-hidden="true">★</span>
             <div>
               <strong>5 de 5 en Trustpilot</strong>
               <span>Valoraciones verificables de alumnos reales del programa, no testimonios recogidos por mí.</span>
@@ -310,8 +311,8 @@
             </div>
           </div>
 
-          <div class="bio-prueba">
-            <span class="bio-prueba-icon">🗺️</span>
+          <div class="bio-prueba solo-escritorio">
+            <span class="bio-prueba-icon" aria-hidden="true">🗺️</span>
             <div>
               <strong>Mismo punto de partida</strong>
               <span>Español nativo, inglés aprendido. Los errores que vas a cometer los cometí yo antes.</span>
@@ -333,20 +334,20 @@
       </div>
       <div class="icp-grid">
         <div class="icp-card">
-          <div class="icp-icon">🏆</div>
+          <div class="icp-icon" aria-hidden="true">🏆</div>
           <h3>Sientes que tu acento te resta autoridad</h3>
           <p>Tienes las ideas y el conocimiento. Sin embargo, al
             hablar, tu pronunciación no proyecta lo que realmente eres. Quieres que
             la gente se centre en lo que dices y no en cómo lo dices.</p>
         </div>
         <div class="icp-card">
-          <div class="icp-icon">📚</div>
+          <div class="icp-icon" aria-hidden="true">📚</div>
           <h3>Nunca te enseñaron a pronunciar</h3>
           <p>Te enseñaron vocabulario y gramática, pero no las reglas que hacen que el inglés suene como suena.
             Quieres entender el sistema y poder descifrar y pronunciar cualquier palabra con seguridad.</p>
         </div>
         <div class="icp-card">
-          <div class="icp-icon">😮‍💨</div>
+          <div class="icp-icon" aria-hidden="true">😮‍💨</div>
           <h3>Estás harto de autocensurarte o tener que repetir las cosas</h3>
           <p>Ese segundo de duda antes de intervenir por miedo a no sonar natural, o la frustración de tener que
             repetir una frase porque no te han entendido. Quieres acabar ya con esta situación.</p>
@@ -365,7 +366,7 @@
 
       <div class="icp-grid">
         <div class="icp-card">
-          <div class="icp-icon">🎯</div>
+          <div class="icp-icon" aria-hidden="true">🎯</div>
           <h3>Práctica guiada con corrección</h3>
           <p>Cada sesión es 1 a 1 y centrada en que practiques. Te explico la teoría, la ponemos en práctica con
             ejercicios y te doy correcciones precisas
@@ -373,14 +374,14 @@
         </div>
 
         <div class="icp-card">
-          <div class="icp-icon">🧠</div>
+          <div class="icp-icon" aria-hidden="true">🧠</div>
           <h3>Aproximación sistemática</h3>
           <p>Sigues un programa estructurado que cubre todos los sonidos del inglés: consonantes, vocales y otros
             fenómenos integrales. Entiendes las reglas y construyes una base sólida.</p>
         </div>
 
         <div class="icp-card">
-          <div class="icp-icon">📈</div>
+          <div class="icp-icon" aria-hidden="true">📈</div>
           <h3>Lectura y control de la pronunciación</h3>
           <p>Te enseño el Alfabeto Fonético Internacional para poder leer cualquier pronunciación de forma autónoma y
             precisa.</p>
@@ -395,14 +396,14 @@
       <div class="section-head">
         <p class="eyebrow center">Por qué esto es diferente</p>
         <h2>Lo que no encuentras en una academia de idiomas</h2>
-        <p>Una comparativa honesta. Hay cosas en las que una academia gana, pero mira dónde importa de verdad.</p>
+        <p class="solo-escritorio">Una comparativa honesta. Hay cosas en las que una academia gana, pero mira dónde importa de verdad.</p>
       </div>
 
       <div class="comp-tabla">
         <div class="comp-fila comp-header">
           <div class="comp-col-feature"></div>
           <div class="comp-col-them">
-            <div class="comp-badge them">🏫 Academia tradicional</div>
+            <div class="comp-badge them"><span><span aria-hidden="true">🏫</span> Academia tradicional</span></div>
           </div>
           <div class="comp-col-me">
             <div class="comp-badge me">
@@ -414,52 +415,52 @@
         </div>
 
         <div class="comp-fila">
-          <div class="comp-col-feature"><span class="comp-icon">🎯</span> Enfocado en pronunciación</div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">🎯</span> Enfocado en pronunciación</div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
 
         <div class="comp-fila alt">
-          <div class="comp-col-feature"><span class="comp-icon">🧬</span> Diagnóstico inicial personalizado</div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">🧬</span> Diagnóstico inicial personalizado</div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
 
         <div class="comp-fila">
-          <div class="comp-col-feature"><span class="comp-icon">📅</span> Duración definida (2-3 meses)</div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">📅</span> Duración definida (2-3 meses)</div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
 
         <div class="comp-fila alt">
-          <div class="comp-col-feature"><span class="comp-icon">💬</span> Soporte entre clases</div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">💬</span> Soporte entre clases</div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
 
         <div class="comp-fila">
-          <div class="comp-col-feature"><span class="comp-icon">📊</span> Resumen de progreso tras cada sesión</div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">📊</span> Resumen de progreso tras cada sesión</div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
 
         <div class="comp-fila alt">
-          <div class="comp-col-feature"><span class="comp-icon">🧑‍🏫</span> Clases 1 a 1</div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">🧑‍🏫</span> Clases 1 a 1</div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
 
         <div class="comp-fila">
-          <div class="comp-col-feature"><span class="comp-icon">📚</span> Materiales digitales sin coste extra</div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">📚</span> Materiales digitales sin coste extra</div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
 
         <div class="comp-fila alt">
-          <div class="comp-col-feature"><span class="comp-icon">🛡️</span> Garantía de devolución (2 primeras clases)
+          <div class="comp-col-feature"><span class="comp-icon" aria-hidden="true">🛡️</span> Garantía de devolución (2 primeras clases)
           </div>
-          <div class="comp-col-them"><span class="comp-mark no">✗</span></div>
-          <div class="comp-col-me"><span class="comp-mark yes">✓</span></div>
+          <div class="comp-col-them"><span class="comp-mark no" role="img" aria-label="No">✗</span></div>
+          <div class="comp-col-me"><span class="comp-mark yes" role="img" aria-label="Sí">✓</span></div>
         </div>
       </div>
     </div>
@@ -483,7 +484,7 @@
                 decoding="async">
               <div>
                 <div class="opinion-nombre">Esperanza M.</div>
-                <div class="opinion-estrellas">★★★★★</div>
+                <div class="opinion-estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
               </div>
             </div>
             <p class="opinion-texto">Una formación única y muy completa que permite adquirir eficazmente y de forma
@@ -491,8 +492,8 @@
             </p>
           </div>
           <div class="opinion-footer">
-            <span class="tp-mark">★ TRUSTPILOT</span>
-            <span class="icono-externo">↗</span>
+            <span class="tp-mark"><span aria-hidden="true">★</span> TRUSTPILOT</span>
+            <span class="icono-externo" aria-hidden="true">↗</span>
           </div>
         </a>
 
@@ -504,15 +505,15 @@
                 decoding="async">
               <div>
                 <div class="opinion-nombre">Vicente E.</div>
-                <div class="opinion-estrellas">★★★★★</div>
+                <div class="opinion-estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
               </div>
             </div>
             <p class="opinion-texto">Con este curso podrás sonar con muchísima más naturalidad y confianza al hablar en
               inglés. No se enseña en ningún sitio y debería ser obligatorio en los colegios.</p>
           </div>
           <div class="opinion-footer">
-            <span class="tp-mark">★ TRUSTPILOT</span>
-            <span class="icono-externo">↗</span>
+            <span class="tp-mark"><span aria-hidden="true">★</span> TRUSTPILOT</span>
+            <span class="icono-externo" aria-hidden="true">↗</span>
           </div>
         </a>
 
@@ -524,7 +525,7 @@
                 decoding="async">
               <div>
                 <div class="opinion-nombre">Julio M.</div>
-                <div class="opinion-estrellas">★★★★★</div>
+                <div class="opinion-estrellas" role="img" aria-label="5 de 5 estrellas">★★★★★</div>
               </div>
             </div>
             <p class="opinion-texto">Una forma muy útil de darle ese plus a tu inglés y desenvolverte con fluidez y
@@ -532,8 +533,8 @@
               fácil.</p>
           </div>
           <div class="opinion-footer">
-            <span class="tp-mark">★ TRUSTPILOT</span>
-            <span class="icono-externo">↗</span>
+            <span class="tp-mark"><span aria-hidden="true">★</span> TRUSTPILOT</span>
+            <span class="icono-externo" aria-hidden="true">↗</span>
           </div>
         </a>
       </div>
@@ -558,38 +559,38 @@
 
         <div class="offer-stack">
           <div class="offer-item">
-            <span class="ck">✓</span>
+            <span class="ck" aria-hidden="true">✓</span>
             <div><strong>Diagnóstico fonético inicial</strong><span>Mapa exacto de tus patrones de interferencia desde
                 el español.</span></div>
           </div>
           <div class="offer-item">
-            <span class="ck">✓</span>
+            <span class="ck" aria-hidden="true">✓</span>
             <div><strong>Sesiones 1 a 1 · mínimo 16 garantizadas</strong><span>2 sesiones semanales de 60 min + 1h de
                 repaso por tu cuenta. Solo 3 horas a la semana para un cambio permanente.</span></div>
           </div>
           <div class="offer-item">
-            <span class="ck">✓</span>
+            <span class="ck" aria-hidden="true">✓</span>
             <div><strong>Plan didáctico estructurado</strong><span>Progresión diseñada como un sistema, no una colección
                 de ejercicios sueltos.</span></div>
           </div>
           <div class="offer-item">
-            <span class="ck">✓</span>
+            <span class="ck" aria-hidden="true">✓</span>
             <div><strong>Resumen por email tras cada sesión</strong><span>Qué se ha corregido, qué practicar y
                 observaciones específicas para ti.</span></div>
           </div>
           <div class="offer-item">
-            <span class="ck">✓</span>
+            <span class="ck" aria-hidden="true">✓</span>
             <div><strong>Acceso al Portal de Práctica</strong><span>La 1h de repaso semanal que marca la diferencia.
                 Ejercicios concretos para practicar fuera de sesión sin invertir más tiempo del necesario.</span></div>
           </div>
           <div class="offer-item">
-            <span class="ck">✓</span>
-            <div><strong>Soporte directo por WhatsApp 24/7</strong><span>Dudas puntuales entre sesiones en cualquier
-                momento, sin esperar a la próxima clase.</span></div>
+            <span class="ck" aria-hidden="true">✓</span>
+            <div><strong>Soporte directo por WhatsApp</strong><span>Dudas puntuales entre sesiones, sin esperar a la
+                próxima clase.</span></div>
           </div>
         </div>
 
-        <div class="permanencia-strip">
+        <div class="permanencia-strip solo-escritorio">
           <div class="perm-item">
             <span class="perm-num">2-3</span>
             <span class="perm-label">meses de programa</span>
@@ -611,10 +612,10 @@
             <div class="price-label">Inversión del programa</div>
             <div class="price-value">500 € <span>/ programa completo</span></div>
             <p class="price-note">Una inversión única. Lo que construyes en el programa es tuyo para siempre, sin
-              cuotas mensuales, sin academias indefinidas. Incluye mínimo 16 sesiones, soporte WhatsApp 24/7 y todos los
+              cuotas mensuales, sin academias indefinidas. Incluye mínimo 16 sesiones, soporte por WhatsApp y todos los
               materiales de forma gratuita.</p>
           </div>
-          <button class="btn btn-primary btn-lg" data-open-modal data-origen="oferta"
+          <button type="button" class="btn btn-primary btn-lg" data-open-modal data-origen="oferta"
             data-label-agotado="Reservar mi sitio para la próxima plaza">
             <span class="btn-label">Reservar mi Auditoría gratuita</span>
           </button>
@@ -622,7 +623,7 @@
       </div>
 
       <div class="guarantee-strip">
-        <div class="g-icon">🛡️</div>
+        <div class="g-icon" aria-hidden="true">🛡️</div>
         <div>
           <strong>Garantía de las 2 primeras clases</strong>
           <span>Si tras las dos primeras sesiones sientes que la metodología no es para ti, te devuelvo el 100% de tu
@@ -657,7 +658,7 @@
         <div class="step">
           <div class="step-num"></div>
           <h3>Plan claro, decides tú</h3>
-          <p>Si encajamos, te explico el programa y el precio exacto para tu caso. Sin compromiso de continuar.</p>
+          <p>Si encajamos, te explico el programa y cómo empezar. Sin compromiso de continuar.</p>
         </div>
       </div>
     </div>
@@ -672,17 +673,16 @@
       </div>
       <div class="faq-acordeon">
         <div class="faq-item">
-          <button class="faq-pregunta">¿En qué se diferencia esto de clases de inglés normales? <span
-              class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">¿En qué se diferencia esto de clases de inglés normales? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a1">
             <div class="faq-respuesta-inner">No trabajamos gramática ni vocabulario: el programa está enfocado
               exclusivamente en pronunciación y acento. Es un complemento a tu nivel de inglés actual, no un curso
               general.</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-pregunta">¿Y si no tengo buen oído?<span class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">¿Y si no tengo buen oído?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a2">
             <div class="faq-respuesta-inner">Precisamente por eso necesitas un método científico y no clases
               tradicionales. En este programa no te voy a pedir que "escuches y repitas a ver si aciertas". Te voy a
               enseñar la
@@ -691,9 +691,8 @@
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-pregunta">¿No es mejor entrenar la pronunciación con un profesor nativo?<span
-              class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">¿No es mejor entrenar la pronunciación con un profesor nativo?<span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a3">
             <div class="faq-respuesta-inner">Para practicar conversación, un nativo es una opción excelente. Para
               reconfigurar tu acento desde cero, rotundamente no: aprendió esos sonidos de bebé y los produce de forma
               inconsciente, así que puede decirte que algo suena raro pero no explicarte qué está haciendo mal tu
@@ -702,8 +701,8 @@
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-pregunta">¿Qué pasa si al final no noto el cambio? <span class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">¿Qué pasa si al final no noto el cambio? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a4">
             <div class="faq-respuesta-inner">Seré directo: si vienes a clase y practicas lo que se trabaja en sesión,
               mejorar es inevitable. La fonética funciona como cualquier habilidad motora: el cerebro y la boca se
               adaptan con práctica deliberada. Dicho esto, existe la garantía de las 2 primeras clases: si tras las dos
@@ -712,15 +711,15 @@
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-pregunta">¿Las clases son online o presenciales? <span class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">¿Las clases son online o presenciales? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a5">
             <div class="faq-respuesta-inner">Ambas. Online para cualquier ubicación, o presencial si te encuentras en
               la ciudad de Cádiz (con un suplemento según distancia de desplazamiento).</div>
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-pregunta">¿Cuánto dura cada sesión y cuántas hay? <span class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q6" aria-expanded="false" aria-controls="faq-a6">¿Cuánto dura cada sesión y cuántas hay? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a6">
             <div class="faq-respuesta-inner">Sesiones de 1 hora, 2 veces por semana. La fonética necesita práctica
               frecuente pero sin saturar, así que la idea es que le dediques solo 3 horas semanales: 2h de clase y 1h de
               repaso por tu cuenta. Daremos un mínimo de 16 clases. El programa completo a este ritmo dura de 2 a 3
@@ -728,9 +727,8 @@
           </div>
         </div>
         <div class="faq-item" data-solo-agotado hidden>
-          <button class="faq-pregunta">Si no quedan plazas, ¿para qué hago la auditoría ahora? <span
-              class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q7" aria-expanded="false" aria-controls="faq-a7">Si no quedan plazas, ¿para qué hago la auditoría ahora? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a7">
             <div class="faq-respuesta-inner">Porque las plazas no se reparten por orden de lista, sino entre las
               personas cuya auditoría ya está hecha. Cuando se libera un hueco necesito empezar esa misma semana, y no
               puedo perder días diagnosticando desde cero: llamo primero a quien ya tiene su diagnóstico sobre la mesa.
@@ -742,9 +740,8 @@
           </div>
         </div>
         <div class="faq-item">
-          <button class="faq-pregunta">¿La Auditoría de Acento tiene algún compromiso? <span
-              class="faq-icon">+</span></button>
-          <div class="faq-respuesta">
+          <button type="button" class="faq-pregunta" id="faq-q8" aria-expanded="false" aria-controls="faq-a8">¿La Auditoría de Acento tiene algún compromiso? <span class="faq-icon" aria-hidden="true">+</span></button>
+          <div class="faq-respuesta" id="faq-a8">
             <div class="faq-respuesta-inner">Ninguno. Son 15 minutos de diagnóstico real. Si no encajamos o no es el
               momento, te lo digo directamente y sin presión.</div>
           </div>
@@ -761,7 +758,7 @@
         qué te frena y si puedo ayudarte.</p>
       <p data-solo-agotado hidden>Esta temporada ya está cerrada, pero la siguiente se llena con quien ya tiene su
         auditoría hecha. Son 15 minutos, es gratis y no te compromete a nada.</p>
-      <button class="btn btn-primary btn-lg" data-open-modal data-origen="cta-final"
+      <button type="button" class="btn btn-primary btn-lg" data-open-modal data-origen="cta-final"
         data-label-agotado="Reservar mi prioridad para la próxima plaza">
         <span class="btn-label">Reservar Auditoría de Acento gratuita</span>
       </button>
@@ -769,7 +766,7 @@
   </section>
 
   <!-- ============ CONTACTO ============ -->
-  <section class="bg-base">
+  <section class="bg-base" id="contacto">
     <div class="wrap">
       <div class="section-head">
         <h2>¿Prefieres escribirme directamente?</h2>
@@ -777,13 +774,13 @@
       <div class="contacto-grid">
         <a href="https://wa.me/34956079630?text=Hola%2C%20Gonzalo%2C%20te%20contacto%20desde%20tu%20web" target="_blank"
           rel="noopener" class="contacto-card" data-track="contacto_whatsapp">
-          <div class="c-icon">💬</div>
+          <div class="c-icon" aria-hidden="true">💬</div>
           <h3>WhatsApp</h3>
           <p>+34 956 07 96 30</p>
         </a>
         <a href="mailto:gonzalorosae@gmail.com?subject=Consulta%20desde%20tu%20web" class="contacto-card"
           data-track="contacto_email">
-          <div class="c-icon">✉️</div>
+          <div class="c-icon" aria-hidden="true">✉️</div>
           <h3>Correo</h3>
           <p>gonzalorosae@gmail.com</p>
         </a>
@@ -797,6 +794,8 @@
       <p class="footer-legal">
         <a href="./privacidad.html">Política de privacidad y aviso legal</a>
         <span aria-hidden="true">·</span>
+        <a href="./condiciones.html">Condiciones del programa</a>
+        <span aria-hidden="true">·</span>
         <a href="mailto:gonzalorosae@gmail.com?subject=Ejercicio%20de%20derechos%20RGPD">Ejercer mis derechos sobre
           mis datos</a>
       </p>
@@ -804,9 +803,9 @@
     </div>
   </footer>
 
-  <button class="fab-auditoria" data-open-modal data-origen="fab" aria-label="Reservar Auditoría de Acento gratuita"
+  <button type="button" class="fab-auditoria" data-open-modal data-origen="fab" aria-label="Reservar Auditoría de Acento gratuita"
     data-label-agotado="Entrar en la lista">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
       stroke-linejoin="round" width="22" height="22">
       <rect x="3" y="4" width="18" height="18" rx="2" />
       <line x1="16" y1="2" x2="16" y2="6" />
@@ -817,15 +816,15 @@
   </button>
 
   <!-- ============ MODAL DE CUALIFICACIÓN ============ -->
-  <div class="modal-overlay" id="modalOverlay">
+  <dialog class="modal-overlay" id="modalOverlay" aria-label="Reservar Auditoría de Acento">
     <div class="modal-box">
-      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+      <button type="button" class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
 
-      <div id="formFlow">
+      <div id="formFlow" tabindex="-1">
         <h3>Reserva tu Auditoría de Acento</h3>
         <p class="modal-sub">Una pregunta rápida para reservar tu auditoría.</p>
 
-        <form id="qualForm">
+        <div id="qualForm">
           <div class="form-step active" data-step="1">
             <p class="form-question">¿Cuál es tu nivel actual de inglés?</p>
             <div class="option-grid" data-field="nivel">
@@ -837,29 +836,43 @@
               <button type="button" class="option-btn" data-value="c2">C2</button>
             </div>
           </div>
-        </form>
+        </div>
       </div>
 
       <!-- Pantalla descalificación unificada (A1/A2/B1) -->
-      <div class="modal-disqualify hidden" id="disqualifyView">
-        <div class="dq-icon">📘</div>
+      <div class="modal-disqualify hidden" id="disqualifyView" tabindex="-1">
+        <div class="dq-icon" aria-hidden="true">📘</div>
         <h4 id="dqTitle">Aún no es el momento</h4>
         <p id="dqText">El programa está diseñado para B2-C2. Con ese nivel lo que más te ayudaría ahora es consolidar el
           inglés general.</p>
+        <div class="dq-actions">
+          <button type="button" class="btn btn-primary" id="dqBack">Elegir otro nivel</button>
+          <button type="button" class="btn btn-ghost" data-cerrar-modal>Cerrar</button>
+        </div>
       </div>
 
-      <div class="modal-success hidden" id="successView">
-        <div class="ok-icon">✓</div>
+      <div class="modal-success hidden" id="successView" tabindex="-1">
+        <div class="ok-icon" aria-hidden="true">✓</div>
         <h4 id="successTitulo">¡Perfecto!</h4>
         <p id="successTexto">Elige el hueco que mejor te venga. La sesión es de 15 minutos por videollamada, sin
           compromiso.</p>
         <!-- Calendly inline widget -->
-        <div id="calendlyWidget"
-          style="min-width:280px;height:400px;margin-top:0.8rem;border-radius:10px;overflow:hidden;"></div>
+        <div class="cal-frame" id="calFrame">
+          <div class="cal-skeleton" aria-hidden="true">
+            <span class="cal-sk l1"></span>
+            <span class="cal-sk l2"></span>
+            <div class="cal-grid">
+              <span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span>
+              <span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span>
+              <span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span><span class="cal-sk"></span>
+            </div>
+          </div>
+          <div id="calendlyWidget"></div>
+        </div>
       </div>
 
       <!-- Pantalla: no quedan plazas -->
-      <div class="modal-soldout hidden" id="soldOutView">
+      <div class="modal-soldout hidden" id="soldOutView" tabindex="-1">
         <span class="so-pill">Plazas agotadas</span>
         <h4>Encajas en el programa, pero ahora mismo no hay hueco</h4>
         <p class="so-lead">Las <strong data-plazas-total></strong> plazas están cubiertas.
@@ -886,12 +899,12 @@
           </li>
         </ol>
 
-        <button class="btn btn-primary btn-lg btn-block" id="soAgendar">Reservar mi auditoría y mi prioridad</button>
-        <button type="button" class="btn-linkish" id="soLista">Prefiero que solo me avises por email →</button>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="soAgendar">Reservar mi auditoría y mi prioridad</button>
+        <button type="button" class="btn-linkish" id="soLista">Prefiero que solo me avises por email <span aria-hidden="true">→</span></button>
       </div>
 
       <!-- Pantalla: lista de espera -->
-      <div class="modal-waitlist hidden" id="waitlistView">
+      <div class="modal-waitlist hidden" id="waitlistView" tabindex="-1">
         <h4>Te aviso en cuanto se abra una plaza</h4>
         <p class="wl-lead">Ni newsletter ni spam: un solo email, y solo cuando haya hueco de verdad.</p>
         <div class="field-group">
@@ -902,34 +915,32 @@
           <label for="wlEmail">Tu email</label>
           <input type="email" id="wlEmail" autocomplete="email" placeholder="tu@email.com">
         </div>
-        <label class="wl-consent" for="wlConsent">
+        <label class="wl-consent">
           <input type="checkbox" id="wlConsent">
           <span>He leído y acepto la <a href="./privacidad.html" target="_blank" rel="noopener">política de
               privacidad</a>. Guardaré tu nombre y tu correo con el único fin de avisarte cuando haya una plaza libre.
             Ni newsletter ni cesión a terceros, y puedes darte de baja cuando quieras.</span>
         </label>
         <p class="wl-error hidden" id="wlError"></p>
-        <button class="btn btn-primary btn-block" id="wlSend">Avísame cuando haya plaza</button>
-        <button type="button" class="btn-linkish" id="wlBack">← Mejor hago la auditoría y reservo prioridad</button>
+        <button type="button" class="btn btn-primary btn-block" id="wlSend">Avísame cuando haya plaza</button>
+        <button type="button" class="btn-linkish" id="wlBack"><span aria-hidden="true">←</span> Mejor hago la auditoría y reservo prioridad</button>
       </div>
 
       <!-- Pantalla: lista de espera OK -->
-      <div class="modal-waitlist hidden" id="waitlistOk">
-        <div class="ok-icon">✓</div>
+      <div class="modal-waitlist hidden" id="waitlistOk" tabindex="-1">
+        <div class="ok-icon" aria-hidden="true">✓</div>
         <h4>Ya estás en la lista, <span id="wlOkName"></span></h4>
         <p class="wl-lead">Te escribo en cuanto se libere una plaza.</p>
         <p class="wl-upsell">Una cosa más, y te dejo tranquilo: estar en la lista <strong>no reserva nada</strong>. Las
           plazas se dan primero a quien ya tiene la auditoría hecha. Son 15 minutos y es gratis.</p>
-        <button class="btn btn-primary btn-block" id="wlOkAgendar">Hacer mi auditoría ahora</button>
+        <button type="button" class="btn btn-primary btn-block" id="wlOkAgendar">Hacer mi auditoría ahora</button>
       </div>
 
     </div>
-  </div>
+  </dialog>
 
   <script defer src="https://cloud.umami.is/script.js" data-website-id="2ed09e71-5e60-47dd-847e-ea361bef72ea"></script>
 
-  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-  <script src="https://assets.calendly.com/assets/external/widget.js" defer></script>
   <script src="main.js" defer></script>
 </body>
 

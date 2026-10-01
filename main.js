@@ -89,9 +89,11 @@ document.addEventListener('click', e => {
   const ofertaEl = document.getElementById('plazasOferta');
   const offerSlots = document.getElementById('offerSlots');
   if (ofertaEl) {
-    ofertaEl.textContent = SIN_PLAZAS
-      ? `Plazas agotadas · ${TEMPORADA_ACTUAL}`
-      : `⏳ ${disponibles} de ${total} plazas disponibles · ${TEMPORADA_ACTUAL}`;
+    const cuenta = SIN_PLAZAS
+      ? 'Plazas agotadas'
+      : `<span aria-hidden="true">⏳</span> ${disponibles} de ${total} plazas disponibles`;
+    ofertaEl.innerHTML = `<span class="slot-cuenta">${cuenta}</span><span class="slot-sep"> · </span>`
+      + `<span class="slot-temp">${TEMPORADA_ACTUAL}</span>`;
   }
   if (offerSlots) offerSlots.classList.toggle('agotado', SIN_PLAZAS);
 
@@ -99,9 +101,11 @@ document.addEventListener('click', e => {
     // Frase del hero
     const fraseEl = document.getElementById('plazasFrase');
     if (fraseEl) {
-      fraseEl.innerHTML = apertura
-        ? `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - próxima apertura ${apertura}`
-        : `<strong class="plazas-alerta">Plazas agotadas esta temporada</strong> - reserva tu plaza para la próxima temporada ya`;
+      const subtexto = apertura
+        ? `próxima apertura ${apertura}`
+        : 'reserva tu plaza para la próxima temporada ya';
+      fraseEl.innerHTML = '<span class="plazas-cuenta"><strong class="plazas-alerta">Plazas agotadas esta temporada</strong></span>'
+        + `<span class="plazas-sep"> - </span><span class="plazas-sub">${subtexto}</span>`;
     }
 
     const soldOutAperturaEl = document.getElementById('soldOutApertura');
@@ -129,51 +133,73 @@ document.addEventListener('click', e => {
 ==================================================== */
 const overlay = document.getElementById('modalOverlay');
 const modalClose = document.getElementById('modalClose');
-const formFlow = document.getElementById('formFlow');
-const disqualifyView = document.getElementById('disqualifyView');
 const successView = document.getElementById('successView');
 
 const answers = { nivel: null };
-let currentStep = 1;
 
 /* --- Abrir / cerrar --- */
 document.querySelectorAll('[data-open-modal]').forEach(btn => {
   btn.addEventListener('click', () => {
     track('modal_abierto', { origen: btn.dataset.origen || 'sin-marcar', plazas: ESTADO_PLAZAS() });
-    openModal();
+    openModal(btn);
   });
 });
 
-function openModal() {
+// El modal es un <dialog>: el navegador atrapa el foco dentro, cierra con Escape
+// y devuelve el foco al botón que lo abrió.
+let disparador = null;
+
+function openModal(origen) {
+  disparador = origen || null;
   resetModal();
-  overlay.classList.add('active');
+  if (typeof overlay.showModal === 'function') overlay.showModal();
+  else overlay.setAttribute('open', '');   // navegadores sin <dialog>
   document.body.style.overflow = 'hidden';
+  enfocarVista('formFlow');
 }
 
 function closeModal() {
-  overlay.classList.remove('active');
-  document.body.style.overflow = '';
+  if (typeof overlay.close === 'function') {
+    overlay.close();               // dispara el evento "close", que hace la limpieza
+  } else {
+    overlay.removeAttribute('open');
+    alCerrarModal();
+  }
 }
 
+function alCerrarModal() {
+  document.body.style.overflow = '';
+  if (disparador && disparador.isConnected) disparador.focus({ preventScroll: true });
+  disparador = null;
+}
+
+overlay.addEventListener('close', alCerrarModal);
 modalClose.addEventListener('click', closeModal);
-overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+document.querySelectorAll('[data-cerrar-modal]').forEach(b => b.addEventListener('click', closeModal));
+
+// Clic fuera de la caja: cierra. Clic en un enlace interno (#contacto...): cierra y deja navegar.
+overlay.addEventListener('click', e => {
+  if (e.target === overlay || e.target.closest('a[href^="#"]')) closeModal();
 });
 
-document.getElementById('dqClose')?.addEventListener('click', closeModal);
-document.getElementById('dqThanksClose')?.addEventListener('click', closeModal);
+// Lleva el foco al título de la vista activa para teclado y lectores de pantalla
+function enfocarVista(id) {
+  const vista = document.getElementById(id);
+  const titulo = vista && vista.querySelector('h3, h4');
+  if (!titulo) return;
+  titulo.setAttribute('tabindex', '-1');
+  titulo.focus({ preventScroll: true });
+}
 
 /* --- Mostrar step --- */
 function showStep(step) {
   document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
   const target = document.querySelector(`.form-step[data-step="${step}"]`);
   if (target) target.classList.add('active');
-  currentStep = step;
 }
 
 /* --- Opciones de nivel en rejilla --- */
-document.querySelectorAll('.option-grid, .option-list').forEach(list => {
+document.querySelectorAll('.option-grid').forEach(list => {
   list.addEventListener('click', e => {
     const btn = e.target.closest('.option-btn');
     if (!btn) return;
@@ -183,6 +209,8 @@ document.querySelectorAll('.option-grid, .option-list').forEach(list => {
     const value = btn.dataset.value;
     const dq = btn.dataset.dq;
     answers[field] = value;
+    // Con intención clara de reservar, Calendly se descarga mientras se ve la transición
+    if (field === 'nivel' && dq !== 'dq' && !SIN_PLAZAS) cargarCalendly().catch(() => { });
     setTimeout(() => {
       if (field === 'nivel') {
         track('nivel_elegido', { nivel: value, cualifica: dq === 'dq' ? 'no' : 'si' });
@@ -201,6 +229,7 @@ function mostrarVista(id) {
     const el = document.getElementById(v);
     if (el) el.classList.toggle('hidden', v !== id);
   });
+  enfocarVista(id);
 }
 
 /* --- Cualificado: si no hay plazas, pasa antes por la pantalla de espera --- */
@@ -211,6 +240,30 @@ function showSuccess() {
     return;
   }
   mostrarCalendly();
+}
+
+/* --- Calendly: el script y la hoja de estilos solo se piden cuando alguien llega a reservar.
+       Antes se descargaban en todas las visitas, sin que nadie hubiera pulsado nada. --- */
+let calendlyPromesa = null;
+
+function cargarCalendly() {
+  if (window.Calendly) return Promise.resolve();
+  if (calendlyPromesa) return calendlyPromesa;
+
+  calendlyPromesa = new Promise((resolve, reject) => {
+    const css = document.createElement('link');
+    css.rel = 'stylesheet';
+    css.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(css);
+
+    const js = document.createElement('script');
+    js.src = 'https://assets.calendly.com/assets/external/widget.js';
+    js.async = true;
+    js.onload = () => (window.Calendly ? resolve() : reject(new Error('Calendly no disponible')));
+    js.onerror = () => { calendlyPromesa = null; reject(new Error('No se pudo cargar Calendly')); };
+    document.head.appendChild(js);
+  });
+  return calendlyPromesa;
 }
 
 /* --- Vista éxito + Calendly --- */
@@ -228,12 +281,16 @@ function mostrarCalendly() {
     }
   }
 
+  const marco = document.getElementById('calFrame');
   const container = document.getElementById('calendlyWidget');
   if (container && !container.dataset.cargado) {
     container.dataset.cargado = '1';
-    if (window.Calendly) {
-      window.Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: container, utm: {} });
-    } else {
+
+    const terminar = () => { if (marco) marco.classList.add('is-loaded'); };
+
+    // Plan B: si Calendly falla o tarda demasiado, enlace directo
+    const alternativa = () => {
+      terminar();
       const link = document.createElement('a');
       link.href = CALENDLY_URL;
       link.target = '_blank'; link.rel = 'noopener noreferrer';
@@ -241,7 +298,20 @@ function mostrarCalendly() {
       link.style.marginTop = '1rem';
       link.textContent = 'Abrir calendario ↗';
       container.replaceWith(link);
-    }
+    };
+    const limite = setTimeout(alternativa, 15000);
+
+    cargarCalendly().then(() => {
+      // El esqueleto se retira cuando el iframe de Calendly termina de cargar
+      const observador = new MutationObserver(() => {
+        const iframe = container.querySelector('iframe');
+        if (!iframe) return;
+        observador.disconnect();
+        iframe.addEventListener('load', () => { clearTimeout(limite); terminar(); }, { once: true });
+      });
+      observador.observe(container, { childList: true, subtree: true });
+      window.Calendly.initInlineWidget({ url: CALENDLY_URL, parentElement: container, utm: {} });
+    }).catch(() => { clearTimeout(limite); alternativa(); });
   }
 
   if (!document.getElementById('waLink')) {
@@ -386,28 +456,18 @@ function showDisqualify(nivel) {
 
   if (nivel === 'b1') {
     title.textContent = 'Todavía no, pero estás muy cerca';
-    text.innerHTML = 'Con B1 el programa aún no sería lo más efectivo, pero estás a un paso. Si quieres puedes escribirme un mensaje o correo para ver tu caso en específico. Puedes encontrar mis datos de contacto abajo del todo.';
+    text.innerHTML = 'Con B1 el programa aún no sería lo más efectivo, pero estás a un paso. Si quieres puedes escribirme un mensaje o correo para ver tu caso en específico. Puedes encontrar mis datos de contacto <a class="dq-link" href="#contacto">abajo del todo</a>.';
   } else {
     title.textContent = 'Aún no es el momento';
     text.innerHTML = 'El programa está diseñado para B2-C2. Con nivel ' + nivel.toUpperCase() + ' lo que más te ayudaría ahora es consolidar el inglés general.';
   }
 }
 
-/* --- Enviar datos descalificado --- */
-document.getElementById('dqSend')?.addEventListener('click', () => {
-  const nombreEl = document.getElementById('dqNombre');
-  const emailEl = document.getElementById('dqEmail');
-  const nombre = nombreEl?.value.trim();
-  const email = emailEl?.value.trim();
-
-  if (!nombre) { nombreEl?.focus(); nombreEl?.style.setProperty('border-color', '#e05252'); return; }
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    emailEl?.focus(); emailEl?.style.setProperty('border-color', '#e05252'); return;
-  }
-
-  document.getElementById('dqForm').classList.add('hidden');
-  document.getElementById('dqThanks').classList.remove('hidden');
-  document.getElementById('dqThanksName').textContent = nombre;
+/* --- Me equivoqué de nivel: volver a la pregunta --- */
+document.getElementById('dqBack')?.addEventListener('click', () => {
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  answers.nivel = null;
+  mostrarVista('formFlow');
 });
 
 /* --- Reset modal --- */
@@ -416,15 +476,11 @@ function resetModal() {
 
   answers.nivel = null;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  ['dqNombre', 'dqEmail', 'wlNombre', 'wlEmail'].forEach(id => {
+  ['wlNombre', 'wlEmail'].forEach(id => {
     const el = document.getElementById(id);
     if (el) { el.value = ''; el.style.borderColor = ''; }
   });
 
-  const dqForm = document.getElementById('dqForm');
-  const dqThanks = document.getElementById('dqThanks');
-  if (dqForm) dqForm.classList.remove('hidden');
-  if (dqThanks) dqThanks.classList.add('hidden');
   document.getElementById('wlError')?.classList.add('hidden');
   const consentReset = document.getElementById('wlConsent');
   if (consentReset) consentReset.checked = false;
@@ -442,14 +498,23 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
     if (!isOpen) track('faq_abierta', { pregunta: btn.textContent.replace('+', '').trim().slice(0, 60) });
     document.querySelectorAll('.faq-item').forEach(i => {
       i.classList.remove('open');
+      i.querySelector('.faq-pregunta').setAttribute('aria-expanded', 'false');
       i.querySelector('.faq-respuesta').style.maxHeight = null;
     });
     if (!isOpen) {
       item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
       const resp = item.querySelector('.faq-respuesta');
       resp.style.maxHeight = resp.scrollHeight + 'px';
     }
   });
+});
+
+// Si cambia el ancho con una respuesta abierta (por ejemplo al girar el móvil),
+// se recalcula su altura para que el texto no quede cortado
+window.addEventListener('resize', () => {
+  const abierta = document.querySelector('.faq-item.open .faq-respuesta');
+  if (abierta) abierta.style.maxHeight = abierta.scrollHeight + 'px';
 });
 
 /* ====================================================
@@ -457,8 +522,33 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
 ==================================================== */
 (function initAudio() {
   const fmt = s => `${Math.floor(s / 60)}:${Math.floor(s % 60).toString().padStart(2, '0')}`;
+  const BAR_COUNT = 40;
 
-  function initPlayer(audioId, playBtnId, barsWrapId, timeCurId, timeTotalId) {
+  // Picos reales del audio (Web Audio). Antes las barras se generaban con Math.random()
+  // y cambiaban en cada visita, sin relación con la grabación.
+  async function calcularPicos(url, n) {
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) throw new Error('Audio no disponible');
+    const datos = await respuesta.arrayBuffer();
+    const Ctx = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    if (!Ctx) throw new Error('Web Audio no disponible');
+    const ctx = new Ctx(1, 44100, 44100);
+    const audio = await new Promise((ok, ko) => ctx.decodeAudioData(datos, ok, ko));
+
+    const canal = audio.getChannelData(0);
+    const tramo = Math.floor(canal.length / n);
+    const paso = Math.max(1, Math.floor(tramo / 400));
+    const picos = [];
+    for (let i = 0; i < n; i++) {
+      let suma = 0, cuenta = 0;
+      for (let j = i * tramo; j < (i + 1) * tramo; j += paso) { suma += canal[j] * canal[j]; cuenta++; }
+      picos.push(Math.sqrt(suma / (cuenta || 1)));
+    }
+    const max = Math.max(...picos) || 1;
+    return picos.map(p => p / max);
+  }
+
+  function initPlayer(audioId, playBtnId, barsWrapId, timeCurId, timeTotalId, nombre) {
     const audio = document.getElementById(audioId);
     const playBtn = document.getElementById(playBtnId);
     const barsWrap = document.getElementById(barsWrapId);
@@ -466,16 +556,34 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
     const timeTotal = document.getElementById(timeTotalId);
     if (!audio || !playBtn || !barsWrap) return;
 
-    const BAR_COUNT = 40;
-    Array.from({ length: BAR_COUNT }, (_, i) => {
-      const env = Math.sin((i / (BAR_COUNT - 1)) * Math.PI);
-      const noise = 0.3 + Math.random() * 0.7;
+    // Las barras son decorativas: el progreso lo comunican el tiempo y el botón
+    barsWrap.setAttribute('aria-hidden', 'true');
+    barsWrap.classList.add('is-loading');
+    for (let i = 0; i < BAR_COUNT; i++) {
       const bar = document.createElement('span');
-      bar.style.height = Math.round(5 + env * noise * 88) + '%';
+      bar.style.height = '18%';
       barsWrap.appendChild(bar);
-    });
-
+    }
     const bars = barsWrap.querySelectorAll('span');
+
+    // La forma de onda se calcula cuando la sección está cerca de la pantalla
+    let ondaIniciada = false;
+    const cargarOnda = () => {
+      if (ondaIniciada) return;
+      ondaIniciada = true;
+      calcularPicos(audio.getAttribute('src'), BAR_COUNT)
+        .then(picos => picos.forEach((p, i) => { bars[i].style.height = Math.max(7, Math.round(p * 100)) + '%'; }))
+        .catch(() => { /* si falla, se quedan barras planas: mejor que inventarlas */ })
+        .finally(() => barsWrap.classList.remove('is-loading'));
+    };
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(entradas => {
+        if (entradas.some(en => en.isIntersecting)) { cargarOnda(); io.disconnect(); }
+      }, { rootMargin: '400px 0px' });
+      io.observe(playBtn);
+    } else {
+      cargarOnda();
+    }
 
     audio.addEventListener('loadedmetadata', () => { if (timeTotal) timeTotal.textContent = fmt(audio.duration); });
     audio.addEventListener('timeupdate', () => {
@@ -483,10 +591,17 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
       const played = Math.round((audio.currentTime / (audio.duration || 1)) * bars.length);
       bars.forEach((b, i) => b.classList.toggle('played', i < played));
     });
+
+    // El botón refleja el estado real del audio (también cuando otro reproductor lo pausa)
+    const marcarPlay = () => { playBtn.textContent = '⏸'; playBtn.setAttribute('aria-label', `Pausar ${nombre}`); };
+    const marcarPausa = () => { playBtn.textContent = '▶'; playBtn.setAttribute('aria-label', `Reproducir ${nombre}`); };
+    audio.addEventListener('play', marcarPlay);
+    audio.addEventListener('pause', marcarPausa);
     audio.addEventListener('ended', () => {
-      playBtn.textContent = '▶';
+      marcarPausa();
       bars.forEach(b => b.classList.remove('played'));
     });
+
     playBtn.addEventListener('click', () => {
       if (audio.error) return;
       if (audio.paused) {
@@ -497,24 +612,18 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
             a.currentTime = 0;
           }
         });
-        // Resetear visualmente los otros botones
-        document.querySelectorAll('.audio-play-btn').forEach(b => {
-          if (b !== playBtn) b.textContent = '▶';
-        });
         audio.play().catch(() => { });
         track('audio_play', { pista: audioId === 'audioDemo' ? 'despues' : 'antes' });
-        playBtn.textContent = '⏸';
       } else {
         audio.pause();
-        playBtn.textContent = '▶';
       }
     });
   }
 
   // Player "antes"
-  initPlayer('audioDemoAntes', 'audioPlayBtnAntes', 'audioBaresAntes', 'audioTimeCurrentAntes', 'audioTimeTotalAntes');
+  initPlayer('audioDemoAntes', 'audioPlayBtnAntes', 'audioBaresAntes', 'audioTimeCurrentAntes', 'audioTimeTotalAntes', 'antes');
   // Player "después"
-  initPlayer('audioDemo', 'audioPlayBtnDespues', 'audioBaresDespues', 'audioTimeCurrentDespues', 'audioTimeTotalDespues');
+  initPlayer('audioDemo', 'audioPlayBtnDespues', 'audioBaresDespues', 'audioTimeCurrentDespues', 'audioTimeTotalDespues', 'después');
 })();
 
 /* ====================================================
@@ -550,37 +659,6 @@ document.querySelectorAll('.faq-pregunta').forEach(btn => {
   }, { threshold: 0.08 });
 
   targets.forEach(el => io.observe(el));
-})();
-
-/* ====================================================
-   WAVEFORM HERO SVG
-==================================================== */
-(function initHeroWaveform() {
-  const container = document.querySelector('.waveform-bg');
-  if (!container) return;
-  const W = 1400, H = 280;
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
-  svg.style.cssText = 'width:100%;height:100%;';
-
-  [['#2389c9', 0.18, '1', -1, 14], ['#c9a66b', 0.10, '1.5', 1, 18], ['#2389c9', 0.08, '1', -1, 22]].forEach(([color, op, sw, dir, dur], l) => {
-    let d = `M0,${H * (0.35 + l * 0.15)}`;
-    for (let x = 0; x <= W; x += W / 60) {
-      const y = H * (0.35 + l * 0.15) + Math.sin(x * (0.04 + l * 0.012) + l * Math.PI * 0.7) * (28 + l * 14) * Math.sin((x / W) * Math.PI);
-      d += ` L${x.toFixed(1)},${y.toFixed(1)}`;
-    }
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', d); path.setAttribute('fill', 'none');
-    path.setAttribute('stroke', color); path.setAttribute('stroke-width', sw);
-    path.setAttribute('opacity', op);
-    const anim = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform');
-    anim.setAttribute('attributeName', 'transform'); anim.setAttribute('type', 'translate');
-    anim.setAttribute('values', `0 0;${W * 0.04 * dir} 0;0 0`);
-    anim.setAttribute('dur', `${dur}s`); anim.setAttribute('repeatCount', 'indefinite');
-    path.appendChild(anim); svg.appendChild(path);
-  });
-  container.appendChild(svg);
 })();
 
 /* ====================================================
