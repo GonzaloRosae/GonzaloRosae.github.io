@@ -21,7 +21,7 @@
 
   --text-high: #eef2f7;
   --text-mid: #aab6c8;
-  --text-low: #6c7991;
+  --text-low: #8591a8;
   --text-dark: #1a2332;
   --text-dark-mid: #4a5468;
 
@@ -829,6 +829,12 @@ section { position: relative; padding: 7rem 0; }
 ==================================================== */
 .modal-overlay {
   position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  max-width: none; max-height: none;
+  margin: 0;
+  border: 0;
+  color: inherit;
+  overflow: hidden;
   background: rgba(5, 8, 14, 0.78);
   backdrop-filter: blur(4px);
   z-index: 1000;
@@ -838,7 +844,11 @@ section { position: relative; padding: 7rem 0; }
   padding: 1.4rem;
 }
 
-.modal-overlay.active { display: flex; }
+.modal-overlay[open] { display: flex; }
+.modal-overlay::backdrop { background: transparent; }
+
+/* Las vistas y sus títulos reciben foco por código; no necesitan contorno */
+.modal-box [tabindex="-1"]:focus { outline: none; }
 
 .modal-box {
   background: var(--bg-panel);
@@ -961,6 +971,11 @@ section { position: relative; padding: 7rem 0; }
 .modal-disqualify .dq-icon { font-size: 2.2rem; margin-bottom: 1rem; }
 .modal-disqualify h4 { font-size: 1.2rem; color: var(--text-high); margin-bottom: 0.7rem; }
 .modal-disqualify p { color: var(--text-mid); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+.dq-actions { display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap; }
+.dq-actions .btn { padding: 0.8rem 1.4rem; font-size: 0.92rem; }
+.modal-disqualify .dq-link { color: var(--gold); border-bottom: 1px solid rgba(201, 166, 107, 0.4); }
+.modal-disqualify .dq-link:hover { border-bottom-color: var(--gold); }
 
 .modal-success { text-align: center; padding: 0.5rem 0; }
 .modal-success .ok-icon {
@@ -1305,7 +1320,14 @@ section { position: relative; padding: 7rem 0; }
 .faq-pregunta .faq-icon { font-size: 1.1rem; color: var(--blue-brand); transition: transform 0.3s; flex-shrink: 0; }
 .faq-item.open .faq-icon { transform: rotate(45deg); }
 
-.faq-respuesta { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; background: var(--bg-light-2); }
+.faq-respuesta {
+  max-height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: max-height 0.35s ease, visibility 0s linear 0.35s;
+  background: var(--bg-light-2);
+}
+.faq-item.open .faq-respuesta { visibility: visible; transition-delay: 0s; }
 .faq-respuesta-inner { padding: 1.1rem 1.4rem 1.4rem; color: var(--text-dark-mid); font-size: 0.96rem; line-height: 1.6; }
 
 /* ====================================================
@@ -1782,6 +1804,9 @@ footer p { font-size: 0.82rem; color: var(--text-low); }
 
 .bio-prueba-link:hover { border-bottom-color: var(--gold); }
 
+/* La flecha decorativa va en línea con el texto del enlace (la regla de arriba pone los span en bloque) */
+.bio-prueba .bio-prueba-link .sym { display: inline; color: inherit; font-size: inherit; line-height: inherit; }
+
 @media (max-width: 860px) {
   .bio-grid { grid-template-columns: 1fr; gap: 1.8rem; }
 }
@@ -1931,4 +1956,52 @@ section[id], header[id], div[id^="audio"] {
   font-size: 0.86rem !important;
   color: var(--text-low) !important;
   margin-top: -0.4rem;
+}
+
+/* ====================================================
+   CALENDLY: marco y esqueleto de carga
+==================================================== */
+.cal-frame {
+  position: relative;
+  margin-top: 0.8rem;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#calendlyWidget {
+  position: relative;
+  z-index: 1;
+  min-width: 280px;
+  height: 400px;
+}
+
+.cal-skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  padding: 1.1rem;
+  display: grid;
+  align-content: start;
+  gap: 0.9rem;
+}
+
+.cal-sk {
+  display: block;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  animation: skPulse 1.4s ease-in-out infinite;
+}
+.cal-sk.l1 { height: 16px; width: 55%; }
+.cal-sk.l2 { height: 12px; width: 35%; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-top: 0.5rem; }
+.cal-grid .cal-sk { aspect-ratio: 1; }
+.cal-frame.is-loaded .cal-skeleton { display: none; }
+
+@keyframes skPulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+/* Barras del audio mientras se calcula la forma de onda real */
+.audio-bars.is-loading span { animation: skPulse 1.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cal-sk, .audio-bars.is-loading span { animation: none; }
 }
