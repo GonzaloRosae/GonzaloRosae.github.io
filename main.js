@@ -7,7 +7,7 @@ const CALENDLY_URL = 'https://calendly.com/gonzalorosae/auditoria';
 
 // Plazas: cambia solo este número para actualizar toda la web.
 // Si lo pones a 0, la web entra automáticamente en modo "plazas agotadas".
-const PLAZAS_DISPONIBLES = 3;
+const PLAZAS_DISPONIBLES = 2;
 const PLAZAS_TOTAL = 3;
 
 // Se usan cuando no quedan plazas
